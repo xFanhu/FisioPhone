@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.FisioPhone" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.FisioPhone" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/background</item>
+    </style>
+
+    <style name="Theme.InicioFisioPhone" parent="Theme.FisioPhone">
+        <item name="android:windowBackground">@drawable/iniciobackground</item>
+    </style>
+
 </resources>
