@@ -11,6 +11,7 @@
         android:id="@+id/LLMenu"
         android:layout_width="409dp"
         android:layout_height="378dp"
+        android:layout_marginBottom="80dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +96,8 @@
             android:id="@+id/LLTerceraFila"
             android:layout_width="match_parent"
             android:layout_height="126dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="VisualLintBounds">
 
             <ImageButton
                 android:id="@+id/AjustesButton"
