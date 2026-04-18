@@ -2,4 +2,13 @@
     <string name="app_name">FisioPhone</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="iniciar">Iniciar</string>
+    <string name="equipo">Equipo</string>
+    <string name="pacientes">Pacientes</string>
+    <string name="citas">Citas</string>
+    <string name="mensajes">Mensajes</string>
+    <string name="informes">Informes</string>
+    <string name="facturas">Facturacion</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="cerrarSesion">Cerrar Sesion</string>
+
 </resources>
