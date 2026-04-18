@@ -23,101 +23,22 @@
             android:layout_height="126dp"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/EquipoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:contentDescription="@string/equipo"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/equipo" />
-
-            <ImageButton
-                android:id="@+id/PacientesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:contentDescription="@string/pacientes"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/pacientes" />
-
-            <ImageButton
-                android:id="@+id/CitasButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:contentDescription="@string/citas"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/citas" />
-
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/LLSegundaFila"
             android:layout_width="match_parent"
             android:layout_height="126dp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/MensajesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:contentDescription="@string/mensajes"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/mensajes" />
-
-            <ImageButton
-                android:id="@+id/InformesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:contentDescription="@string/informes"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/informes" />
-
-            <ImageButton
-                android:id="@+id/FacturacionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:contentDescription="@string/facturas"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/facturas" />
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
         <LinearLayout
             android:id="@+id/LLTerceraFila"
             android:layout_width="match_parent"
             android:layout_height="126dp"
             android:orientation="horizontal"
-            tools:ignore="VisualLintBounds">
-
-            <ImageButton
-                android:id="@+id/AjustesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:contentDescription="@string/ajustes"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ajustes" />
-
-            <ImageButton
-                android:id="@+id/CerrarSesionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:contentDescription="@string/cerrarSesion"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/cerrarsesion" />
-        </LinearLayout>
+            tools:ignore="VisualLintBounds"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
