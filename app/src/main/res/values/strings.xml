@@ -12,6 +12,8 @@
     <string name="cerrarSesion">Cerrar Sesion</string>
     <string name="perfil">Perfil</string>
     <string name="notificaciones">Notificaciones</string>
-    <string name="menu">Menú principal</string>
+    <string name="usuario">Usuario</string>
+    <string name="contraseña">Contraseña</string>
+
 
 </resources>

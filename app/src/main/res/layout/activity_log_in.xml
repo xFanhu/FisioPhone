@@ -7,4 +7,55 @@
     android:layout_height="match_parent"
     tools:context=".LogInActivity">
 
+    <EditText
+        android:id="@+id/eTUsuario"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="252dp"
+        android:ems="10"
+        android:hint="@string/usuario"
+        android:inputType="text"
+        android:text="@string/usuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ETPassword"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="376dp"
+        android:ems="10"
+        android:hint="@string/contraseña"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eTUsuario" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        app:cardBackgroundColor="@color/Ripple"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ETPassword"
+        app:layout_constraintVertical_bias="0.115" >
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log in"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

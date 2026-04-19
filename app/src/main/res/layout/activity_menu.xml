@@ -7,20 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
-    <TextView
-        android:id="@+id/tvMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/anton"
-        android:text="@string/menu"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textSize="36dp"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="336dp"
+        android:layout_height="220dp"
         app:layout_constraintBottom_toTopOf="@+id/LLMenu"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/logo" />
 
     <LinearLayout
         android:id="@+id/LLMenu"
@@ -46,8 +43,8 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/cvEquipo"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -63,6 +60,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/perfil"
                         app:srcCompat="@drawable/ic_profile" />
 
                     <TextView
@@ -84,8 +82,8 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
-                app:layout_constraintStart_toEndOf="@id/cvProfile"
                 app:layout_constraintEnd_toStartOf="@id/cvPaciente"
+                app:layout_constraintStart_toEndOf="@id/cvProfile"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -100,7 +98,9 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginBottom="8dp"
-                        app:srcCompat="@drawable/ic_team" />
+                        android:contentDescription="@string/equipo"
+                        app:srcCompat="@drawable/ic_team"
+                        tools:ignore="ImageContrastCheck" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -136,6 +136,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/pacientes"
                         app:srcCompat="@drawable/ic_pacientes" />
 
                     <TextView
@@ -165,14 +166,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/cvNotificaciones"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#FFFFFF"
+
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="8dp">
@@ -181,6 +183,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/citas"
                         app:srcCompat="@drawable/ic_calendar" />
 
                     <TextView
@@ -202,14 +205,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
-                app:layout_constraintStart_toEndOf="@id/cvCitas"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cvCitas"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#FFFFFF"
+
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="8dp">
@@ -218,6 +222,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/notificaciones"
                         app:srcCompat="@drawable/ic_notificaciones" />
 
                     <TextView
@@ -247,14 +252,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/cvCerrarSesion"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#FFFFFF"
+
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="8dp">
@@ -263,6 +269,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/ajustes"
                         app:srcCompat="@drawable/ic_settings" />
 
                     <TextView
@@ -284,14 +291,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
-                app:layout_constraintStart_toEndOf="@id/cvAjustes"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cvAjustes"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#FFFFFF"
+
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="8dp">
@@ -300,6 +308,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/cerrarSesion"
                         app:srcCompat="@drawable/ic_logout" />
 
                     <TextView
