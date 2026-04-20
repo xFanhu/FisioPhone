@@ -6,7 +6,7 @@
     </style>
 
     <style name="Theme.InicioFisioPhone" parent="Theme.FisioPhone">
-        <item name="android:windowBackground">@drawable/backgroundnight</item>
+        <item name="android:windowBackground">@drawable/iniciobackground</item>
     </style>
 
 </resources>
