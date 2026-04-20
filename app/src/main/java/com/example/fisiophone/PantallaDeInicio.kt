@@ -2,7 +2,7 @@ package com.example.fisiophone
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageButton
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,10 +19,8 @@ class PantallaDeInicio : AppCompatActivity() {
             insets
         }
 
-        //Damos un valor al botón iniciarButton y lo identifico
-        val iniciarButton = findViewById<ImageButton>(R.id.iniciarButton)
+        val iniciarButton = findViewById<View>(R.id.iniciarButton)
 
-        //Listener del botón y intent para llevar a la clase LogInActivity
         iniciarButton.setOnClickListener {
             val intent = Intent(this, LogInActivity::class.java)
             startActivity(intent)

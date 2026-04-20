@@ -9,15 +9,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="336dp"
-        android:layout_height="220dp"
+        android:layout_width="270dp"
+        android:layout_height="168dp"
         app:layout_constraintBottom_toTopOf="@+id/LLMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/app_logo" />
 
     <LinearLayout
         android:id="@+id/LLMenu"
@@ -40,7 +40,7 @@
                 android:id="@+id/cvProfile"
                 android:layout_width="126dp"
                 android:layout_height="126dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 app:layout_constraintEnd_toStartOf="@id/cvEquipo"
@@ -50,7 +50,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF"
+                    android:background="@color/card_background"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="8dp">
@@ -70,6 +70,7 @@
                         android:gravity="center"
                         android:text="@string/perfil"
                         android:textAlignment="center"
+                        android:textColor="@color/card_text"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -79,7 +80,7 @@
                 android:id="@+id/cvEquipo"
                 android:layout_width="126dp"
                 android:layout_height="126dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 app:layout_constraintEnd_toStartOf="@id/cvPaciente"
@@ -89,7 +90,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF"
+                    android:background="@color/card_background"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="8dp">
@@ -109,6 +110,7 @@
                         android:gravity="center"
                         android:text="@string/equipo"
                         android:textAlignment="center"
+                        android:textColor="@color/card_text"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -118,7 +120,7 @@
                 android:id="@+id/cvPaciente"
                 android:layout_width="126dp"
                 android:layout_height="126dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +129,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF"
+                    android:background="@color/card_background"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="8dp">
@@ -146,6 +148,7 @@
                         android:gravity="center"
                         android:text="@string/pacientes"
                         android:textAlignment="center"
+                        android:textColor="@color/card_text"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -163,7 +166,7 @@
                 android:id="@+id/cvCitas"
                 android:layout_width="126dp"
                 android:layout_height="126dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 app:layout_constraintEnd_toStartOf="@id/cvNotificaciones"
@@ -173,7 +176,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF"
+                    android:background="@color/card_background"
 
                     android:gravity="center"
                     android:orientation="vertical"
@@ -193,6 +196,7 @@
                         android:gravity="center"
                         android:text="@string/citas"
                         android:textAlignment="center"
+                        android:textColor="@color/card_text"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -202,7 +206,7 @@
                 android:id="@+id/cvNotificaciones"
                 android:layout_width="126dp"
                 android:layout_height="126dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -212,7 +216,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF"
+                    android:background="@color/card_background"
 
                     android:gravity="center"
                     android:orientation="vertical"
@@ -232,6 +236,7 @@
                         android:gravity="center"
                         android:text="@string/notificaciones"
                         android:textAlignment="center"
+                        android:textColor="@color/card_text"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -249,7 +254,7 @@
                 android:id="@+id/cvAjustes"
                 android:layout_width="126dp"
                 android:layout_height="126dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 app:layout_constraintEnd_toStartOf="@id/cvCerrarSesion"
@@ -259,7 +264,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF"
+                    android:background="@color/card_background"
 
                     android:gravity="center"
                     android:orientation="vertical"
@@ -279,6 +284,7 @@
                         android:gravity="center"
                         android:text="@string/ajustes"
                         android:textAlignment="center"
+                        android:textColor="@color/card_text"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -288,7 +294,7 @@
                 android:id="@+id/cvCerrarSesion"
                 android:layout_width="126dp"
                 android:layout_height="126dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -298,7 +304,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF"
+                    android:background="@color/card_background"
 
                     android:gravity="center"
                     android:orientation="vertical"
@@ -318,6 +324,7 @@
                         android:gravity="center"
                         android:text="@string/cerrarSesion"
                         android:textAlignment="center"
+                        android:textColor="@color/card_text"
                         android:textSize="18sp" />
                 </LinearLayout>
 

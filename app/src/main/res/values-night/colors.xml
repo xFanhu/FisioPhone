@@ -10,7 +10,7 @@
     <color name="azul">#2196F3</color>
     <color name="Borde">#1976D2</color>
     <color name="Ripple">#64B5F6</color>
-    <color name="card_background">#FFFFFFFF</color>
-    <color name="card_text">#FF000000</color>
-    <color name="icon_tint">#40AFCB</color>
+    <color name="card_background">#FF1E1E1E</color>
+    <color name="card_text">#FFFFFFFF</color>
+    <color name="icon_tint">#8CDCF2</color>
 </resources>
