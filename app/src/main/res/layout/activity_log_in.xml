@@ -12,10 +12,15 @@
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="252dp"
+        android:background="@drawable/bg_login_input"
         android:ems="10"
         android:hint="@string/usuario"
         android:inputType="text"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:text="@string/usuario"
+        android:textColor="@color/card_text"
+        android:textColorHint="@color/card_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,10 +32,15 @@
         android:layout_height="48dp"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="376dp"
+        android:background="@drawable/bg_login_input"
         android:ems="10"
         android:hint="@string/contraseña"
         android:importantForAutofill="no"
         android:inputType="textPassword"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="@color/card_text"
+        android:textColorHint="@color/card_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -47,15 +57,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword"
-        app:layout_constraintVertical_bias="0.115" >
+        app:layout_constraintVertical_bias="0.115">
 
         <TextView
             android:id="@+id/tvLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Log in"
             android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:layout_gravity="center"/>
+            android:textColor="@color/card_text" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
