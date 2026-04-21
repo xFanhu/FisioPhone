@@ -12,16 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FisioPhone">
         <activity
+            android:name=".ConfigActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FisioPhone" />
+        <activity
             android:name=".MenuActivity"
             android:exported="false"
-            android:theme="@style/Theme.FisioPhone"
-            />
-
+            android:theme="@style/Theme.FisioPhone" />
         <activity
             android:name=".LogInActivity"
             android:exported="false"
-            android:theme="@style/Theme.FisioPhone"/>
-
+            android:theme="@style/Theme.FisioPhone" />
         <activity
             android:name=".PantallaDeInicio"
             android:exported="true"
@@ -36,7 +37,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 
 </manifest>

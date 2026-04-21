@@ -14,6 +14,8 @@
     <string name="notificaciones">Notificaciones</string>
     <string name="usuario">Usuario</string>
     <string name="contraseña">Contraseña</string>
+    <string name="modonoche">Modo Noche</string>
+    <string name="descModonoche">Activa o desactiva el modo oscuro.</string>
 
 
 </resources>

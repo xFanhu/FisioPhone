@@ -48,8 +48,12 @@
         app:layout_constraintTop_toBottomOf="@+id/etUsuario" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/loginButton"
         android:layout_width="250dp"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_height="48dp"
+        android:clickable="true"
+        android:focusable="true"
         app:cardBackgroundColor="@color/Ripple"
         app:cardCornerRadius="32dp"
         app:cardElevation="6dp"
