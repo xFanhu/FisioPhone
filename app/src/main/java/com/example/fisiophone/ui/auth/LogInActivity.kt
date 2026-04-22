@@ -1,28 +1,32 @@
-package com.example.fisiophone
+package com.example.fisiophone.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.fisiophone.databinding.ActivityLogInBinding
+import com.example.fisiophone.ui.menu.MenuActivity
 
-class PantallaDeInicio : AppCompatActivity() {
+class LogInActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLogInBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_pantalla_de_inicio)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+
+        binding = ActivityLogInBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val iniciarButton = findViewById<View>(R.id.iniciarButton)
-
-        iniciarButton.setOnClickListener {
-            val intent = Intent(this, LogInActivity::class.java)
+        binding.loginButton.setOnClickListener {
+            val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
         }
     }

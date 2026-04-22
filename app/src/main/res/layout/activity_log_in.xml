@@ -5,24 +5,23 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LogInActivity">
+    tools:context=".ui.auth.LogInActivity">
 
     <EditText
         android:id="@+id/etUsuario"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="340dp"
         android:background="@drawable/bg_login_input"
         android:ems="10"
         android:hint="@string/usuario"
         android:inputType="text"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="@string/usuario"
         android:textColor="@color/card_text"
         android:textColorHint="@color/card_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,8 +29,8 @@
         android:id="@+id/etPassword"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="376dp"
+        android:layout_marginTop="20dp"
+
         android:background="@drawable/bg_login_input"
         android:ems="10"
         android:hint="@string/contraseña"
@@ -41,27 +40,27 @@
         android:paddingEnd="16dp"
         android:textColor="@color/card_text"
         android:textColorHint="@color/card_text"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUsuario" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/loginButton"
         android:layout_width="250dp"
-        android:foreground="?attr/selectableItemBackground"
         android:layout_height="48dp"
         android:clickable="true"
         android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         app:cardBackgroundColor="@color/Ripple"
         app:cardCornerRadius="32dp"
         app:cardElevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword"
-        app:layout_constraintVertical_bias="0.115">
+        app:layout_constraintVertical_bias="0.176">
 
         <TextView
             android:id="@+id/tvLogin"
