@@ -10,7 +10,7 @@ class FisioPhoneApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // Aplico el tema guardado al arrancar toda la app
+        // Aplica el tema antes de que se creen las pantallas para evitar cambios visuales al arrancar.
         val settingsData = runBlocking {
             SettingsManager.getSettings(applicationContext).first()
         }

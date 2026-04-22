@@ -26,7 +26,6 @@ class PantallaDeInicio : AppCompatActivity() {
             insets
         }
 
-        // Botón para ir al login
         binding.iniciarButton.setOnClickListener {
             val intent = Intent(this, LogInActivity::class.java)
             startActivity(intent)
