@@ -6,17 +6,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.fisiophone.data.settings.SettingsManager
 import com.example.fisiophone.databinding.ActivityPantallaDeInicioBinding
 import com.example.fisiophone.ui.auth.LogInActivity
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 
 class PantallaDeInicio : AppCompatActivity() {
+
     private lateinit var binding: ActivityPantallaDeInicioBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applySavedSettings()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
@@ -29,17 +26,10 @@ class PantallaDeInicio : AppCompatActivity() {
             insets
         }
 
+        // Botón para ir al login
         binding.iniciarButton.setOnClickListener {
             val intent = Intent(this, LogInActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    private fun applySavedSettings() {
-        val settingsData = runBlocking {
-            SettingsManager.getSettings(applicationContext).first()
-        }
-
-        SettingsManager.applyNightMode(settingsData.darkMode)
     }
 }
