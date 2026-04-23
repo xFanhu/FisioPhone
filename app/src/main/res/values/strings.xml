@@ -15,7 +15,7 @@
     <string name="email">Correo electrónico</string>
     <string name="nombre">Nombre</string>
     <string name="nuevoUsuario">Nuevo Usuario</string>
-    <string name="rcontraseña">Repita contraseña</string>
+    <string name="rcontraseña">Repetir contraseña</string>
     <string name="usuario">Usuario</string>
 
     <!-- Menú principal -->

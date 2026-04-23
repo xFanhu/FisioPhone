@@ -39,11 +39,17 @@ class ConfigFragment : Fragment() {
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             if (isInitializing) return@setOnCheckedChangeListener
 
-            viewLifecycleOwner.lifecycleScope.launch {
-                SettingsManager.saveDarkMode(requireContext(), isChecked)
-            }
+            binding.switchDarkMode.isEnabled = false
+            val appContext = requireContext().applicationContext
 
-            SettingsManager.applyNightMode(isChecked)
+            viewLifecycleOwner.lifecycleScope.launch {
+                try {
+                    SettingsManager.saveDarkMode(appContext, isChecked)
+                    SettingsManager.applyNightMode(isChecked)
+                } finally {
+                    _binding?.switchDarkMode?.isEnabled = true
+                }
+            }
         }
     }
 
@@ -53,6 +59,7 @@ class ConfigFragment : Fragment() {
             isInitializing = true
             binding.switchDarkMode.isChecked = settingsData.darkMode
             isInitializing = false
+            binding.switchDarkMode.isEnabled = true
         }
     }
 
