@@ -37,7 +37,7 @@
     <!-- Notificaciones -->
     <string name="eliminar_notificacion">Eliminar notificación</string>
     <string name="notificacion_cita">Tienes una cita con el fisioterapeuta %1$s a las %2$s del dia %3$s.</string>
-    <string name="notificaciones_desc">Tienes nuevas notificaciones.</string>
+    <string name="notificaciones_desc">Tus notificaciones.</string>
     <string name="notificaciones_vacias">No tienes notificaciones pendientes.</string>
 
 </resources>
