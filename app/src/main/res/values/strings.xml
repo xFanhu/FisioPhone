@@ -1,21 +1,43 @@
 <resources>
+
+    <!-- App -->
     <string name="app_name">FisioPhone</string>
+
+    <!-- Inicio de sesión -->
+    <string name="iniciar">Iniciar sesión</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="iniciar">Iniciar</string>
-    <string name="equipo">Equipo</string>
-    <string name="pacientes">Pacientes</string>
-    <string name="citas">Citas</string>
-    <string name="mensajes">Mensajes</string>
-    <string name="informes">Informes</string>
-    <string name="facturas">Facturacion</string>
+
+    <!-- Registro de usuario -->
+    <string name="apellidos">Apellidos</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="crearUsuario">Crear Usuario</string>
+    <string name="DNI">DNI</string>
+    <string name="email">Correo electrónico</string>
+    <string name="nombre">Nombre</string>
+    <string name="nuevoUsuario">Nuevo Usuario</string>
+    <string name="rcontraseña">Repita contraseña</string>
+    <string name="usuario">Usuario</string>
+
+    <!-- Menú principal -->
     <string name="ajustes">Ajustes</string>
     <string name="cerrarSesion">Cerrar Sesion</string>
-    <string name="perfil">Perfil</string>
+    <string name="citas">Citas</string>
+    <string name="equipo">Equipo</string>
+    <string name="facturas">Facturacion</string>
+    <string name="informes">Informes</string>
+    <string name="mensajes">Mensajes</string>
     <string name="notificaciones">Notificaciones</string>
-    <string name="usuario">Usuario</string>
-    <string name="contraseña">Contraseña</string>
-    <string name="modonoche">Modo Noche</string>
-    <string name="descModonoche">Activa o desactiva el modo oscuro.</string>
+    <string name="pacientes">Pacientes</string>
+    <string name="perfil">Perfil</string>
 
+    <!-- Configuración -->
+    <string name="descModonoche">Activa o desactiva el modo oscuro.</string>
+    <string name="modonoche">Modo Noche</string>
+
+    <!-- Notificaciones -->
+    <string name="eliminar_notificacion">Eliminar notificación</string>
+    <string name="notificacion_cita">Tienes una cita con el fisioterapeuta %1$s a las %2$s del dia %3$s.</string>
+    <string name="notificaciones_desc">Tienes nuevas notificaciones.</string>
+    <string name="notificaciones_vacias">No tienes notificaciones pendientes.</string>
 
 </resources>

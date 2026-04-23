@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FisioPhone">
         <activity
+            android:name=".ui.auth.NewUserActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FisioPhone" />
+        <activity
             android:name=".ui.menu.MenuActivity"
             android:exported="false"
             android:theme="@style/Theme.FisioPhone" />

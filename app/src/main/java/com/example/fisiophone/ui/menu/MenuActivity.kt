@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.fisiophone.databinding.ActivityMenuBinding
 import com.example.fisiophone.ui.menu.fragments.ConfigFragment
+import com.example.fisiophone.ui.menu.fragments.NotificationsFragment
 
 class MenuActivity : AppCompatActivity() {
 
@@ -38,6 +39,10 @@ class MenuActivity : AppCompatActivity() {
             showConfigFragment()
         }
 
+        binding.cvNotificaciones.setOnClickListener {
+            showNotificationsFragment()
+        }
+
         onBackPressedDispatcher.addCallback(this) {
             // Si hay un fragment abierto, volvemos al menú en lugar de cerrar la activity.
             if (supportFragmentManager.backStackEntryCount > 0) {
@@ -58,6 +63,13 @@ class MenuActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentHost.id, ConfigFragment())
             .addToBackStack(ConfigFragment.TAG)
+            .commit()
+    }
+
+    private fun showNotificationsFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(binding.fragmentHost.id, NotificationsFragment())
+            .addToBackStack(NotificationsFragment.TAG)
             .commit()
     }
 

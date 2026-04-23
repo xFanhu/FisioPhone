@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.fisiophone.databinding.ActivityPantallaDeInicioBinding
 import com.example.fisiophone.ui.auth.LogInActivity
+import com.example.fisiophone.ui.auth.NewUserActivity
 
 class PantallaDeInicio : AppCompatActivity() {
 
@@ -28,6 +29,11 @@ class PantallaDeInicio : AppCompatActivity() {
 
         binding.iniciarButton.setOnClickListener {
             val intent = Intent(this, LogInActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.nuevoButton.setOnClickListener {
+            val intent = Intent(this, NewUserActivity::class.java)
             startActivity(intent)
         }
     }

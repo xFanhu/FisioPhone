@@ -11,18 +11,18 @@
         android:id="@+id/iniciarButton"
         android:layout_width="235dp"
         android:layout_height="51dp"
+        android:layout_marginTop="360dp"
         android:clickable="true"
         android:contentDescription="@string/iniciar"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/Ripple"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.691"
-        app:cardBackgroundColor="@color/Ripple"
-        app:cardCornerRadius="32dp"
-        app:cardElevation="6dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="match_parent"
@@ -30,6 +30,35 @@
             android:fontFamily="@font/anton"
             android:gravity="center"
             android:text="@string/iniciar"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/nuevoButton"
+        android:layout_width="235dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:contentDescription="@string/iniciar"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iniciarButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/anton"
+            android:gravity="center"
+            android:text="@string/nuevoUsuario"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
