@@ -12,7 +12,7 @@
     <string name="contraseña">Contraseña</string>
     <string name="crearUsuario">Crear Usuario</string>
     <string name="DNI">DNI</string>
-    <string name="email">Correo electrónico</string>
+    <string name="email">Correo electrónico:</string>
     <string name="nombre">Nombre</string>
     <string name="nuevoUsuario">Nuevo Usuario</string>
     <string name="rcontraseña">Repetir contraseña</string>
@@ -20,10 +20,10 @@
 
     <!-- Menú principal -->
     <string name="ajustes">Ajustes</string>
-    <string name="cerrarSesion">Cerrar Sesion</string>
+    <string name="cerrarSesion">Cerrar Sesión</string>
     <string name="citas">Citas</string>
     <string name="equipo">Equipo</string>
-    <string name="facturas">Facturacion</string>
+    <string name="facturas">Facturación</string>
     <string name="informes">Informes</string>
     <string name="mensajes">Mensajes</string>
     <string name="notificaciones">Notificaciones</string>
@@ -36,8 +36,20 @@
 
     <!-- Notificaciones -->
     <string name="eliminar_notificacion">Eliminar notificación</string>
-    <string name="notificacion_cita">Tienes una cita con el fisioterapeuta %1$s a las %2$s del dia %3$s.</string>
+    <string name="notificacion_cita">Tienes una cita con el fisioterapeuta %1$s a las %2$s del día %3$s.</string>
     <string name="notificaciones_desc">Tus notificaciones.</string>
     <string name="notificaciones_vacias">No tienes notificaciones pendientes.</string>
+
+    <!-- Perfil -->
+    <string name="perfil_anadir_foto">Añadir foto</string>
+    <string name="perfil_foto">Foto de perfil</string>
+    <string name="perfil_historial_sesiones">Historial de sesiones</string>
+    <string name="perfil_nombre">Nombre:</string>
+    <string name="perfil_nombre_text">%1$s</string>
+    <string name="perfil_apellidos">Apellidos:</string>
+    <string name="perfil_apellidos_text">%2$s</string>
+    <string name="perfil_sesion_fisio">Fisioterapeuta: %1$s</string>
+    <string name="perfil_sesion_tratamiento">Tratamiento: %1$s</string>
+    <string name="perfil_sesiones_vacias">Todavía no hay sesiones registradas.</string>
 
 </resources>

@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.fisiophone.databinding.ActivityMenuBinding
 import com.example.fisiophone.ui.menu.fragments.ConfigFragment
 import com.example.fisiophone.ui.menu.fragments.NotificationsFragment
+import com.example.fisiophone.ui.menu.fragments.ProfileFragment
 
 class MenuActivity : AppCompatActivity() {
 
@@ -43,6 +44,10 @@ class MenuActivity : AppCompatActivity() {
             showNotificationsFragment()
         }
 
+        binding.cvProfile.setOnClickListener {
+            showProfileFragment()
+        }
+
         onBackPressedDispatcher.addCallback(this) {
             // Si hay un fragment abierto, volvemos al menú en lugar de cerrar la activity.
             if (supportFragmentManager.backStackEntryCount > 0) {
@@ -70,6 +75,16 @@ class MenuActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentHost.id, NotificationsFragment())
             .addToBackStack(NotificationsFragment.TAG)
+            .commit()
+    }
+
+    private fun showProfileFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(
+                binding.fragmentHost.id,
+                ProfileFragment.newInstance(ProfileFragment.UserRole.PATIENT)
+            )
+            .addToBackStack(ProfileFragment.TAG)
             .commit()
     }
 
