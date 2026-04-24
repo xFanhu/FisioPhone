@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_citas"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/citas" />
+
+
+
+    <item
+        android:id="@+id/nav_equipo"
+        android:icon="@drawable/ic_team"
+        android:title="@string/equipo"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/nav_pacientes"
+        android:icon="@drawable/ic_pacientes"
+        android:title="@string/pacientes"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@drawable/ic_add"
+        android:title="Nueva Cita" />
+
+    <item
+        android:id="@+id/nav_ajustes"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/ajustes" />
+
+</menu>

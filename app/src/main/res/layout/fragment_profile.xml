@@ -1,187 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingStart="24dp"
-    android:paddingTop="64dp"
-    android:paddingEnd="24dp"
-    android:paddingBottom="24dp"
     tools:context=".ui.menu.fragments.ProfileFragment">
 
     <TextView
         android:id="@+id/tvProfileTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/anton"
         android:text="@string/perfil"
         android:textColor="@color/card_text"
-        android:textSize="28sp" />
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
+        android:layout_marginTop="16dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileTitle">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="24dp">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="24dp">
 
-                    <LinearLayout
+                    <!-- Custom layout for photo and name -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/photoPickerCard"
-                            android:layout_width="104dp"
-                            android:layout_height="104dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardBackgroundColor="@color/card_background"
-                            app:cardCornerRadius="52dp"
-                            app:cardElevation="4dp">
-
-                            <FrameLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/photoPickerCard"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                app:cardCornerRadius="50dp"
+                                app:cardElevation="2dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <ImageView
                                     android:id="@+id/ivProfilePhoto"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:contentDescription="@string/perfil_foto"
                                     android:scaleType="centerCrop"
-                                    android:src="@drawable/ic_profile"
-                                    android:visibility="gone" />
+                                    android:src="@drawable/ic_profile" />
 
                                 <TextView
                                     android:id="@+id/tvProfilePhotoPlaceholder"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/bg_profile_photo_placeholder"
-                                    android:fontFamily="@font/anton"
+                                    android:background="#80000000"
                                     android:gravity="center"
-                                    android:padding="12dp"
-                                    android:text="@string/perfil_anadir_foto"
-                                    android:textAlignment="center"
+                                    android:padding="8dp"
+                                    android:text="@string/cambiar"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:visibility="gone" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="@id/photoPickerCard"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/photoPickerCard"
+                                app:layout_constraintTop_toTopOf="@id/photoPickerCard">
+
+                                <TextView
+                                    android:id="@+id/tvNameValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:textColor="@color/card_text"
-                                    android:textSize="14sp" />
+                                    android:textSize="22sp"
+                                    android:textStyle="bold"
+                                    tools:text="Lucía" />
 
-                            </FrameLayout>
+                                <TextView
+                                    android:id="@+id/tvApellidosValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:textColor="@color/description_gray"
+                                    android:textSize="16sp"
+                                    tools:text="Fernández López" />
+                            </LinearLayout>
 
-                        </androidx.cardview.widget.CardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvNameLabel"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/perfil_nombre"
-                                android:textColor="@color/card_text"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tvNameValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:textColor="@color/card_text"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                tools:text="Lucia" />
-
-                            <TextView
-                                android:id="@+id/tvApellidosLabel"
-                                android:layout_marginTop="8dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/perfil_apellidos"
-                                android:textColor="@color/card_text"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tvApellidosValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:textColor="@color/card_text"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                tools:text="Fernandez Lopez" />
-                        </LinearLayout>
-
-                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="24dp"
+                        android:background="#1A000000" />
 
                     <TextView
-                        android:id="@+id/tvEmailLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:text="@string/email"
-                        android:textColor="@color/card_text"
-                        android:textSize="13sp" />
+                        android:textColor="@color/description_gray"
+                        android:textSize="12sp"
+                        android:textAllCaps="true"
+                        android:letterSpacing="0.1" />
 
                     <TextView
                         android:id="@+id/tvEmailValue"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@drawable/bg_login_input"
-                        android:gravity="center_vertical"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:textColor="@color/card_text"
-                        android:textSize="15sp"
+                        android:textSize="16sp"
                         tools:text="lucia.fernandez@email.com" />
+
+                    <TextView
+                        android:id="@+id/tvDniLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/DNI"
+                        android:textColor="@color/description_gray"
+                        android:textSize="12sp"
+                        android:textAllCaps="true"
+                        android:letterSpacing="0.1" />
+
+                    <TextView
+                        android:id="@+id/tvDniValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/card_text"
+                        android:textSize="16sp"
+                        tools:text="12345678X" />
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/tvSessionsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="32dp"
                 android:fontFamily="@font/anton"
-                android:text="@string/perfil_historial_sesiones"
+                android:text="@string/perfil_resumen_actividad"
                 android:textColor="@color/card_text"
                 android:textSize="22sp" />
 
-            <LinearLayout
-                android:id="@+id/sessionsContainer"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="vertical" />
+                app:cardBackgroundColor="@color/card_background"
+                app:cardCornerRadius="16dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#1A000000">
+
+                <LinearLayout
+                    android:id="@+id/sessionsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp" />
+
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/tvSessionsEmpty"
@@ -198,4 +207,4 @@
 
     </ScrollView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "362255630427",
+    "project_id": "fisiophone",
+    "storage_bucket": "fisiophone.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362255630427:android:66c1b3417c60dbe8837f7e",
+        "android_client_info": {
+          "package_name": "com.example.fisiophone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQD89_-EfN5I3345aNLEimhBBK658yUt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

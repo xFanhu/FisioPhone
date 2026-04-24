@@ -9,6 +9,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.fisiophone.databinding.ActivityPantallaDeInicioBinding
 import com.example.fisiophone.ui.auth.LogInActivity
 import com.example.fisiophone.ui.auth.NewUserActivity
+import com.example.fisiophone.ui.menu.MainActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class PantallaDeInicio : AppCompatActivity() {
 
@@ -35,6 +37,16 @@ class PantallaDeInicio : AppCompatActivity() {
         binding.nuevoButton.setOnClickListener {
             val intent = Intent(this, NewUserActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

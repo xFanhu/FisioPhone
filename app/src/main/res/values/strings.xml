@@ -23,33 +23,76 @@
     <string name="cerrarSesion">Cerrar Sesión</string>
     <string name="citas">Citas</string>
     <string name="equipo">Equipo</string>
+    <string name="perfil">Perfil</string>
+    <string name="salir">Salir</string>
+    
+    <!-- Nueva Cita / Booking -->
+    <string name="nueva_cita">Nueva Cita</string>
+    <string name="seleccionar_fisioterapeuta">1. Selecciona Fisioterapeuta</string>
+    <string name="seleccionar_profesional">Seleccionar profesional</string>
+    <string name="elegir_dia">2. Elige el Día</string>
+    <string name="abrir_calendario">Abrir Calendario</string>
+    <string name="dia_seleccionado">Día seleccionado: %1$s</string>
+    <string name="horas_disponibles">3. Horas Disponibles</string>
+    <string name="confirmar_reserva">Confirmar Reserva</string>
+    <string name="cita_exito">Cita reservada con éxito</string>
+    <string name="error_reserva">Error al reservar la cita</string>
+    <string name="no_citas">No tienes citas programadas</string>
+    <string name="mis_citas">Mis Citas</string>
+
+    <!-- Horario / Schedule -->
+    <string name="configurar_horario">Configurar Mi Horario</string>
+    <string name="dias_laborables">Días Laborables</string>
+    <string name="rango_horario">Rango Horario</string>
+    <string name="inicio">Inicio</string>
+    <string name="fin">Fin</string>
+    <string name="duracion_sesion">Duración de la Sesión</string>
+    <string name="guardar_horario">Guardar Horario</string>
+    <string name="horario_guardado">Horario guardado correctamente</string>
+    <string name="seleccionar_dias">Por favor, selecciona al menos un día laborable</string>
+
+    <!-- Equipo -->
+    <string name="nuestro_equipo">Nuestro Equipo</string>
+    <string name="gestion_equipo">Gestión de Equipo</string>
+    <string name="buscar_pista">Buscar por nombre o email...</string>
+    <string name="hacer_fisioterapeuta">Hacer Fisioterapeuta</string>
+    <string name="hacer_paciente">Hacer Paciente</string>
+
+    <!-- Categorías futuras (Opcional) -->
     <string name="facturas">Facturación</string>
     <string name="informes">Informes</string>
     <string name="mensajes">Mensajes</string>
-    <string name="notificaciones">Notificaciones</string>
     <string name="pacientes">Pacientes</string>
-    <string name="perfil">Perfil</string>
 
     <!-- Configuración -->
     <string name="descModonoche">Activa o desactiva el modo oscuro.</string>
     <string name="modonoche">Modo Noche</string>
-
-    <!-- Notificaciones -->
-    <string name="eliminar_notificacion">Eliminar notificación</string>
-    <string name="notificacion_cita">Tienes una cita con el fisioterapeuta %1$s a las %2$s del día %3$s.</string>
-    <string name="notificaciones_desc">Tus notificaciones.</string>
-    <string name="notificaciones_vacias">No tienes notificaciones pendientes.</string>
+    <string name="ajustes_titulo">Ajustes</string>
 
     <!-- Perfil -->
     <string name="perfil_anadir_foto">Añadir foto</string>
     <string name="perfil_foto">Foto de perfil</string>
     <string name="perfil_historial_sesiones">Historial de sesiones</string>
+    <string name="perfil_resumen_actividad">Resumen de Actividad</string>
     <string name="perfil_nombre">Nombre:</string>
-    <string name="perfil_nombre_text">%1$s</string>
     <string name="perfil_apellidos">Apellidos:</string>
-    <string name="perfil_apellidos_text">%2$s</string>
-    <string name="perfil_sesion_fisio">Fisioterapeuta: %1$s</string>
+    <string name="perfil_sesion_fisio">con %1$s</string>
     <string name="perfil_sesion_tratamiento">Tratamiento: %1$s</string>
     <string name="perfil_sesiones_vacias">Todavía no hay sesiones registradas.</string>
+    <string name="cambiar">CAMBIAR</string>
 
+    <!-- Mensajes de Error y Toast -->
+    <string name="error_generico">Ha ocurrido un error inesperado</string>
+    <string name="rellenar_campos">Por favor, rellena todos los campos</string>
+    <string name="pass_no_coinciden">Las contraseñas no coinciden</string>
+    <string name="pass_corta">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="error_login">Error de inicio de sesión</string>
+    <string name="error_registro">Error de registro</string>
+
+    <string name="cita_cancelada">Cita cancelada</string>
+    <string name="na">N/A</string>
+    <string name="sesion_fisio_default">Sesión de Fisioterapia</string>
+    <string name="error_equipo">Error al cargar el equipo</string>
+    <string name="trabajando_login">Iniciando sesión...</string>
+    <string name="trabajando_registro">Creando usuario...</string>
 </resources>

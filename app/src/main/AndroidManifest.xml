@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".FisioPhoneApp"
@@ -14,14 +15,20 @@
         <activity
             android:name=".ui.auth.NewUserActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.FisioPhone" />
         <activity
-            android:name=".ui.menu.MenuActivity"
+            android:name=".ui.menu.ManageUsersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FisioPhone" />
+        <activity
+            android:name=".ui.menu.MainActivity"
             android:exported="false"
             android:theme="@style/Theme.FisioPhone" />
         <activity
             android:name=".ui.auth.LogInActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.FisioPhone" />
         <activity
             android:name=".ui.start.PantallaDeInicio"
