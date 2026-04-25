@@ -67,6 +67,18 @@
             app:layout_constraintTop_toBottomOf="@id/tvUserEmail"
             android:text="DNI: 12345678A" />
 
+        <TextView
+            android:id="@+id/tvUserPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/description_gray"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvUserDni"
+            android:text="Teléfono: 600123456" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnChangeRole"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -76,7 +88,7 @@
             android:text="Hacer Fisioterapeuta"
             app:cornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvUserDni" />
+            app:layout_constraintTop_toBottomOf="@id/tvUserPhone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

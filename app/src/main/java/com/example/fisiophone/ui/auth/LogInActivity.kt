@@ -50,7 +50,7 @@ class LogInActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this, "${getString(R.string.error_login)}: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.error_formato, getString(R.string.error_login), task.exception?.message), Toast.LENGTH_SHORT).show()
                     }
                 }
         }

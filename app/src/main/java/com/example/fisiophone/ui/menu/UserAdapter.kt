@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fisiophone.R
+import com.google.android.material.button.MaterialButton
 
 data class User(
     val id: String,
@@ -14,7 +15,9 @@ data class User(
     val apellidos: String,
     val email: String,
     val dni: String,
-    var role: String
+    val telefono: String,
+    var role: String,
+    val treatments: List<String> = emptyList()
 )
 
 class UserAdapter(
@@ -46,21 +49,29 @@ class UserAdapter(
         private val tvUserRole: TextView = itemView.findViewById(R.id.tvUserRole)
         private val tvUserEmail: TextView = itemView.findViewById(R.id.tvUserEmail)
         private val tvUserDni: TextView = itemView.findViewById(R.id.tvUserDni)
-        private val btnChangeRole: Button = itemView.findViewById(R.id.btnChangeRole)
+        private val tvUserPhone: TextView = itemView.findViewById(R.id.tvUserPhone)
+        private val btnChangeRole: MaterialButton = itemView.findViewById(R.id.btnChangeRole)
 
         fun bind(user: User) {
             tvUserName.text = "${user.nombre} ${user.apellidos}"
             tvUserRole.text = user.role.replaceFirstChar { it.uppercase() }
             tvUserEmail.text = user.email
-            tvUserDni.text = "DNI: ${user.dni}"
+            tvUserDni.text = "${itemView.context.getString(R.string.DNI)}: ${user.dni}"
 
-            if (user.role == "fisioterapeuta") {
-                btnChangeRole.text = "Hacer Paciente"
+            if (user.telefono.isNotEmpty()) {
+                tvUserPhone.visibility = View.VISIBLE
+                tvUserPhone.text = "${itemView.context.getString(R.string.telefono)}: ${user.telefono}"
             } else {
-                btnChangeRole.text = "Hacer Fisioterapeuta"
+                tvUserPhone.visibility = View.GONE
             }
 
-            // Ocultar botón si es administrador (no queremos que se degraden a sí mismos accidentalmente)
+            if (user.role == "fisioterapeuta") {
+                btnChangeRole.setText(R.string.hacer_paciente)
+            } else {
+                btnChangeRole.setText(R.string.hacer_fisioterapeuta)
+            }
+
+            // Ocultar botón si es administrador (no quiero que se degraden a sí mismos accidentalmente)
             if (!showActions || user.role == "administrador") {
                 btnChangeRole.visibility = View.GONE
             } else {

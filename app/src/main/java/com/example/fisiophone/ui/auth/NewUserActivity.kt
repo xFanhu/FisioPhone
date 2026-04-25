@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.fisiophone.databinding.ActivityNewUserBinding
 import com.example.fisiophone.ui.menu.MainActivity
+import com.example.fisiophone.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -41,13 +42,19 @@ class NewUserActivity : AppCompatActivity() {
             val nombre = binding.etNombre.text.toString().trim()
             val apellidos = binding.etApellidos.text.toString().trim()
             val dni = binding.etDNI.text.toString().trim()
+            val telefono = binding.etTelefono.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
             val rPassword = binding.etRPassword.text.toString().trim()
 
             if (email.isEmpty() || nombre.isEmpty() || apellidos.isEmpty() ||
-                dni.isEmpty() || password.isEmpty() || rPassword.isEmpty()
+                dni.isEmpty() || telefono.isEmpty() || password.isEmpty() || rPassword.isEmpty()
             ) {
                 Toast.makeText(this, getString(com.example.fisiophone.R.string.rellenar_campos), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!telefono.matches(Regex("^\\+?[0-9]+$"))) {
+                Toast.makeText(this, getString(R.string.error_telefono_vacio), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -73,6 +80,7 @@ class NewUserActivity : AppCompatActivity() {
                                 "nombre" to nombre,
                                 "apellidos" to apellidos,
                                 "dni" to dni,
+                                "telefono" to telefono,
                                 "role" to "paciente"
                             )
 
@@ -86,12 +94,12 @@ class NewUserActivity : AppCompatActivity() {
                                 }
                                 .addOnFailureListener { e ->
                                     setLoading(false)
-                                    Toast.makeText(this, "Error guardando datos: ${e.message}", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, getString(R.string.error_guardando_datos, e.message), Toast.LENGTH_SHORT).show()
                                 }
                         }
                     } else {
                         setLoading(false)
-                        Toast.makeText(this, "${getString(com.example.fisiophone.R.string.error_registro)}: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.error_formato, getString(R.string.error_registro), task.exception?.message), Toast.LENGTH_SHORT).show()
                     }
                 }
         }

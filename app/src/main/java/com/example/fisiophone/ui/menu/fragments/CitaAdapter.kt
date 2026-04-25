@@ -16,7 +16,8 @@ data class Cita(
     val physioName: String,
     val date: String,
     val time: String,
-    val status: String
+    val status: String,
+    val tratamiento: String
 )
 
 class CitaAdapter(
@@ -48,9 +49,12 @@ class CitaAdapter(
         private val tvCitaNameValue: TextView = itemView.findViewById(R.id.tvCitaNameValue)
         private val ivDeleteCita: ImageView = itemView.findViewById(R.id.ivDeleteCita)
 
+        private val tvCitaTreatment: TextView = itemView.findViewById(R.id.tvCitaTreatment)
+
         fun bind(cita: Cita) {
             tvCitaTime.text = cita.time
             tvCitaDate.text = cita.date
+            tvCitaTreatment.text = cita.tratamiento
             
             if (isPatient) {
                 tvCitaNameLabel.text = "Fisioterapeuta:"

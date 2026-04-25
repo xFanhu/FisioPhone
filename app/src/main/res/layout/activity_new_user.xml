@@ -98,6 +98,26 @@
                 android:textColor="@color/card_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- TELÉFONO -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTelefono"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/telefono"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilDni">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:textColor="@color/card_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <!-- CONTRASEÑA -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPassword"
@@ -109,7 +129,7 @@
             app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilDni">
+            app:layout_constraintTop_toBottomOf="@id/tilTelefono">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"

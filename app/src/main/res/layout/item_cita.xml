@@ -66,6 +66,15 @@
                 tools:text="Marta Ruiz" />
 
             <TextView
+                android:id="@+id/tvCitaTreatment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/description_gray"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp"
+                tools:text="Osteopatía" />
+
+            <TextView
                 android:id="@+id/tvCitaStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

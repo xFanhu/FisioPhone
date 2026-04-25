@@ -31,9 +31,22 @@ class ScheduleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
+        setupTreatments()
         setupTimePickers()
         setupSaveButton()
         loadCurrentSchedule()
+    }
+
+    private fun setupTreatments() {
+        val treatmentsArray = resources.getStringArray(R.array.treatments_array)
+        for (treatment in treatmentsArray) {
+            val chip = com.google.android.material.chip.Chip(requireContext()).apply {
+                text = treatment
+                isCheckable = true
+                tag = treatment
+            }
+            binding.cgTreatments.addView(chip)
+        }
     }
 
     private fun setupTimePickers() {
@@ -71,10 +84,17 @@ class ScheduleFragment : Fragment() {
                 if (_binding == null) return@addOnSuccessListener
                 binding.pbSaving.visibility = View.GONE
                 if (doc.exists()) {
-                    val schedule = doc.get("schedule") as? Map<String, Any> ?: return@addOnSuccessListener
+                    val schedule = doc.get("schedule") as? Map<*, *> ?: return@addOnSuccessListener
+                    
+                    // Treatments
+                    val selectedTreatments = (schedule["treatments"] as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                    for (i in 0 until binding.cgTreatments.childCount) {
+                        val chip = binding.cgTreatments.getChildAt(i) as com.google.android.material.chip.Chip
+                        chip.isChecked = selectedTreatments.contains(chip.tag as String)
+                    }
                     
                     // Days
-                    val days = schedule["workDays"] as? List<String> ?: emptyList()
+                    val days = (schedule["workDays"] as? List<*>)?.filterIsInstance<String>() ?: emptyList()
                     binding.chipMon.isChecked = days.contains("Mon")
                     binding.chipTue.isChecked = days.contains("Tue")
                     binding.chipWed.isChecked = days.contains("Wed")
@@ -88,7 +108,7 @@ class ScheduleFragment : Fragment() {
                     binding.etEndTime.setText(schedule["endHour"] as? String ?: "21:00")
                     
                     // Duration
-                    val duration = (schedule["duration"] as? Long)?.toInt() ?: 60
+                    val duration = (schedule["duration"] as? Number)?.toInt() ?: 60
                     when (duration) {
                         30 -> binding.chip30min.isChecked = true
                         45 -> binding.chip45min.isChecked = true
@@ -120,11 +140,25 @@ class ScheduleFragment : Fragment() {
             else -> 60
         }
         
+        val selectedTreatments = mutableListOf<String>()
+        for (i in 0 until binding.cgTreatments.childCount) {
+            val chip = binding.cgTreatments.getChildAt(i) as com.google.android.material.chip.Chip
+            if (chip.isChecked) {
+                selectedTreatments.add(chip.tag as String)
+            }
+        }
+        
+        if (selectedTreatments.isEmpty()) {
+            Toast.makeText(requireContext(), "Por favor, selecciona al menos un tratamiento", Toast.LENGTH_SHORT).show()
+            return
+        }
+        
         val scheduleMap = mapOf(
             "workDays" to selectedDays,
             "startHour" to binding.etStartTime.text.toString(),
             "endHour" to binding.etEndTime.text.toString(),
-            "duration" to duration
+            "duration" to duration,
+            "treatments" to selectedTreatments
         )
         
         binding.pbSaving.visibility = View.VISIBLE

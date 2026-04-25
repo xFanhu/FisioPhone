@@ -23,6 +23,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var selectedPhotoUri: Uri? = null
+    private lateinit var sessionAdapter: PatientSessionAdapter
 
     private val pickPhoto = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri == null) return@registerForActivityResult
@@ -53,7 +54,26 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupPhotoPicker()
+        setupRecyclerView()
+        setupHistoryButton()
         fetchUserData()
+    }
+
+    private fun setupHistoryButton() {
+        binding.cardClinicalHistory.setOnClickListener {
+            val targetUid = arguments?.getString(ARG_USER_ID) ?: FirebaseAuth.getInstance().currentUser?.uid ?: return@setOnClickListener
+            val isOwnProfile = arguments?.getString(ARG_USER_ID) == null
+            val fragment = HistoryFragment.newInstance(targetUid, isOwnProfile)
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentHost, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+
+    private fun setupRecyclerView() {
+        sessionAdapter = PatientSessionAdapter(emptyList())
+        binding.rvSessions.adapter = sessionAdapter
     }
 
     private fun fetchUserData() {
@@ -73,6 +93,7 @@ class ProfileFragment : Fragment() {
                             surnames = document.getString("apellidos") ?: "",
                             email = document.getString("email") ?: "",
                             dni = document.getString("dni") ?: getString(R.string.na),
+                            phone = document.getString("telefono") ?: "",
                             sessions = emptyList()
                         )
                         
@@ -88,17 +109,27 @@ class ProfileFragment : Fragment() {
 
     private fun fetchUserSessions(uid: String, profile: UserProfile) {
         FirebaseFirestore.getInstance().collection("citas")
-            .whereEqualTo("pacienteId", uid)
+            .whereEqualTo("patientId", uid)
             .get()
             .addOnSuccessListener { documents ->
                 if (_binding == null) return@addOnSuccessListener
                 val sessions = mutableListOf<PatientSession>()
+                
+                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
+                val currentDateTimeStr = sdf.format(java.util.Date())
+                
                 for (doc in documents) {
-                    sessions.add(PatientSession(
-                        date = doc.getString("fecha") ?: "",
-                        physiotherapistName = doc.getString("fisioterapeutaNombre") ?: "",
-                        treatment = doc.getString("tratamiento") ?: getString(R.string.sesion_fisio_default)
-                    ))
+                    val dateStr = doc.getString("date") ?: ""
+                    val timeStr = doc.getString("time") ?: "00:00"
+                    val sessionDateTimeStr = "$dateStr $timeStr"
+                    
+                    if (sessionDateTimeStr < currentDateTimeStr) {
+                        sessions.add(PatientSession(
+                            date = dateStr,
+                            physiotherapistName = doc.getString("physioName") ?: "",
+                            treatment = doc.getString("tratamiento") ?: getString(R.string.sesion_fisio_default)
+                        ))
+                    }
                 }
                 // Sort by date (optional, but good)
                 val sortedSessions = sessions.sortedByDescending { it.date }
@@ -121,11 +152,22 @@ class ProfileFragment : Fragment() {
         binding.tvEmailValue.text = profile.email
         binding.tvDniValue.text = profile.dni
 
+        if (profile.phone.isNotEmpty()) {
+            binding.tvPhoneLabel.visibility = View.VISIBLE
+            binding.tvPhoneValue.visibility = View.VISIBLE
+            binding.tvPhoneValue.text = profile.phone
+        } else {
+            binding.tvPhoneLabel.visibility = View.GONE
+            binding.tvPhoneValue.visibility = View.GONE
+        }
+
         val isPatient = profile.role == UserRole.PATIENT
+        binding.cardClinicalHistory.visibility = if (isPatient) View.VISIBLE else View.GONE
+        
         binding.tvSessionsTitle.visibility = if (isPatient) View.VISIBLE else View.GONE
         binding.tvSessionsEmpty.visibility = if (isPatient && profile.sessions.isEmpty()) View.VISIBLE else View.GONE
         
-        val containerCard = binding.sessionsContainer.parent as? View
+        val containerCard = binding.rvSessions.parent as? View
         containerCard?.visibility = if (isPatient && profile.sessions.isNotEmpty()) View.VISIBLE else View.GONE
 
         binding.tvDniLabel.visibility = if (isPatient) View.VISIBLE else View.GONE
@@ -137,6 +179,19 @@ class ProfileFragment : Fragment() {
         
         val isOwnProfile = arguments?.getString(ARG_USER_ID) == null
         binding.photoPickerCard.isEnabled = isOwnProfile
+        
+        binding.btnCall.visibility = if (!isOwnProfile && profile.phone.isNotEmpty()) View.VISIBLE else View.GONE
+        binding.btnCall.setOnClickListener {
+            com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.llamar_paciente_titulo)
+                .setMessage(getString(R.string.llamar_paciente_mensaje, profile.name))
+                .setPositiveButton(R.string.si) { _, _ ->
+                    val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${profile.phone}"))
+                    startActivity(intent)
+                }
+                .setNegativeButton(R.string.no, null)
+                .show()
+        }
         
         renderPhoto()
     }
@@ -154,66 +209,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun renderSessions(sessions: List<PatientSession>) {
-        binding.sessionsContainer.removeAllViews()
         binding.tvSessionsEmpty.visibility = if (sessions.isEmpty()) View.VISIBLE else View.GONE
-
-        sessions.forEach { session ->
-            binding.sessionsContainer.addView(createSessionCard(session))
-        }
-    }
-
-    private fun createSessionCard(session: PatientSession): View {
-        val card = com.google.android.material.card.MaterialCardView(requireContext()).apply {
-            radius = dp(12).toFloat()
-            cardElevation = 0f
-            strokeWidth = dp(1)
-            strokeColor = 0x1A000000.toInt()
-            setCardBackgroundColor(requireContext().getColor(R.color.card_background))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                bottomMargin = dp(8)
-            }
-        }
-
-        val content = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.HORIZONTAL
-            setPadding(dp(12), dp(12), dp(12), dp(12))
-            gravity = android.view.Gravity.CENTER_VERTICAL
-        }
-
-        val textContainer = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.VERTICAL
-            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-        }
-
-        val dateView = TextView(requireContext()).apply {
-            text = session.date
-            setTextColor(requireContext().getColor(R.color.azul))
-            textSize = 14f
-            setTypeface(typeface, Typeface.BOLD)
-        }
-
-        val treatmentView = TextView(requireContext()).apply {
-            text = session.treatment
-            setTextColor(requireContext().getColor(R.color.card_text))
-            textSize = 15f
-        }
-
-        val professionalView = TextView(requireContext()).apply {
-            text = getString(R.string.perfil_sesion_fisio, session.physiotherapistName)
-            setTextColor(requireContext().getColor(R.color.description_gray))
-            textSize = 12f
-        }
-
-        textContainer.addView(dateView)
-        textContainer.addView(treatmentView)
-        textContainer.addView(professionalView)
-        content.addView(textContainer)
-        
-        card.addView(content)
-        return card
+        sessionAdapter.updateList(sessions)
     }
 
     private fun dp(value: Int): Int {
@@ -236,6 +233,7 @@ class ProfileFragment : Fragment() {
         val surnames: String,
         val email: String,
         val dni: String,
+        val phone: String,
         val sessions: List<PatientSession>
     )
 
@@ -247,7 +245,8 @@ class ProfileFragment : Fragment() {
 
     enum class UserRole(val value: String) {
         PATIENT("paciente"),
-        PHYSIOTHERAPIST("fisioterapeuta");
+        PHYSIOTHERAPIST("fisioterapeuta"),
+        ADMIN("administrador");
 
         companion object {
             fun fromValue(value: String): UserRole {

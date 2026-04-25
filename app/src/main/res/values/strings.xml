@@ -12,6 +12,7 @@
     <string name="contraseña">Contraseña</string>
     <string name="crearUsuario">Crear Usuario</string>
     <string name="DNI">DNI</string>
+    <string name="telefono">Teléfono</string>
     <string name="email">Correo electrónico:</string>
     <string name="nombre">Nombre</string>
     <string name="nuevoUsuario">Nuevo Usuario</string>
@@ -25,23 +26,43 @@
     <string name="equipo">Equipo</string>
     <string name="perfil">Perfil</string>
     <string name="salir">Salir</string>
+    <string name="pacientes">Pacientes</string>
     
     <!-- Nueva Cita / Booking -->
     <string name="nueva_cita">Nueva Cita</string>
     <string name="seleccionar_fisioterapeuta">1. Selecciona Fisioterapeuta</string>
     <string name="seleccionar_profesional">Seleccionar profesional</string>
-    <string name="elegir_dia">2. Elige el Día</string>
+    <string name="seleccionar_tratamiento">2. Selecciona Tratamiento</string>
+    <string name="elegir_dia">3. Elige el Día</string>
     <string name="abrir_calendario">Abrir Calendario</string>
+    <string name="seleccionar_fecha">Seleccionar fecha</string>
     <string name="dia_seleccionado">Día seleccionado: %1$s</string>
-    <string name="horas_disponibles">3. Horas Disponibles</string>
+    <string name="horas_disponibles">4. Horas Disponibles</string>
     <string name="confirmar_reserva">Confirmar Reserva</string>
     <string name="cita_exito">Cita reservada con éxito</string>
     <string name="error_reserva">Error al reservar la cita</string>
     <string name="no_citas">No tienes citas programadas</string>
     <string name="mis_citas">Mis Citas</string>
+    
+    <!-- Historia Clínica -->
+    <string name="historia_clinica">Historia Clínica</string>
+    <string name="nueva_anotacion">Nueva Anotación</string>
+    <string name="escribe_detalles">Escribe los detalles clínicos de la sesión...</string>
+    <string name="guardar_historia">Guardar Anotación</string>
+    <string name="sin_historia">No hay anotaciones clínicas todavía.</string>
+    
+    <string-array name="treatments_array">
+        <item>Fisioterapia Deportiva</item>
+        <item>Osteopatía</item>
+        <item>Drenaje linfático</item>
+        <item>Fisioterapia Neurológica</item>
+        <item>Fisioterapia Traumatológica</item>
+        <item>Fisioterapia de cuello y espalda</item>
+    </string-array>
 
     <!-- Horario / Schedule -->
     <string name="configurar_horario">Configurar Mi Horario</string>
+    <string name="especialidades">Especialidades / Tratamientos</string>
     <string name="dias_laborables">Días Laborables</string>
     <string name="rango_horario">Rango Horario</string>
     <string name="inicio">Inicio</string>
@@ -58,11 +79,7 @@
     <string name="hacer_fisioterapeuta">Hacer Fisioterapeuta</string>
     <string name="hacer_paciente">Hacer Paciente</string>
 
-    <!-- Categorías futuras (Opcional) -->
-    <string name="facturas">Facturación</string>
-    <string name="informes">Informes</string>
-    <string name="mensajes">Mensajes</string>
-    <string name="pacientes">Pacientes</string>
+    
 
     <!-- Configuración -->
     <string name="descModonoche">Activa o desactiva el modo oscuro.</string>
@@ -81,13 +98,28 @@
     <string name="perfil_sesiones_vacias">Todavía no hay sesiones registradas.</string>
     <string name="cambiar">CAMBIAR</string>
 
+    <!-- Diálogo Llamada -->
+    <string name="llamar_paciente_titulo">¿Llamar al paciente?</string>
+    <string name="llamar_paciente_mensaje">Se abrirá la aplicación de teléfono para contactar con %1$s.</string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
+
     <!-- Mensajes de Error y Toast -->
     <string name="error_generico">Ha ocurrido un error inesperado</string>
     <string name="rellenar_campos">Por favor, rellena todos los campos</string>
+    <string name="error_telefono_vacio">Por favor, introduce un teléfono válido</string>
     <string name="pass_no_coinciden">Las contraseñas no coinciden</string>
     <string name="pass_corta">La contraseña debe tener al menos 6 caracteres</string>
     <string name="error_login">Error de inicio de sesión</string>
     <string name="error_registro">Error de registro</string>
+    <string name="error_dia_no_laborable">El profesional no trabaja ese día</string>
+    <string name="error_sin_horario">Este profesional no tiene horario configurado</string>
+    <string name="error_datos_paciente">Error al obtener datos del paciente: %1$s</string>
+    <string name="error_con_mensaje">Error: %1$s</string>
+    <string name="rol_actualizado">Rol actualizado a %1$s</string>
+    <string name="error_actualizando_rol">Error actualizando rol</string>
+    <string name="error_guardando_datos">Error guardando datos: %1$s</string>
+    <string name="error_formato">%1$s: %2$s</string>
 
     <string name="cita_cancelada">Cita cancelada</string>
     <string name="na">N/A</string>

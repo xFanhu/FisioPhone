@@ -54,6 +54,7 @@ class ManageUsersActivity : AppCompatActivity() {
                         apellidos = document.getString("apellidos") ?: "",
                         email = document.getString("email") ?: "",
                         dni = document.getString("dni") ?: "",
+                        telefono = document.getString("telefono") ?: "",
                         role = role
                     )
                     allUsers.add(user)
@@ -102,7 +103,7 @@ class ManageUsersActivity : AppCompatActivity() {
         db.collection("users").document(user.id)
             .update("role", newRole)
             .addOnSuccessListener {
-                Toast.makeText(this, "Rol actualizado a $newRole", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.rol_actualizado, newRole), Toast.LENGTH_SHORT).show()
                 // Update local list to reflect changes immediately
                 val index = allUsers.indexOfFirst { it.id == user.id }
                 if (index != -1) {
@@ -111,7 +112,7 @@ class ManageUsersActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Error actualizando rol", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.error_actualizando_rol), Toast.LENGTH_SHORT).show()
             }
     }
 }

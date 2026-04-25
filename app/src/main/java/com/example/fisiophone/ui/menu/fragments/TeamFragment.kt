@@ -96,6 +96,7 @@ class TeamFragment : Fragment() {
                         apellidos = document.getString("apellidos") ?: "",
                         email = document.getString("email") ?: "",
                         dni = document.getString("dni") ?: "",
+                        telefono = document.getString("telefono") ?: "",
                         role = document.getString("role") ?: "fisioterapeuta"
                     )
                     teamList.add(user)

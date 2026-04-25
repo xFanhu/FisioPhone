@@ -83,6 +83,7 @@ class PatientsFragment : Fragment() {
                         apellidos = doc.getString("apellidos") ?: "",
                         email = doc.getString("email") ?: "",
                         dni = doc.getString("dni") ?: "",
+                        telefono = doc.getString("telefono") ?: "",
                         role = doc.getString("role") ?: "paciente"
                     )
                     allPatients.add(user)
