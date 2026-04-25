@@ -1,5 +1,6 @@
 package com.example.fisiophone.data.settings
 
 data class SettingData(
-    val darkMode: Boolean
+    val darkMode: Boolean,
+    val notificationsEnabled: Boolean = true
 )

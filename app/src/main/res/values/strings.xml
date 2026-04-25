@@ -85,6 +85,8 @@
     <string name="descModonoche">Activa o desactiva el modo oscuro.</string>
     <string name="modonoche">Modo Noche</string>
     <string name="ajustes_titulo">Ajustes</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="descNotificaciones">Recibe avisos sobre tus citas.</string>
 
     <!-- Perfil -->
     <string name="perfil_anadir_foto">Añadir foto</string>

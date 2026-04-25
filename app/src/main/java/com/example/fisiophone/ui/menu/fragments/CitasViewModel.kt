@@ -12,6 +12,9 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class CitasViewModel : ViewModel() {
 
@@ -30,7 +33,18 @@ class CitasViewModel : ViewModel() {
     private val _messages = MutableSharedFlow<Result<String>>()
     val messages: SharedFlow<Result<String>> = _messages.asSharedFlow()
 
+    private val _selectedDate = MutableStateFlow<String?>(null)
+    val selectedDate: StateFlow<String?> = _selectedDate.asStateFlow()
+
     init {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        _selectedDate.value = sdf.format(Date())
+        fetchData()
+    }
+
+    fun updateSelectedDate(date: Date) {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        _selectedDate.value = sdf.format(date)
         fetchData()
     }
 
@@ -48,10 +62,13 @@ class CitasViewModel : ViewModel() {
 
                 // 2. Obtener citas
                 val field = if (patientFlag) "patientId" else "physioId"
-                val result = db.collection("citas")
-                    .whereEqualTo(field, uid)
-                    .get()
-                    .await()
+                var query = db.collection("citas").whereEqualTo(field, uid)
+
+                if (!patientFlag && _selectedDate.value != null) {
+                    query = query.whereEqualTo("date", _selectedDate.value!!)
+                }
+
+                val result = query.get().await()
 
                 val list = result.documents.map { doc ->
                     Cita(

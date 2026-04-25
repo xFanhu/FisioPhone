@@ -13,7 +13,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fisiophone.R
 import com.example.fisiophone.databinding.FragmentCitasBinding
+import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class CitasFragment : Fragment() {
 
@@ -44,6 +48,18 @@ class CitasFragment : Fragment() {
             viewModel.deleteCita(cita)
         }
         binding.rvCitas.adapter = citaAdapter
+
+        binding.cardDatePicker.setOnClickListener {
+            val picker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Seleccionar fecha")
+                .build()
+
+            picker.addOnPositiveButtonClickListener { selection ->
+                val date = Date(selection)
+                viewModel.updateSelectedDate(date)
+            }
+            picker.show(parentFragmentManager, "DATE_PICKER")
+        }
     }
 
     private fun observeViewModel() {
@@ -52,11 +68,33 @@ class CitasFragment : Fragment() {
                 
                 launch {
                     viewModel.isPatient.collect { isPatient ->
+                        binding.cardDatePicker.visibility = if (isPatient) View.GONE else View.VISIBLE
                         // Recrear el adapter con el rol correcto
                         citaAdapter = CitaAdapter(viewModel.citas.value, isPatient) { cita ->
                             viewModel.deleteCita(cita)
                         }
                         binding.rvCitas.adapter = citaAdapter
+                    }
+                }
+
+                launch {
+                    viewModel.selectedDate.collect { dateStr ->
+                        if (dateStr != null) {
+                            try {
+                                val sdfIn = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                                val date = sdfIn.parse(dateStr)
+                                if (date != null) {
+                                    // Comprobar si es hoy
+                                    val todayStr = sdfIn.format(Date())
+                                    if (dateStr == todayStr) {
+                                        binding.tvSelectedDateFilter.text = "Hoy"
+                                    } else {
+                                        val sdfOut = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                                        binding.tvSelectedDateFilter.text = "Citas del ${sdfOut.format(date)}"
+                                    }
+                                }
+                            } catch (e: Exception) {}
+                        }
                     }
                 }
 

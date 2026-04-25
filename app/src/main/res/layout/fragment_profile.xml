@@ -227,6 +227,60 @@
                             android:scaleType="centerInside" />
                     </LinearLayout>
 
+                    <!-- ESPECIALIDADES -->
+                    <TextView
+                        android:id="@+id/tvSpecialtiesTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="ESPECIALIDADES"
+                        android:textColor="@color/description_gray"
+                        android:textSize="12sp"
+                        android:textAllCaps="true"
+                        android:letterSpacing="0.1"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/cgSpecialties"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:visibility="gone" />
+
+                    <!-- HORARIO -->
+                    <TextView
+                        android:id="@+id/tvScheduleTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="HORARIO SEMANAL"
+                        android:textColor="@color/description_gray"
+                        android:textSize="12sp"
+                        android:textAllCaps="true"
+                        android:letterSpacing="0.1"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvScheduleDays"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/card_text"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        tools:text="Lunes, Martes, Miércoles" />
+
+                    <TextView
+                        android:id="@+id/tvScheduleHours"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/card_text"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        tools:text="09:00 - 14:00" />
+
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>

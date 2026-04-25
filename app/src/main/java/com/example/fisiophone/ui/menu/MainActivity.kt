@@ -8,6 +8,13 @@ import com.example.fisiophone.ui.menu.fragments.ConfigFragment
 import com.example.fisiophone.ui.menu.fragments.ProfileFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.DocumentChange
+import com.example.fisiophone.notifications.NotificationHelper
+import com.example.fisiophone.data.settings.SettingsManager
+import kotlinx.coroutines.flow.first
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
     private var userRole: String = "paciente"
+    private var appointmentsListener: ListenerRegistration? = null
+    private var isInitialLoad = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +108,50 @@ class MainActivity : AppCompatActivity() {
                 if (document != null && document.exists()) {
                     userRole = document.getString("role") ?: "paciente"
                     updateMenuVisibility()
+                    if (userRole == "fisioterapeuta" || userRole == "administrador") {
+                        setupNotificationsListener()
+                    }
+                }
+            }
+    }
+
+    private fun setupNotificationsListener() {
+        val currentUser = auth.currentUser ?: return
+        appointmentsListener?.remove()
+        isInitialLoad = true
+
+        appointmentsListener = db.collection("citas")
+            .whereEqualTo("physioId", currentUser.uid)
+            .whereEqualTo("status", "booked")
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) return@addSnapshotListener
+
+                if (snapshots != null) {
+                    if (isInitialLoad) {
+                        isInitialLoad = false
+                        return@addSnapshotListener
+                    }
+
+                    for (change in snapshots.documentChanges) {
+                        if (change.type == DocumentChange.Type.ADDED) {
+                            // Ignorar si la cita la ha creado el propio fisio localmente
+                            if (change.document.metadata.hasPendingWrites()) continue
+                            
+                            lifecycleScope.launch {
+                                val settings = SettingsManager.getSettings(this@MainActivity).first()
+                                if (settings.notificationsEnabled) {
+                                    val patientName = change.document.getString("patientName") ?: "Un paciente"
+                                    val date = change.document.getString("date") ?: ""
+                                    val time = change.document.getString("time") ?: ""
+                                    
+                                    val title = "Nueva Cita Reservada"
+                                    val message = "$patientName ha reservado una cita contigo el $date a las $time."
+                                    
+                                    NotificationHelper.showNotification(this@MainActivity, title, message)
+                                }
+                            }
+                        }
+                    }
                 }
             }
     }
@@ -115,7 +168,7 @@ class MainActivity : AppCompatActivity() {
             addItem?.title = "Horario"
             addItem?.setIcon(R.drawable.ic_citas)
         } else {
-            teamItem?.isVisible = false
+            teamItem?.isVisible = true // Los pacientes pueden ver el equipo
             patientsItem?.isVisible = false
             addItem?.title = "Nueva Cita"
             addItem?.setIcon(R.drawable.ic_add)
@@ -143,5 +196,10 @@ class MainActivity : AppCompatActivity() {
             )
             .addToBackStack(ProfileFragment.TAG)
             .commit()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        appointmentsListener?.remove()
     }
 }

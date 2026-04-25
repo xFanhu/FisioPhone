@@ -21,6 +21,12 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.Calendar
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import java.util.concurrent.TimeUnit
+import com.example.fisiophone.workers.AppointmentReminderWorker
 
 class AddCitaFragment : Fragment() {
 
@@ -146,6 +152,7 @@ class AddCitaFragment : Fragment() {
                 launch {
                     viewModel.bookingResult.collect { result ->
                         result.onSuccess {
+                            scheduleReminder()
                             Toast.makeText(requireContext(), getString(R.string.cita_exito), Toast.LENGTH_LONG).show()
                             parentFragmentManager.beginTransaction()
                                 .replace(com.example.fisiophone.R.id.fragmentHost, CitasFragment())
@@ -160,6 +167,48 @@ class AddCitaFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun scheduleReminder() {
+        val date = viewModel.selectedDate ?: return
+        val timeStr = viewModel.selectedTime ?: return
+        val physio = viewModel.selectedPhysio ?: return
+
+        try {
+            val parts = timeStr.split(":")
+            val hour = parts[0].toInt()
+            val minute = parts[1].toInt()
+
+            val calendar = Calendar.getInstance()
+            calendar.time = date
+            calendar.set(Calendar.HOUR_OF_DAY, hour)
+            calendar.set(Calendar.MINUTE, minute)
+            calendar.set(Calendar.SECOND, 0)
+
+            val appointmentTimeMs = calendar.timeInMillis
+            val oneDayMs = 24 * 60 * 60 * 1000L
+            val reminderTimeMs = appointmentTimeMs - oneDayMs
+            val currentTimeMs = System.currentTimeMillis()
+
+            val delay = reminderTimeMs - currentTimeMs
+
+            if (delay > 0) {
+                val data = Data.Builder()
+                    .putString("physioName", "${physio.nombre} ${physio.apellidos}")
+                    .putString("time", timeStr)
+                    .build()
+
+                val workRequest = OneTimeWorkRequestBuilder<AppointmentReminderWorker>()
+                    .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+                    .setInputData(data)
+                    .build()
+
+                WorkManager.getInstance(requireContext().applicationContext)
+                    .enqueue(workRequest)
+            }
+        } catch (e: Exception) {
+            // Ignorar fallos al programar el recordatorio
         }
     }
 

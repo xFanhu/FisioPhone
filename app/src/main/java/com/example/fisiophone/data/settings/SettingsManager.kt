@@ -16,19 +16,28 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 object SettingsManager {
 
     const val KEY_DARKMODE = "dark_mode"
+    const val KEY_NOTIFICATIONS = "notifications"
 
     private val darkModeKey = booleanPreferencesKey(KEY_DARKMODE)
+    private val notificationsKey = booleanPreferencesKey(KEY_NOTIFICATIONS)
 
     fun getSettings(context: Context): Flow<SettingData> =
         context.applicationContext.dataStore.data.map { preferences ->
             SettingData(
-                darkMode = preferences[darkModeKey] ?: false
+                darkMode = preferences[darkModeKey] ?: false,
+                notificationsEnabled = preferences[notificationsKey] ?: true
             )
         }
 
     suspend fun saveDarkMode(context: Context, enabled: Boolean) {
         context.applicationContext.dataStore.edit { preferences ->
             preferences[darkModeKey] = enabled
+        }
+    }
+
+    suspend fun saveNotificationsEnabled(context: Context, enabled: Boolean) {
+        context.applicationContext.dataStore.edit { preferences ->
+            preferences[notificationsKey] = enabled
         }
     }
 

@@ -94,7 +94,9 @@ class ProfileFragment : Fragment() {
                             email = document.getString("email") ?: "",
                             dni = document.getString("dni") ?: getString(R.string.na),
                             phone = document.getString("telefono") ?: "",
-                            sessions = emptyList()
+                            sessions = emptyList(),
+                            treatments = ((document.get("schedule") as? Map<*, *>)?.get("treatments") as? List<*>)?.filterIsInstance<String>() ?: emptyList(),
+                            scheduleInfo = document.get("schedule") as? Map<String, Any>
                         )
                         
                         if (roleEnum == UserRole.PATIENT) {
@@ -147,12 +149,25 @@ class ProfileFragment : Fragment() {
     }
 
     private fun bindProfile(profile: UserProfile) {
+        val isOwnProfile = arguments?.getString(ARG_USER_ID) == null
+        val isPatient = profile.role == UserRole.PATIENT
+        val isPhysio = profile.role == UserRole.PHYSIOTHERAPIST
+        
+        // PRIVACIDAD: Ocultamos DNI/Teléfono si es el perfil de un fisioterapeuta visto por un paciente.
+        // Asumimos: si 'isPatient' es true, el que lo mira es un fisio/admin. Si es 'isOwnProfile', es el propio usuario.
+        val showSensitiveData = isOwnProfile || isPatient
+
         binding.tvNameValue.text = profile.name
         binding.tvApellidosValue.text = profile.surnames
         binding.tvEmailValue.text = profile.email
-        binding.tvDniValue.text = profile.dni
 
-        if (profile.phone.isNotEmpty()) {
+        binding.tvDniLabel.visibility = if (showSensitiveData) View.VISIBLE else View.GONE
+        binding.tvDniValue.visibility = if (showSensitiveData) View.VISIBLE else View.GONE
+        if (showSensitiveData) {
+            binding.tvDniValue.text = profile.dni
+        }
+
+        if (profile.phone.isNotEmpty() && showSensitiveData) {
             binding.tvPhoneLabel.visibility = View.VISIBLE
             binding.tvPhoneValue.visibility = View.VISIBLE
             binding.tvPhoneValue.text = profile.phone
@@ -161,7 +176,6 @@ class ProfileFragment : Fragment() {
             binding.tvPhoneValue.visibility = View.GONE
         }
 
-        val isPatient = profile.role == UserRole.PATIENT
         binding.cardClinicalHistory.visibility = if (isPatient) View.VISIBLE else View.GONE
         
         binding.tvSessionsTitle.visibility = if (isPatient) View.VISIBLE else View.GONE
@@ -170,17 +184,58 @@ class ProfileFragment : Fragment() {
         val containerCard = binding.rvSessions.parent as? View
         containerCard?.visibility = if (isPatient && profile.sessions.isNotEmpty()) View.VISIBLE else View.GONE
 
-        binding.tvDniLabel.visibility = if (isPatient) View.VISIBLE else View.GONE
-        binding.tvDniValue.visibility = if (isPatient) View.VISIBLE else View.GONE
-
         if (isPatient) {
             renderSessions(profile.sessions)
         }
         
-        val isOwnProfile = arguments?.getString(ARG_USER_ID) == null
+        if (isPhysio) {
+            binding.tvSpecialtiesTitle.visibility = View.VISIBLE
+            binding.cgSpecialties.visibility = View.VISIBLE
+            binding.cgSpecialties.removeAllViews()
+            if (profile.treatments.isEmpty()) {
+                val chip = com.google.android.material.chip.Chip(requireContext())
+                chip.text = "Sin especialidades"
+                chip.isCheckable = false
+                binding.cgSpecialties.addView(chip)
+            } else {
+                profile.treatments.forEach { treatment ->
+                    val chip = com.google.android.material.chip.Chip(requireContext())
+                    chip.text = treatment
+                    chip.isCheckable = false
+                    binding.cgSpecialties.addView(chip)
+                }
+            }
+
+            binding.tvScheduleTitle.visibility = View.VISIBLE
+            binding.tvScheduleDays.visibility = View.VISIBLE
+            binding.tvScheduleHours.visibility = View.VISIBLE
+            
+            val workingDays = (profile.scheduleInfo?.get("workDays") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+            val startHour = profile.scheduleInfo?.get("startHour") as? String ?: "09:00"
+            val endHour = profile.scheduleInfo?.get("endHour") as? String ?: "18:00"
+
+            if (workingDays.isNotEmpty()) {
+                val daysMap = mapOf(
+                    "Mon" to "Lunes", "Tue" to "Martes", "Wed" to "Miércoles",
+                    "Thu" to "Jueves", "Fri" to "Viernes", "Sat" to "Sábado", "Sun" to "Domingo"
+                )
+                val localizedDays = workingDays.map { daysMap[it] ?: it }.joinToString(", ")
+                binding.tvScheduleDays.text = localizedDays
+            } else {
+                binding.tvScheduleDays.text = "Horario no configurado"
+            }
+            binding.tvScheduleHours.text = "$startHour - $endHour"
+        } else {
+            binding.tvSpecialtiesTitle.visibility = View.GONE
+            binding.cgSpecialties.visibility = View.GONE
+            binding.tvScheduleTitle.visibility = View.GONE
+            binding.tvScheduleDays.visibility = View.GONE
+            binding.tvScheduleHours.visibility = View.GONE
+        }
+        
         binding.photoPickerCard.isEnabled = isOwnProfile
         
-        binding.btnCall.visibility = if (!isOwnProfile && profile.phone.isNotEmpty()) View.VISIBLE else View.GONE
+        binding.btnCall.visibility = if (!isOwnProfile && profile.phone.isNotEmpty() && showSensitiveData) View.VISIBLE else View.GONE
         binding.btnCall.setOnClickListener {
             com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.llamar_paciente_titulo)
@@ -234,7 +289,9 @@ class ProfileFragment : Fragment() {
         val email: String,
         val dni: String,
         val phone: String,
-        val sessions: List<PatientSession>
+        val sessions: List<PatientSession>,
+        val treatments: List<String> = emptyList(),
+        val scheduleInfo: Map<String, Any>? = null
     )
 
     data class PatientSession(

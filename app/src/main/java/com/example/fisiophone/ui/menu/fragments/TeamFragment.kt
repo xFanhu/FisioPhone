@@ -41,16 +41,14 @@ class TeamFragment : Fragment() {
 
         binding.rvTeamMembers.layoutManager = LinearLayoutManager(requireContext())
         teamAdapter = TeamAdapter(emptyList()) { user ->
-            if (currentUserRole == "administrador") {
-                val profileFragment = ProfileFragment.newInstance(
-                    ProfileFragment.UserRole.fromValue(user.role),
-                    user.id
-                )
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentHost, profileFragment)
-                    .addToBackStack(ProfileFragment.TAG)
-                    .commit()
-            }
+            val profileFragment = ProfileFragment.newInstance(
+                ProfileFragment.UserRole.fromValue(user.role),
+                user.id
+            )
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentHost, profileFragment)
+                .addToBackStack(ProfileFragment.TAG)
+                .commit()
         }
         binding.rvTeamMembers.adapter = teamAdapter
 
