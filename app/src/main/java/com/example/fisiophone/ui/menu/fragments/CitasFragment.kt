@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fisiophone.R
 import com.example.fisiophone.databinding.FragmentCitasBinding
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -45,7 +46,7 @@ class CitasFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.rvCitas.layoutManager = LinearLayoutManager(requireContext())
         citaAdapter = CitaAdapter(emptyList(), true) { cita ->
-            viewModel.deleteCita(cita)
+            confirmDeleteCita(cita)
         }
         binding.rvCitas.adapter = citaAdapter
 
@@ -71,7 +72,7 @@ class CitasFragment : Fragment() {
                         binding.cardDatePicker.visibility = if (isPatient) View.GONE else View.VISIBLE
                         // Recrear el adapter con el rol correcto
                         citaAdapter = CitaAdapter(viewModel.citas.value, isPatient) { cita ->
-                            viewModel.deleteCita(cita)
+                            confirmDeleteCita(cita)
                         }
                         binding.rvCitas.adapter = citaAdapter
                     }
@@ -87,10 +88,10 @@ class CitasFragment : Fragment() {
                                     // Comprobar si es hoy
                                     val todayStr = sdfIn.format(Date())
                                     if (dateStr == todayStr) {
-                                        binding.tvSelectedDateFilter.text = "Hoy"
+                                        binding.tvSelectedDateFilter.text = getString(R.string.hoy)
                                     } else {
                                         val sdfOut = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                                        binding.tvSelectedDateFilter.text = "Citas del ${sdfOut.format(date)}"
+                                        binding.tvSelectedDateFilter.text = getString(R.string.citas_del, sdfOut.format(date))
                                     }
                                 }
                             } catch (e: Exception) {}
@@ -129,6 +130,17 @@ class CitasFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun confirmDeleteCita(cita: Cita) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.cancelar_cita)
+            .setMessage(R.string.confirmar_cancelacion)
+            .setPositiveButton(R.string.si) { _: android.content.DialogInterface, _: Int ->
+                viewModel.deleteCita(cita)
+            }
+            .setNegativeButton(R.string.no, null)
+            .show()
     }
 
     override fun onDestroyView() {

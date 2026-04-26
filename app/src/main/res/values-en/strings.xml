@@ -1,0 +1,156 @@
+<resources>
+    <!-- App -->
+    <string name="app_name">FisioPhone</string>
+
+    <!-- Inicio de sesión -->
+    <string name="iniciar">Log In</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="trabajando_login">Logging in...</string>
+
+    <!-- Registro de usuario -->
+    <string name="apellidos">Surnames</string>
+    <string name="contraseña">Password</string>
+    <string name="crearUsuario">Create User</string>
+    <string name="DNI">ID Number</string>
+    <string name="telefono">Phone</string>
+    <string name="email">Email:</string>
+    <string name="nombre">Name</string>
+    <string name="nuevoUsuario">New User</string>
+    <string name="rcontraseña">Repeat password</string>
+    <string name="usuario">User</string>
+    <string name="trabajando_registro">Creating user...</string>
+
+    <!-- Menú principal -->
+    <string name="ajustes">Settings</string>
+    <string name="cerrarSesion">Log Out</string>
+    <string name="citas">Appointments</string>
+    <string name="equipo">Team</string>
+    <string name="perfil">Profile</string>
+    <string name="salir">Exit</string>
+    <string name="pacientes">Patients</string>
+    <string name="menu_horario">Schedule</string>
+    <string name="menu_nueva_cita">New Appointment</string>
+    
+    <!-- Citas / Booking -->
+    <string name="nueva_cita">New Appointment</string>
+    <string name="seleccionar_fisioterapeuta">1. Select Physiotherapist</string>
+    <string name="seleccionar_profesional">Select professional</string>
+    <string name="seleccionar_tratamiento">2. Select Treatment</string>
+    <string name="elegir_dia">3. Choose Day</string>
+    <string name="abrir_calendario">Open Calendar</string>
+    <string name="seleccionar_fecha">Select date</string>
+    <string name="dia_seleccionado">Selected day: %1$s</string>
+    <string name="horas_disponibles">4. Available Hours</string>
+    <string name="confirmar_reserva">Confirm Booking</string>
+    <string name="cita_exito">Appointment booked successfully</string>
+    <string name="error_reserva">Error booking appointment</string>
+    <string name="no_citas">You have no scheduled appointments</string>
+    <string name="mis_citas">My Appointments</string>
+    <string name="hoy">Today</string>
+    <string name="citas_del">Appointments for %1$s</string>
+    <string name="sesion_fisio_default">Physiotherapy Session</string>
+    
+    <!-- Historia Clínica -->
+    <string name="historia_clinica">Clinical History</string>
+    <string name="nueva_anotacion">New Note</string>
+    <string name="escribe_detalles">Write the clinical details of the session...</string>
+    <string name="guardar_historia">Save Note</string>
+    <string name="sin_historia">No clinical notes yet.</string>
+    
+    <string-array name="treatments_array">
+        <item>Sports Physiotherapy</item>
+        <item>Osteopathy</item>
+        <item>Lymphatic drainage</item>
+        <item>Neurological Physiotherapy</item>
+        <item>Traumatological Physiotherapy</item>
+        <item>Neck and back Physiotherapy</item>
+    </string-array>
+
+    <!-- Horario / Schedule -->
+    <string name="configurar_horario">Configure My Schedule</string>
+    <string name="especialidades">Specialties / Treatments</string>
+    <string name="dias_laborables">Working Days</string>
+    <string name="rango_horario">Time Range</string>
+    <string name="inicio">Start</string>
+    <string name="fin">End</string>
+    <string name="duracion_sesion">Session Duration</string>
+    <string name="guardar_horario">Save Schedule</string>
+    <string name="horario_guardado">Schedule saved successfully</string>
+    <string name="seleccionar_dias">Please select at least one working day</string>
+    <string name="horario_no_configurado">Schedule not configured</string>
+    <string name="selecciona_tratamiento_error">Please select at least one treatment</string>
+
+    <!-- Equipo -->
+    <string name="nuestro_equipo">Our Team</string>
+    <string name="gestion_equipo">Team Management</string>
+    <string name="buscar_pista">Search by name or email...</string>
+    <string name="hacer_fisioterapeuta">Make Physiotherapist</string>
+    <string name="hacer_paciente">Make Patient</string>
+    <string name="error_equipo">Error loading team</string>
+
+    <!-- Ajustes / Configuración -->
+    <string name="ajustes_titulo">Settings</string>
+    <string name="modonoche">Dark Mode</string>
+    <string name="descModonoche">Enable or disable dark mode.</string>
+    <string name="notificaciones">Notifications</string>
+    <string name="descNotificaciones">Receive alerts about your appointments.</string>
+    <string name="idioma">Language</string>
+    <string name="descIdioma">Select the application language.</string>
+    <string name="seleccionar_idioma">Select language</string>
+    <string name="idioma_es">Spanish</string>
+    <string name="idioma_en">English</string>
+    <string name="notif_nueva_cita_titulo">New Appointment Booked</string>
+    <string name="notif_nueva_cita_mensaje">%1$s has booked an appointment with you on %2$s at %3$s.</string>
+
+    <!-- Perfil -->
+    <string name="perfil_anadir_foto">Add photo</string>
+    <string name="perfil_foto">Profile photo</string>
+    <string name="perfil_historial_sesiones">Session history</string>
+    <string name="perfil_resumen_actividad">Activity Summary</string>
+    <string name="perfil_nombre">Name:</string>
+    <string name="perfil_apellidos">Surnames:</string>
+    <string name="perfil_sesion_fisio">with %1$s</string>
+    <string name="perfil_sesion_tratamiento">Treatment: %1$s</string>
+    <string name="perfil_sesiones_vacias">No sessions registered yet.</string>
+    <string name="sin_especialidades">No specialties</string>
+    <string name="cambiar">CHANGE</string>
+    <string name="label_fisioterapeuta">Physiotherapist:</string>
+    <string name="label_paciente">Patient:</string>
+
+    <!-- Diálogos -->
+    <string name="llamar_paciente_titulo">Call patient?</string>
+    <string name="llamar_paciente_mensaje">The phone app will open to contact %1$s.</string>
+    <string name="cancelar_cita">Cancel appointment</string>
+    <string name="confirmar_cancelacion">You are about to cancel an appointment. Are you sure?</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Mensajes de Error / Toasts -->
+    <string name="error_generico">An unexpected error occurred</string>
+    <string name="rellenar_campos">Please fill all fields</string>
+    <string name="error_telefono_vacio">Please enter a valid phone number</string>
+    <string name="pass_no_coinciden">Passwords do not match</string>
+    <string name="pass_corta">Password must have at least 6 characters</string>
+    <string name="error_login">Login error</string>
+    <string name="error_registro">Registration error</string>
+    <string name="error_dia_no_laborable">The professional does not work that day</string>
+    <string name="error_sin_horario">This professional has no schedule configured</string>
+    <string name="error_datos_paciente">Error getting patient data: %1$s</string>
+    <string name="error_con_mensaje">Error: %1$s</string>
+    <string name="rol_actualizado">Role updated to %1$s</string>
+    <string name="error_actualizando_rol">Error updating role</string>
+    <string name="error_guardando_datos">Error saving data: %1$s</string>
+    <string name="error_formato">%1$s: %2$s</string>
+    <string name="cita_cancelada">Appointment cancelled</string>
+    <string name="un_paciente">A patient</string>
+    <string name="na">N/A</string>
+
+    <!-- Días de la semana -->
+    <string name="lunes">Monday</string>
+    <string name="martes">Tuesday</string>
+    <string name="miercoles">Wednesday</string>
+    <string name="jueves">Thursday</string>
+    <string name="viernes">Friday</string>
+    <string name="sabado">Saturday</string>
+    <string name="domingo">Sunday</string>
+</resources>

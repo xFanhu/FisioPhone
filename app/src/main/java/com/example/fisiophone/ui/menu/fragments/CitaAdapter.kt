@@ -57,10 +57,10 @@ class CitaAdapter(
             tvCitaTreatment.text = cita.tratamiento
             
             if (isPatient) {
-                tvCitaNameLabel.text = "Fisioterapeuta:"
+                tvCitaNameLabel.text = itemView.context.getString(R.string.label_fisioterapeuta)
                 tvCitaNameValue.text = cita.physioName
             } else {
-                tvCitaNameLabel.text = "Paciente:"
+                tvCitaNameLabel.text = itemView.context.getString(R.string.label_paciente)
                 tvCitaNameValue.text = cita.patientName
             }
 

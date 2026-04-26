@@ -1,6 +1,7 @@
 package com.example.fisiophone.ui.menu.fragments
 
 import android.os.Bundle
+import com.example.fisiophone.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 
 class ConfigFragment : Fragment() {
 
@@ -24,6 +27,9 @@ class ConfigFragment : Fragment() {
 
     // Evita disparar el listener al asignar el valor inicial del switch.
     private var isInitializing = true
+
+    private data class Language(val name: String, val code: String)
+    private lateinit var availableLanguages: List<Language>
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -50,7 +56,22 @@ class ConfigFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
+        setupLanguageSelector()
         loadSettings()
+    }
+
+    private fun setupLanguageSelector() {
+        availableLanguages = listOf(
+            Language(getString(R.string.idioma_es), "es"),
+            Language(getString(R.string.idioma_en), "en")
+        )
+        
+        val adapter = android.widget.ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_dropdown_item_1line,
+            availableLanguages.map { it.name }
+        )
+        binding.autoCompleteLanguage.setAdapter(adapter)
     }
 
     private fun initUI() {
@@ -93,6 +114,14 @@ class ConfigFragment : Fragment() {
                 saveNotificationSetting(false)
             }
         }
+
+        binding.autoCompleteLanguage.setOnItemClickListener { _, _, position, _ ->
+            if (isInitializing) return@setOnItemClickListener
+
+            val selectedLang = availableLanguages[position]
+            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(selectedLang.code)
+            AppCompatDelegate.setApplicationLocales(appLocale)
+        }
     }
 
     private fun saveNotificationSetting(enabled: Boolean) {
@@ -108,6 +137,13 @@ class ConfigFragment : Fragment() {
             isInitializing = true
             binding.switchDarkMode.isChecked = settingsData.darkMode
             binding.switchNotifications.isChecked = settingsData.notificationsEnabled
+            
+            val currentLocales = AppCompatDelegate.getApplicationLocales()
+            val currentLangCode = if (currentLocales.isEmpty()) "es" else currentLocales[0]?.language ?: "es"
+            
+            val currentLangName = availableLanguages.find { it.code == currentLangCode }?.name ?: availableLanguages[0].name
+            binding.autoCompleteLanguage.setText(currentLangName, false)
+            
             isInitializing = false
             binding.switchDarkMode.isEnabled = true
             binding.switchNotifications.isEnabled = true

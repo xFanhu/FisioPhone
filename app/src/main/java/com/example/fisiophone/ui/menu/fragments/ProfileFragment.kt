@@ -76,6 +76,7 @@ class ProfileFragment : Fragment() {
         binding.rvSessions.adapter = sessionAdapter
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun fetchUserData() {
         val targetUid = arguments?.getString(ARG_USER_ID) ?: FirebaseAuth.getInstance().currentUser?.uid
         if (targetUid != null) {
@@ -194,7 +195,7 @@ class ProfileFragment : Fragment() {
             binding.cgSpecialties.removeAllViews()
             if (profile.treatments.isEmpty()) {
                 val chip = com.google.android.material.chip.Chip(requireContext())
-                chip.text = "Sin especialidades"
+                chip.text = getString(R.string.sin_especialidades)
                 chip.isCheckable = false
                 binding.cgSpecialties.addView(chip)
             } else {
@@ -216,13 +217,18 @@ class ProfileFragment : Fragment() {
 
             if (workingDays.isNotEmpty()) {
                 val daysMap = mapOf(
-                    "Mon" to "Lunes", "Tue" to "Martes", "Wed" to "Miércoles",
-                    "Thu" to "Jueves", "Fri" to "Viernes", "Sat" to "Sábado", "Sun" to "Domingo"
+                    "Mon" to getString(R.string.lunes),
+                    "Tue" to getString(R.string.martes),
+                    "Wed" to getString(R.string.miercoles),
+                    "Thu" to getString(R.string.jueves),
+                    "Fri" to getString(R.string.viernes),
+                    "Sat" to getString(R.string.sabado),
+                    "Sun" to getString(R.string.domingo)
                 )
                 val localizedDays = workingDays.map { daysMap[it] ?: it }.joinToString(", ")
                 binding.tvScheduleDays.text = localizedDays
             } else {
-                binding.tvScheduleDays.text = "Horario no configurado"
+                binding.tvScheduleDays.text = getString(R.string.horario_no_configurado)
             }
             binding.tvScheduleHours.text = "$startHour - $endHour"
         } else {

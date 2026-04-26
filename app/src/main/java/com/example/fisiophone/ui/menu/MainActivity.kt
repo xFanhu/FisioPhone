@@ -138,17 +138,17 @@ class MainActivity : AppCompatActivity() {
                             if (change.document.metadata.hasPendingWrites()) continue
                             
                             lifecycleScope.launch {
-                                val settings = SettingsManager.getSettings(this@MainActivity).first()
-                                if (settings.notificationsEnabled) {
-                                    val patientName = change.document.getString("patientName") ?: "Un paciente"
-                                    val date = change.document.getString("date") ?: ""
-                                    val time = change.document.getString("time") ?: ""
-                                    
-                                    val title = "Nueva Cita Reservada"
-                                    val message = "$patientName ha reservado una cita contigo el $date a las $time."
-                                    
-                                    NotificationHelper.showNotification(this@MainActivity, title, message)
-                                }
+                                    val settings = SettingsManager.getSettings(this@MainActivity).first()
+                                    if (settings.notificationsEnabled) {
+                                        val patientName = change.document.getString("patientName") ?: getString(R.string.un_paciente)
+                                        val date = change.document.getString("date") ?: ""
+                                        val time = change.document.getString("time") ?: ""
+                                        
+                                        val title = getString(R.string.notif_nueva_cita_titulo)
+                                        val message = getString(R.string.notif_nueva_cita_mensaje, patientName, date, time)
+                                        
+                                        NotificationHelper.showNotification(this@MainActivity, title, message)
+                                    }
                             }
                         }
                     }
@@ -165,12 +165,12 @@ class MainActivity : AppCompatActivity() {
         if (userRole == "fisioterapeuta" || userRole == "administrador") {
             teamItem?.isVisible = true
             patientsItem?.isVisible = true
-            addItem?.title = "Horario"
+            addItem?.title = getString(R.string.menu_horario)
             addItem?.setIcon(R.drawable.ic_citas)
         } else {
             teamItem?.isVisible = true // Los pacientes pueden ver el equipo
             patientsItem?.isVisible = false
-            addItem?.title = "Nueva Cita"
+            addItem?.title = getString(R.string.menu_nueva_cita)
             addItem?.setIcon(R.drawable.ic_add)
         }
     }

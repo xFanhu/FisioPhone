@@ -149,7 +149,7 @@ class ScheduleFragment : Fragment() {
         }
         
         if (selectedTreatments.isEmpty()) {
-            Toast.makeText(requireContext(), "Por favor, selecciona al menos un tratamiento", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.selecciona_tratamiento_error), Toast.LENGTH_SHORT).show()
             return
         }
         
