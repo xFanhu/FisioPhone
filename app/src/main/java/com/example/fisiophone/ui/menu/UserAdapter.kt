@@ -17,7 +17,8 @@ data class User(
     val dni: String,
     val telefono: String,
     var role: String,
-    val treatments: List<String> = emptyList()
+    val treatments: List<String> = emptyList(),
+    val photoUrl: String? = null
 )
 
 class UserAdapter(
@@ -51,12 +52,29 @@ class UserAdapter(
         private val tvUserDni: TextView = itemView.findViewById(R.id.tvUserDni)
         private val tvUserPhone: TextView = itemView.findViewById(R.id.tvUserPhone)
         private val btnChangeRole: MaterialButton = itemView.findViewById(R.id.btnChangeRole)
+        private val ivUserPhoto: android.widget.ImageView = itemView.findViewById(R.id.ivUserPhoto)
 
         fun bind(user: User) {
             tvUserName.text = "${user.nombre} ${user.apellidos}"
             tvUserRole.text = user.role.replaceFirstChar { it.uppercase() }
             tvUserEmail.text = user.email
             tvUserDni.text = "${itemView.context.getString(R.string.DNI)}: ${user.dni}"
+            
+            if (!user.photoUrl.isNullOrEmpty()) {
+                ivUserPhoto.setPadding(0, 0, 0, 0)
+                ivUserPhoto.imageTintList = null
+                com.bumptech.glide.Glide.with(itemView.context)
+                    .load(user.photoUrl)
+                    .circleCrop()
+                    .placeholder(R.drawable.ic_profile)
+                    .into(ivUserPhoto)
+            } else {
+                ivUserPhoto.setPadding(24, 24, 24, 24)
+                ivUserPhoto.setImageResource(R.drawable.ic_profile)
+                ivUserPhoto.imageTintList = android.content.res.ColorStateList.valueOf(
+                    itemView.context.getColor(R.color.azul)
+                )
+            }
 
             if (user.telefono.isNotEmpty()) {
                 tvUserPhone.visibility = View.VISIBLE

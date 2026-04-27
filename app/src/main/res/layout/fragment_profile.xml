@@ -34,17 +34,41 @@
             app:cardBackgroundColor="@color/card_background"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnEditProfile"
+            android:layout_marginEnd="8dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_pacientes"
+                app:tint="@color/azul" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnEditProfile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:cardBackgroundColor="@color/card_background"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_biografia"
                 app:tint="@color/azul" />
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -226,6 +250,45 @@
                             app:tint="@color/azul"
                             android:scaleType="centerInside" />
                     </LinearLayout>
+
+                    <!-- BIOGRAFÍA -->
+                    <LinearLayout
+                        android:id="@+id/layoutBioLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_biografia"
+                            app:tint="@color/description_gray" />
+
+                        <TextView
+                            android:id="@+id/tvBioLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/biografia"
+                            android:textColor="@color/description_gray"
+                            android:textSize="12sp"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.1" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvBioValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/card_text"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp"
+                        android:visibility="gone"
+                        tools:text="Fisioterapeuta con más de 10 años de experiencia en lesiones deportivas..." />
 
                     <!-- ESPECIALIDADES -->
                     <TextView

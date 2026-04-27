@@ -55,7 +55,8 @@ class ManageUsersActivity : AppCompatActivity() {
                         email = document.getString("email") ?: "",
                         dni = document.getString("dni") ?: "",
                         telefono = document.getString("telefono") ?: "",
-                        role = role
+                        role = role,
+                        photoUrl = document.getString("photoUrl")
                     )
                     allUsers.add(user)
                 }

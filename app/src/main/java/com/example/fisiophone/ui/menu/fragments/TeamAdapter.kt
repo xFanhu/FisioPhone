@@ -33,11 +33,28 @@ class TeamAdapter(
     inner class TeamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvTeamMemberName: TextView = itemView.findViewById(R.id.tvTeamMemberName)
         private val tvTeamMemberEmail: TextView = itemView.findViewById(R.id.tvTeamMemberEmail)
+        private val ivTeamMemberPhoto: android.widget.ImageView = itemView.findViewById(R.id.ivTeamMemberPhoto)
 
         fun bind(user: User) {
             tvTeamMemberName.text = "${user.nombre} ${user.apellidos}"
             tvTeamMemberEmail.text = user.email
             
+            if (!user.photoUrl.isNullOrEmpty()) {
+                ivTeamMemberPhoto.setPadding(0, 0, 0, 0)
+                ivTeamMemberPhoto.imageTintList = null
+                com.bumptech.glide.Glide.with(itemView.context)
+                    .load(user.photoUrl)
+                    .circleCrop()
+                    .placeholder(R.drawable.ic_profile)
+                    .into(ivTeamMemberPhoto)
+            } else {
+                ivTeamMemberPhoto.setPadding(32, 32, 32, 32)
+                ivTeamMemberPhoto.setImageResource(R.drawable.ic_profile)
+                ivTeamMemberPhoto.imageTintList = android.content.res.ColorStateList.valueOf(
+                    itemView.context.getColor(R.color.azul)
+                )
+            }
+
             itemView.setOnClickListener {
                 onItemClick(user)
             }

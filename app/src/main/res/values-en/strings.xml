@@ -39,16 +39,26 @@
     <string name="elegir_dia">3. Choose Day</string>
     <string name="abrir_calendario">Open Calendar</string>
     <string name="seleccionar_fecha">Select date</string>
-    <string name="dia_seleccionado">Selected day: %1$s</string>
+    <string name="dia_seleccionado">Selected day: %s</string>
     <string name="horas_disponibles">4. Available Hours</string>
     <string name="confirmar_reserva">Confirm Booking</string>
     <string name="cita_exito">Appointment booked successfully</string>
     <string name="error_reserva">Error booking appointment</string>
     <string name="no_citas">You have no scheduled appointments</string>
+    <string name="no_horas_disponibles">No available time slots for the selected day</string>
     <string name="mis_citas">My Appointments</string>
     <string name="hoy">Today</string>
-    <string name="citas_del">Appointments for %1$s</string>
+    <string name="citas_del">Appointments for %s</string>
     <string name="sesion_fisio_default">Physiotherapy Session</string>
+    <string name="estado_confirmada">Confirmed</string>
+    <string name="estado_realizada">Completed</string>
+    <string name="btn_finalizar">Finish</string>
+    <string name="pendientes">Pending</string>
+    <string name="realizadas">Completed</string>
+    <string name="nota_guardada_exito">Clinical note saved successfully</string>
+    <string name="hint_nota_clinica">Write session details, treatment applied, etc.</string>
+    <string name="error_nota_vacia">Note cannot be empty</string>
+    <string name="sesion_finalizada_sin_nota">Session finished without note</string>
     
     <!-- Historia Clínica -->
     <string name="historia_clinica">Clinical History</string>
@@ -99,8 +109,11 @@
     <string name="seleccionar_idioma">Select language</string>
     <string name="idioma_es">Spanish</string>
     <string name="idioma_en">English</string>
+    <string name="cambiar_password">Change password</string>
+    <string name="desc_cambiar_password">We will send you an email so you can securely change your password.</string>
+    <string name="email_reset_enviado">Reset email sent. Check your inbox.</string>
     <string name="notif_nueva_cita_titulo">New Appointment Booked</string>
-    <string name="notif_nueva_cita_mensaje">%1$s has booked an appointment with you on %2$s at %3$s.</string>
+    <string name="notif_nueva_cita_mensaje">%s has booked an appointment with you on %s at %s.</string>
 
     <!-- Perfil -->
     <string name="perfil_anadir_foto">Add photo</string>
@@ -109,21 +122,40 @@
     <string name="perfil_resumen_actividad">Activity Summary</string>
     <string name="perfil_nombre">Name:</string>
     <string name="perfil_apellidos">Surnames:</string>
-    <string name="perfil_sesion_fisio">with %1$s</string>
-    <string name="perfil_sesion_tratamiento">Treatment: %1$s</string>
+    <string name="perfil_sesion_fisio">with %s</string>
+    <string name="perfil_sesion_tratamiento">Treatment: %s</string>
     <string name="perfil_sesiones_vacias">No sessions registered yet.</string>
     <string name="sin_especialidades">No specialties</string>
+    <string name="biografia">Biography</string>
+    <string name="editar_perfil">Edit Profile</string>
+    <string name="hint_biografia">Tell us about your background, experience, and specialties...</string>
+    <string name="biografia_vacia">This professional hasn\'t added a biography yet.</string>
+    <string name="guardar_cambios">Save Changes</string>
+    <string name="proxima_cita_label">Next appointment today</string>
+    <string name="dashboard_resumen_hoy">Today you have %s pending appointments</string>
     <string name="cambiar">CHANGE</string>
     <string name="label_fisioterapeuta">Physiotherapist:</string>
     <string name="label_paciente">Patient:</string>
 
     <!-- Diálogos -->
     <string name="llamar_paciente_titulo">Call patient?</string>
-    <string name="llamar_paciente_mensaje">The phone app will open to contact %1$s.</string>
+    <string name="llamar_paciente_mensaje">The phone app will open to contact %s.</string>
     <string name="cancelar_cita">Cancel appointment</string>
     <string name="confirmar_cancelacion">You are about to cancel an appointment. Are you sure?</string>
+    <string name="confirmar_cambio_password_titulo">Change password?</string>
+    <string name="confirmar_cambio_password_mensaje">An email will be sent to your address to reset it. Are you sure?</string>
+    <string name="confirmar_finalizar_titulo">Finish Session</string>
+    <string name="confirmar_finalizar_mensaje">Have you finished the session with %s? It will be marked as completed and you can add a clinical note.</string>
+    <string name="titulo_anadir_nota">Add Clinical Note</string>
+    <string name="label_paciente_dialog">Patient: %s</string>
+    <string name="btn_guardar_nota">Save Note</string>
+    <string name="btn_ahora_no">Not now</string>
     <string name="si">Yes</string>
     <string name="no">No</string>
+    <string name="opciones_cita">Appointment options</string>
+    <string name="que_quieres_hacer">What would you like to do?</string>
+    <string name="ver_perfil_paciente">View patient profile</string>
+    <string name="marcar_como_realizada">Mark as completed</string>
 
     <!-- Mensajes de Error / Toasts -->
     <string name="error_generico">An unexpected error occurred</string>
@@ -135,15 +167,20 @@
     <string name="error_registro">Registration error</string>
     <string name="error_dia_no_laborable">The professional does not work that day</string>
     <string name="error_sin_horario">This professional has no schedule configured</string>
-    <string name="error_datos_paciente">Error getting patient data: %1$s</string>
-    <string name="error_con_mensaje">Error: %1$s</string>
-    <string name="rol_actualizado">Role updated to %1$s</string>
+    <string name="error_datos_paciente">Error getting patient data: %s</string>
+    <string name="error_con_mensaje">Error: %s</string>
+    <string name="rol_actualizado">Role updated to %s</string>
     <string name="error_actualizando_rol">Error updating role</string>
-    <string name="error_guardando_datos">Error saving data: %1$s</string>
-    <string name="error_formato">%1$s: %2$s</string>
+    <string name="error_guardando_datos">Error saving data: %s</string>
+    <string name="error_formato">%s: %s</string>
     <string name="cita_cancelada">Appointment cancelled</string>
     <string name="un_paciente">A patient</string>
     <string name="na">N/A</string>
+    <string name="label_paciente_default">Patient</string>
+    <string name="nota_vacia">Note cannot be empty</string>
+    <string name="anotacion_guardada">Note saved successfully</string>
+    <string name="error_guardar">Error saving</string>
+    <string name="fisioterapeuta">Physiotherapist</string>
 
     <!-- Días de la semana -->
     <string name="lunes">Monday</string>
@@ -153,4 +190,8 @@
     <string name="viernes">Friday</string>
     <string name="sabado">Saturday</string>
     <string name="domingo">Sunday</string>
+    
+    <!-- Estados Vacíos -->
+    <string name="no_pacientes">No patients registered.</string>
+    <string name="no_equipo">No professionals in the team.</string>
 </resources>

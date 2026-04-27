@@ -84,12 +84,14 @@ class PatientsFragment : Fragment() {
                         email = doc.getString("email") ?: "",
                         dni = doc.getString("dni") ?: "",
                         telefono = doc.getString("telefono") ?: "",
-                        role = doc.getString("role") ?: "paciente"
+                        role = doc.getString("role") ?: "paciente",
+                        photoUrl = doc.getString("photoUrl")
                     )
                     allPatients.add(user)
                 }
-                allPatients.sortBy { it.nombre }
+                allPatients.sortWith(compareBy({ it.nombre }, { it.apellidos }))
                 adapter.updateList(allPatients)
+                binding.tvEmptyPatients.visibility = if (allPatients.isEmpty()) View.VISIBLE else View.GONE
             }
             .addOnFailureListener {
                 if (_binding == null) return@addOnFailureListener

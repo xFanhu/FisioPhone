@@ -22,9 +22,18 @@ data class Cita(
 
 class CitaAdapter(
     private var citas: List<Cita>,
-    private val isPatient: Boolean,
-    private val onDeleteClick: (Cita) -> Unit
+    private var isPatient: Boolean,
+    private val onItemClick: (Cita) -> Unit = {},
+    private val onDeleteClick: (Cita) -> Unit,
+    private val onFinishClick: (Cita) -> Unit = {} // Nuevo callback
 ) : RecyclerView.Adapter<CitaAdapter.CitaViewHolder>() {
+
+    fun updateRole(newIsPatient: Boolean) {
+        if (isPatient != newIsPatient) {
+            isPatient = newIsPatient
+            notifyDataSetChanged()
+        }
+    }
 
     fun updateList(newList: List<Cita>) {
         citas = newList
@@ -48,25 +57,51 @@ class CitaAdapter(
         private val tvCitaNameLabel: TextView = itemView.findViewById(R.id.tvCitaNameLabel)
         private val tvCitaNameValue: TextView = itemView.findViewById(R.id.tvCitaNameValue)
         private val ivDeleteCita: ImageView = itemView.findViewById(R.id.ivDeleteCita)
+        private val btnFinishCita: View = itemView.findViewById(R.id.btnFinishCita) // Nuevo botón
 
+        private val tvCitaStatus: TextView = itemView.findViewById(R.id.tvCitaStatus)
         private val tvCitaTreatment: TextView = itemView.findViewById(R.id.tvCitaTreatment)
 
         fun bind(cita: Cita) {
+            val context = itemView.context
             tvCitaTime.text = cita.time
             tvCitaDate.text = cita.date
             tvCitaTreatment.text = cita.tratamiento
             
+            // Lógica de estado explícita (ya no es automática por tiempo)
+            if (cita.status == "done") {
+                tvCitaStatus.text = context.getString(R.string.estado_realizada)
+                tvCitaStatus.setTextColor(android.graphics.Color.GRAY)
+                btnFinishCita.visibility = View.GONE
+            } else {
+                tvCitaStatus.text = context.getString(R.string.estado_confirmada)
+                tvCitaStatus.setTextColor(context.getColor(R.color.azul))
+                
+                // Mostrar botón "Finalizar" solo si es FISIO y es el momento (hoy o pasado)
+                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
+                val now = sdf.format(java.util.Date())
+                val isTimeToShowFinish = !isPatient && "${cita.date} ${cita.time}" <= now
+                
+                btnFinishCita.visibility = if (isTimeToShowFinish) View.VISIBLE else View.GONE
+            }
+
             if (isPatient) {
-                tvCitaNameLabel.text = itemView.context.getString(R.string.label_fisioterapeuta)
+                tvCitaNameLabel.text = context.getString(R.string.label_fisioterapeuta)
                 tvCitaNameValue.text = cita.physioName
             } else {
-                tvCitaNameLabel.text = itemView.context.getString(R.string.label_paciente)
+                tvCitaNameLabel.text = context.getString(R.string.label_paciente)
                 tvCitaNameValue.text = cita.patientName
             }
 
-            ivDeleteCita.setOnClickListener {
-                onDeleteClick(cita)
+            ivDeleteCita.setOnClickListener { 
+                // Evitar que el clic se propague a la tarjeta
+                onDeleteClick(cita) 
             }
+            btnFinishCita.setOnClickListener { 
+                // Evitar que el clic se propague a la tarjeta
+                onFinishClick(cita) 
+            }
+            itemView.setOnClickListener { onItemClick(cita) }
         }
     }
 }

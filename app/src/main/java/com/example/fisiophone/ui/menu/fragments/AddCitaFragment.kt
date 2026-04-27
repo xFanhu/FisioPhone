@@ -28,6 +28,10 @@ import androidx.work.WorkManager
 import java.util.concurrent.TimeUnit
 import com.example.fisiophone.workers.AppointmentReminderWorker
 
+/**
+ * Fragmento para que los pacientes soliciten una nueva cita.
+ * Guía al usuario por 4 pasos: Profesional -> Tratamiento -> Fecha -> Hora.
+ */
 class AddCitaFragment : Fragment() {
 
     private var _binding: FragmentAddCitaBinding? = null
@@ -49,7 +53,11 @@ class AddCitaFragment : Fragment() {
         setupListeners()
         observeViewModel()
         
-        // Restaurar visibilidad si el ViewModel ya tenía datos (por rotación)
+        // Restaurar estado visual tras cambios de configuración (ej. rotación)
+        restoreUIState()
+    }
+
+    private fun restoreUIState() {
         if (viewModel.selectedPhysio != null) {
             binding.tvSelectDateLabel.visibility = View.VISIBLE
             binding.btnOpenCalendar.visibility = View.VISIBLE
@@ -65,12 +73,14 @@ class AddCitaFragment : Fragment() {
     }
 
     private fun setupListeners() {
+        // Selección de Fisioterapeuta
         binding.autoCompletePhysio.setOnItemClickListener { _, _, position, _ ->
             val physios = viewModel.physios.value
             if (position in physios.indices) {
                 viewModel.selectPhysio(physios[position])
-                resetStep2()
+                resetStepsAfterPhysio()
                 
+                // Mostrar especialidades del fisio seleccionado
                 val treatments = physios[position].treatments
                 if (treatments.isNotEmpty()) {
                     binding.tvSelectTreatmentLabel.visibility = View.VISIBLE
@@ -89,7 +99,7 @@ class AddCitaFragment : Fragment() {
                         binding.cgTreatments.addView(chip)
                     }
                 } else {
-                    // Fallback si el fisio no configuró tratamientos
+                    // Fallback por defecto si no tiene especialidades configuradas
                     viewModel.selectTreatment(getString(R.string.sesion_fisio_default))
                     binding.tvSelectDateLabel.visibility = View.VISIBLE
                     binding.btnOpenCalendar.visibility = View.VISIBLE
@@ -109,6 +119,8 @@ class AddCitaFragment : Fragment() {
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                
+                // Cargar lista de profesionales
                 launch {
                     viewModel.physios.collect { physios ->
                         val names = physios.map { "${it.nombre} ${it.apellidos}" }
@@ -117,27 +129,33 @@ class AddCitaFragment : Fragment() {
                     }
                 }
                 
+                // Mostrar huecos horarios disponibles
                 launch {
                     viewModel.availableSlots.collect { slots ->
+                        if (slots == null) return@collect
+                        
                         binding.cgTimeSlots.removeAllViews()
                         if (slots.isNotEmpty()) {
                             slots.forEach { time -> addTimeChip(time) }
                             binding.tvSelectTimeLabel.visibility = View.VISIBLE
                             binding.cgTimeSlots.visibility = View.VISIBLE
+                            binding.tvNoSlotsError.visibility = View.GONE
                             
-                            // Si ya había una hora seleccionada, marcar el chip
-                            val selectedTime = viewModel.selectedTime
-                            if (selectedTime != null) {
+                            // Re-seleccionar chip si ya había uno marcado (ej. al rotar)
+                            viewModel.selectedTime?.let { selected ->
                                 for (i in 0 until binding.cgTimeSlots.childCount) {
                                     val chip = binding.cgTimeSlots.getChildAt(i) as Chip
-                                    if (chip.text == selectedTime) {
+                                    if (chip.text == selected) {
                                         chip.isChecked = true
                                         break
                                     }
                                 }
                             }
                         } else if (viewModel.selectedDate != null) {
-                            // Opcional: mostrar mensaje si no hay huecos ese día pero es día laborable
+                            // Feedback visual si no hay horas libres ese día
+                            binding.tvSelectTimeLabel.visibility = View.GONE
+                            binding.cgTimeSlots.visibility = View.GONE
+                            binding.tvNoSlotsError.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -149,11 +167,13 @@ class AddCitaFragment : Fragment() {
                     }
                 }
 
+                // Resultado final de la reserva
                 launch {
                     viewModel.bookingResult.collect { result ->
                         result.onSuccess {
-                            scheduleReminder()
+                            scheduleReminder() // Programar notificación local
                             Toast.makeText(requireContext(), getString(R.string.cita_exito), Toast.LENGTH_LONG).show()
+                            // Volver a la lista de citas
                             parentFragmentManager.beginTransaction()
                                 .replace(com.example.fisiophone.R.id.fragmentHost, CitasFragment())
                                 .commit()
@@ -170,6 +190,9 @@ class AddCitaFragment : Fragment() {
         }
     }
 
+    /**
+     * Programa una notificación local para recordar la cita (24h antes).
+     */
     private fun scheduleReminder() {
         val date = viewModel.selectedDate ?: return
         val timeStr = viewModel.selectedTime ?: return
@@ -180,18 +203,16 @@ class AddCitaFragment : Fragment() {
             val hour = parts[0].toInt()
             val minute = parts[1].toInt()
 
-            val calendar = Calendar.getInstance()
-            calendar.time = date
-            calendar.set(Calendar.HOUR_OF_DAY, hour)
-            calendar.set(Calendar.MINUTE, minute)
-            calendar.set(Calendar.SECOND, 0)
+            val calendar = Calendar.getInstance().apply {
+                time = date
+                set(Calendar.HOUR_OF_DAY, hour)
+                set(Calendar.MINUTE, minute)
+                set(Calendar.SECOND, 0)
+            }
 
             val appointmentTimeMs = calendar.timeInMillis
-            val oneDayMs = 24 * 60 * 60 * 1000L
-            val reminderTimeMs = appointmentTimeMs - oneDayMs
-            val currentTimeMs = System.currentTimeMillis()
-
-            val delay = reminderTimeMs - currentTimeMs
+            val reminderTimeMs = appointmentTimeMs - (24 * 60 * 60 * 1000L)
+            val delay = reminderTimeMs - System.currentTimeMillis()
 
             if (delay > 0) {
                 val data = Data.Builder()
@@ -204,17 +225,14 @@ class AddCitaFragment : Fragment() {
                     .setInputData(data)
                     .build()
 
-                WorkManager.getInstance(requireContext().applicationContext)
-                    .enqueue(workRequest)
+                WorkManager.getInstance(requireContext().applicationContext).enqueue(workRequest)
             }
-        } catch (e: Exception) {
-            // Ignorar fallos al programar el recordatorio
-        }
+        } catch (e: Exception) { /* Silencioso */ }
     }
 
     private fun showDatePicker() {
         val constraints = CalendarConstraints.Builder()
-            .setValidator(DateValidatorPointForward.now())
+            .setValidator(DateValidatorPointForward.now()) // No permitir fechas pasadas
             .build()
 
         val picker = MaterialDatePicker.Builder.datePicker()
@@ -247,7 +265,7 @@ class AddCitaFragment : Fragment() {
         binding.cgTimeSlots.addView(chip)
     }
 
-    private fun resetStep2() {
+    private fun resetStepsAfterPhysio() {
         binding.tvSelectTreatmentLabel.visibility = View.GONE
         binding.cgTreatments.visibility = View.GONE
         binding.tvSelectDateLabel.visibility = View.GONE
@@ -255,6 +273,7 @@ class AddCitaFragment : Fragment() {
         binding.tvSelectedDateDisplay.visibility = View.GONE
         binding.tvSelectTimeLabel.visibility = View.GONE
         binding.cgTimeSlots.visibility = View.GONE
+        binding.tvNoSlotsError.visibility = View.GONE
         binding.btnConfirmBooking.visibility = View.GONE
     }
 

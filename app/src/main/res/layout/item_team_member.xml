@@ -19,6 +19,7 @@
         android:gravity="center_vertical">
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivTeamMemberPhoto"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:src="@drawable/ic_profile"

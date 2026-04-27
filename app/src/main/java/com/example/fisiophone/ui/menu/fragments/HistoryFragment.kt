@@ -97,18 +97,21 @@ class HistoryFragment : Fragment() {
         input.layoutParams = params
         container.addView(input)
 
-        MaterialAlertDialogBuilder(context)
+        MaterialAlertDialogBuilder(requireActivity())
             .setTitle(R.string.nueva_anotacion)
             .setView(container)
-            .setPositiveButton(R.string.guardar_historia) { _, _ ->
+            .setPositiveButton(R.string.guardar_historia) { dialog, _ ->
                 val text = input.text.toString().trim()
                 if (text.isNotEmpty()) {
+                    dialog.dismiss()
                     saveHistoryNote(text)
                 } else {
-                    Toast.makeText(context, "La nota no puede estar vacía", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.nota_vacia), Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton(android.R.string.cancel, null)
+            .setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
             .show()
     }
 
@@ -122,7 +125,7 @@ class HistoryFragment : Fragment() {
             
             val historiaMap = mapOf(
                 "physioId" to currentUid,
-                "physioName" to physioName.ifEmpty { "Fisioterapeuta" },
+                "physioName" to physioName.ifEmpty { getString(R.string.fisioterapeuta) },
                 "date" to dateStr,
                 "timestamp" to System.currentTimeMillis(),
                 "note" to note
@@ -132,11 +135,11 @@ class HistoryFragment : Fragment() {
                 .collection("historias_clinicas")
                 .add(historiaMap)
                 .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "Anotación guardada", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.anotacion_guardada), Toast.LENGTH_SHORT).show()
                     fetchHistory() // Recargar lista
                 }
                 .addOnFailureListener {
-                    Toast.makeText(requireContext(), "Error al guardar", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.error_guardar), Toast.LENGTH_SHORT).show()
                 }
         }
     }
@@ -155,7 +158,7 @@ class HistoryFragment : Fragment() {
                 for (doc in documents) {
                     list.add(HistoriaClinica(
                         id = doc.id,
-                        physioName = doc.getString("physioName") ?: "Fisioterapeuta",
+                        physioName = doc.getString("physioName") ?: getString(R.string.fisioterapeuta),
                         date = doc.getString("date") ?: "",
                         timestamp = doc.getLong("timestamp") ?: 0L,
                         note = doc.getString("note") ?: ""

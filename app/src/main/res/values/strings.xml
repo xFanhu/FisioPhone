@@ -39,16 +39,26 @@
     <string name="elegir_dia">3. Elige el Día</string>
     <string name="abrir_calendario">Abrir Calendario</string>
     <string name="seleccionar_fecha">Seleccionar fecha</string>
-    <string name="dia_seleccionado">Día seleccionado: %1$s</string>
+    <string name="dia_seleccionado">Día seleccionado: %s</string>
     <string name="horas_disponibles">4. Horas Disponibles</string>
     <string name="confirmar_reserva">Confirmar Reserva</string>
     <string name="cita_exito">Cita reservada con éxito</string>
     <string name="error_reserva">Error al reservar la cita</string>
     <string name="no_citas">No tienes citas programadas</string>
+    <string name="no_horas_disponibles">No hay horas disponibles para el día seleccionado</string>
     <string name="mis_citas">Mis Citas</string>
     <string name="hoy">Hoy</string>
-    <string name="citas_del">Citas del %1$s</string>
+    <string name="citas_del">Citas del %s</string>
     <string name="sesion_fisio_default">Sesión de Fisioterapia</string>
+    <string name="estado_confirmada">Confirmada</string>
+    <string name="estado_realizada">Realizada</string>
+    <string name="btn_finalizar">Finalizar</string>
+    <string name="pendientes">Pendientes</string>
+    <string name="realizadas">Realizadas</string>
+    <string name="nota_guardada_exito">Nota clínica guardada con éxito</string>
+    <string name="hint_nota_clinica">Escribe detalles de la sesión, tratamiento aplicado, etc.</string>
+    <string name="error_nota_vacia">La nota no puede estar vacía</string>
+    <string name="sesion_finalizada_sin_nota">Sesión finalizada sin nota</string>
     
     <!-- Historia Clínica -->
     <string name="historia_clinica">Historia Clínica</string>
@@ -99,8 +109,11 @@
     <string name="seleccionar_idioma">Seleccionar idioma</string>
     <string name="idioma_es">Español</string>
     <string name="idioma_en">Inglés</string>
+    <string name="cambiar_password">Cambiar contraseña</string>
+    <string name="desc_cambiar_password">Te enviaremos un correo para que puedas cambiar tu contraseña de forma segura.</string>
+    <string name="email_reset_enviado">Correo de restablecimiento enviado. Revisa tu bandeja de entrada.</string>
     <string name="notif_nueva_cita_titulo">Nueva Cita Reservada</string>
-    <string name="notif_nueva_cita_mensaje">%1$s ha reservado una cita contigo el %2$s a las %3$s.</string>
+    <string name="notif_nueva_cita_mensaje">%s ha reservado una cita contigo el %s a las %s.</string>
 
     <!-- Perfil -->
     <string name="perfil_anadir_foto">Añadir foto</string>
@@ -109,21 +122,40 @@
     <string name="perfil_resumen_actividad">Resumen de Actividad</string>
     <string name="perfil_nombre">Nombre:</string>
     <string name="perfil_apellidos">Apellidos:</string>
-    <string name="perfil_sesion_fisio">con %1$s</string>
-    <string name="perfil_sesion_tratamiento">Tratamiento: %1$s</string>
+    <string name="perfil_sesion_fisio">con %s</string>
+    <string name="perfil_sesion_tratamiento">Tratamiento: %s</string>
     <string name="perfil_sesiones_vacias">Todavía no hay sesiones registradas.</string>
     <string name="sin_especialidades">Sin especialidades</string>
+    <string name="biografia">Biografía</string>
+    <string name="editar_perfil">Editar Perfil</string>
+    <string name="hint_biografia">Cuéntanos sobre tu formación, experiencia y especialidades...</string>
+    <string name="biografia_vacia">Este profesional aún no ha añadido una biografía.</string>
+    <string name="guardar_cambios">Guardar Cambios</string>
+    <string name="proxima_cita_label">Próxima cita hoy</string>
+    <string name="dashboard_resumen_hoy">Hoy tienes %s citas pendientes</string>
     <string name="cambiar">CAMBIAR</string>
     <string name="label_fisioterapeuta">Fisioterapeuta:</string>
     <string name="label_paciente">Paciente:</string>
 
     <!-- Diálogos -->
     <string name="llamar_paciente_titulo">¿Llamar al paciente?</string>
-    <string name="llamar_paciente_mensaje">Se abrirá la aplicación de teléfono para contactar con %1$s.</string>
+    <string name="llamar_paciente_mensaje">Se abrirá la aplicación de teléfono para contactar con %s.</string>
     <string name="cancelar_cita">Cancelar cita</string>
     <string name="confirmar_cancelacion">Estás a punto de cancelar una cita. ¿Estás seguro?</string>
+    <string name="confirmar_cambio_password_titulo">¿Cambiar contraseña?</string>
+    <string name="confirmar_cambio_password_mensaje">Se enviará un correo a tu dirección para restablecerla. ¿Estás seguro?</string>
+    <string name="confirmar_finalizar_titulo">Finalizar Sesión</string>
+    <string name="confirmar_finalizar_mensaje">¿Has terminado la sesión con %s? Se marcará como realizada y podrás añadir una nota clínica.</string>
+    <string name="titulo_anadir_nota">Añadir Nota Clínica</string>
+    <string name="label_paciente_dialog">Paciente: %s</string>
+    <string name="btn_guardar_nota">Guardar Nota</string>
+    <string name="btn_ahora_no">Ahora no</string>
     <string name="si">Sí</string>
     <string name="no">No</string>
+    <string name="opciones_cita">Opciones de la cita</string>
+    <string name="que_quieres_hacer">¿Qué quieres hacer con esta cita?</string>
+    <string name="ver_perfil_paciente">Ver perfil del paciente</string>
+    <string name="marcar_como_realizada">Marcar como realizada</string>
 
     <!-- Mensajes de Error / Toasts -->
     <string name="error_generico">Ha ocurrido un error inesperado</string>
@@ -135,15 +167,20 @@
     <string name="error_registro">Error de registro</string>
     <string name="error_dia_no_laborable">El profesional no trabaja ese día</string>
     <string name="error_sin_horario">Este profesional no tiene horario configurado</string>
-    <string name="error_datos_paciente">Error al obtener datos del paciente: %1$s</string>
-    <string name="error_con_mensaje">Error: %1$s</string>
-    <string name="rol_actualizado">Rol actualizado a %1$s</string>
+    <string name="error_datos_paciente">Error al obtener datos del paciente: %s</string>
+    <string name="error_con_mensaje">Error: %s</string>
+    <string name="rol_actualizado">Rol actualizado a %s</string>
     <string name="error_actualizando_rol">Error actualizando rol</string>
-    <string name="error_guardando_datos">Error guardando datos: %1$s</string>
-    <string name="error_formato">%1$s: %2$s</string>
+    <string name="error_guardando_datos">Error guardando datos: %s</string>
+    <string name="error_formato">%s: %s</string>
     <string name="cita_cancelada">Cita cancelada</string>
     <string name="un_paciente">Un paciente</string>
     <string name="na">N/A</string>
+    <string name="label_paciente_default">Paciente</string>
+    <string name="nota_vacia">La nota no puede estar vacía</string>
+    <string name="anotacion_guardada">Anotación guardada con éxito</string>
+    <string name="error_guardar">Error al guardar</string>
+    <string name="fisioterapeuta">Fisioterapeuta</string>
 
     <!-- Días de la semana -->
     <string name="lunes">Lunes</string>
@@ -153,4 +190,8 @@
     <string name="viernes">Viernes</string>
     <string name="sabado">Sábado</string>
     <string name="domingo">Domingo</string>
+    
+    <!-- Estados Vacíos -->
+    <string name="no_pacientes">No hay pacientes registrados.</string>
+    <string name="no_equipo">No hay profesionales en el equipo.</string>
 </resources>

@@ -81,14 +81,18 @@ class ConfigFragment : Fragment() {
             binding.switchDarkMode.isEnabled = false
             val appContext = requireContext().applicationContext
 
-            viewLifecycleOwner.lifecycleScope.launch {
-                try {
-                    SettingsManager.saveDarkMode(appContext, isChecked)
-                    SettingsManager.applyNightMode(isChecked)
-                } finally {
-                    _binding?.switchDarkMode?.isEnabled = true
+            
+            binding.root.postDelayed({
+                if (_binding == null) return@postDelayed
+                viewLifecycleOwner.lifecycleScope.launch {
+                    try {
+                        SettingsManager.saveDarkMode(appContext, isChecked)
+                        SettingsManager.applyNightMode(isChecked)
+                    } finally {
+                        _binding?.switchDarkMode?.isEnabled = true
+                    }
                 }
-            }
+            }, 150)
         }
 
         binding.switchNotifications.setOnCheckedChangeListener { _, isChecked ->
@@ -119,8 +123,39 @@ class ConfigFragment : Fragment() {
             if (isInitializing) return@setOnItemClickListener
 
             val selectedLang = availableLanguages[position]
-            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(selectedLang.code)
-            AppCompatDelegate.setApplicationLocales(appLocale)
+            
+            
+            binding.root.postDelayed({
+                val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(selectedLang.code)
+                AppCompatDelegate.setApplicationLocales(appLocale)
+            }, 150)
+        }
+
+        binding.cardChangePassword.setOnClickListener {
+            com.google.android.material.dialog.MaterialAlertDialogBuilder(requireActivity())
+                .setTitle(getString(R.string.confirmar_cambio_password_titulo))
+                .setMessage(getString(R.string.confirmar_cambio_password_mensaje))
+                .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(getString(R.string.si)) { dialog, _ ->
+                    dialog.dismiss()
+                    val user = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
+                    val email = user?.email
+                    if (email != null) {
+                        com.google.firebase.auth.FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                            .addOnCompleteListener { task ->
+                                if (isAdded && context != null) {
+                                    if (task.isSuccessful) {
+                                        android.widget.Toast.makeText(requireContext(), getString(R.string.email_reset_enviado), android.widget.Toast.LENGTH_LONG).show()
+                                    } else {
+                                        android.widget.Toast.makeText(requireContext(), task.exception?.message ?: "Error", android.widget.Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            }
+                    }
+                }
+                .show()
         }
     }
 

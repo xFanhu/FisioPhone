@@ -15,16 +15,29 @@
         android:layout_height="wrap_content"
         android:padding="20dp">
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivUserPhoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_profile"
+            app:tint="@color/azul"
+            android:padding="10dp"
+            android:background="#1A2196F3"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.MediumComponent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tvUserName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:textColor="@color/card_text"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/tvUserRole"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivUserPhoto"
+            app:layout_constraintTop_toTopOf="@id/ivUserPhoto"
             android:text="Nombre Apellidos" />
 
         <TextView
@@ -51,7 +64,7 @@
             android:textColor="@color/description_gray"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvUserName"
             app:layout_constraintTop_toBottomOf="@id/tvUserName"
             android:text="email@example.com" />
 
@@ -63,7 +76,7 @@
             android:textColor="@color/description_gray"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvUserName"
             app:layout_constraintTop_toBottomOf="@id/tvUserEmail"
             android:text="DNI: 12345678A" />
 
@@ -75,7 +88,7 @@
             android:textColor="@color/description_gray"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvUserName"
             app:layout_constraintTop_toBottomOf="@id/tvUserDni"
             android:text="Teléfono: 600123456" />
 

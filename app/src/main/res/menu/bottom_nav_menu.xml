@@ -4,7 +4,10 @@
         android:id="@+id/nav_citas"
         android:icon="@drawable/ic_calendar"
         android:title="@string/citas" />
-
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@drawable/ic_add"
+        android:title="@string/nueva_cita" />
 
 
     <item
@@ -19,10 +22,7 @@
         android:title="@string/pacientes"
         android:visible="false" />
 
-    <item
-        android:id="@+id/nav_add"
-        android:icon="@drawable/ic_add"
-        android:title="@string/nueva_cita" />
+
 
     <item
         android:id="@+id/nav_ajustes"
