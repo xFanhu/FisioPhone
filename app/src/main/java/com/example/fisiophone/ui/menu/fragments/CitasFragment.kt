@@ -85,11 +85,27 @@ class CitasFragment : Fragment() {
         }
 
         binding.btnEmptyAddCita.setOnClickListener {
-            (activity as? MainActivity)?.let { mainActivity ->
-                val bottomNav = mainActivity.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
-                bottomNav?.selectedItemId = R.id.nav_add
+            if (viewModel.isPatient.value) {
+                (activity as? MainActivity)?.let { mainActivity ->
+                    val bottomNav = mainActivity.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
+                    bottomNav?.selectedItemId = R.id.nav_add
+                }
+            } else {
+                openAddCitaFisio()
             }
         }
+        
+        binding.fabAddCita.setOnClickListener {
+            openAddCitaFisio()
+        }
+    }
+    
+    private fun openAddCitaFisio(citaId: String? = null) {
+        val fragment = AddCitaFisioFragment.newInstance(citaId)
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentHost, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun observeViewModel() {
@@ -105,9 +121,11 @@ class CitasFragment : Fragment() {
                         if (isPatient) {
                             binding.tvEmptyAddCita.text = getString(R.string.nueva_cita)
                             binding.ivEmptyAddCita.setImageResource(R.drawable.ic_add)
+                            binding.fabAddCita.visibility = View.GONE
                         } else {
                             binding.tvEmptyAddCita.text = getString(R.string.configurar_horario)
                             binding.ivEmptyAddCita.setImageResource(R.drawable.ic_citas)
+                            binding.fabAddCita.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -216,6 +234,7 @@ class CitasFragment : Fragment() {
     private fun showCitaOptionsDialog(cita: Cita) {
         val options = mutableListOf<String>()
         options.add(getString(R.string.ver_perfil_paciente))
+        options.add(getString(R.string.modificar_cita))
         
         // Solo permitir marcar como realizada si no lo está ya
         if (cita.status != "done") {
@@ -227,6 +246,7 @@ class CitasFragment : Fragment() {
             .setItems(options.toTypedArray()) { _, which ->
                 when (options[which]) {
                     getString(R.string.ver_perfil_paciente) -> openPatientProfile(cita.patientId)
+                    getString(R.string.modificar_cita) -> openAddCitaFisio(cita.id)
                     getString(R.string.marcar_como_realizada) -> confirmFinishCita(cita)
                 }
             }

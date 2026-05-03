@@ -194,4 +194,27 @@
     <!-- Estados Vacíos -->
     <string name="no_pacientes">No patients registered.</string>
     <string name="no_equipo">No professionals in the team.</string>
+
+    <!-- Citas Fisios-->
+    <string name="titulo_nueva_cita_profesional">New Appointment</string>
+    <string name="modificar_cita">Modify Appointment</string>
+    <string name="cita_actualizada_exito">Appointment updated successfully</string>
+    <string name="seleccionar_paciente_label">Select Patient</string>
+    <string name="seleccionar_paciente_hint">Search patient...</string>
+    <string name="seleccionar_fisioterapeuta_label">Select Physiotherapist</string>
+    <string name="seleccionar_tratamiento_label">Select Treatment</string>
+    <string name="elegir_dia_label">Choose Day</string>
+    <string name="horas_disponibles_label">Available Hours</string>
+    <string name="btn_actualizar_reserva">Update Booking</string>
+
+    <!-- Correo de Verificación -->
+    <string name="email_verificacion_enviado">Account created successfully. We have sent a verification link to your email. Please check it and verify your account before logging in.</string>
+    <string name="error_email_no_verificado">You must verify your email address before logging in. Please check your inbox.</string>
+    <string name="titulo_verificar_cuenta">Verify Account</string>
+    <string name="mensaje_verificar_cuenta">Your account is not verified yet. In order to log in, you must confirm your email address.\n\nDo you want us to send you a verification email right now?</string>
+    <string name="enviar_correo">Send Email</string>
+    <string name="olvido_password">I forgot my password</string>
+    <string name="mensaje_olvido_password">Do you want us to send a password reset email to %s?</string>
+    <string name="error_email_olvido">Please enter your email address above to reset your password.</string>
+
 </resources>

@@ -19,7 +19,16 @@ class PatientSessionAdapter(
 
     override fun onBindViewHolder(holder: SessionViewHolder, position: Int) {
         val session = sessions[position]
-        holder.binding.tvSessionDate.text = session.date
+        
+        // Formatear la fecha de aaaa-mm-dd a dd-mm-aaaa
+        val dateParts = session.date.split("-")
+        val formattedDate = if (dateParts.size == 3) {
+            "${dateParts[2]}-${dateParts[1]}-${dateParts[0]}"
+        } else {
+            session.date
+        }
+        
+        holder.binding.tvSessionDate.text = formattedDate
         holder.binding.tvSessionTreatment.text = session.treatment
         holder.binding.tvSessionPhysio.text = holder.itemView.context.getString(R.string.perfil_sesion_fisio, session.physiotherapistName)
     }

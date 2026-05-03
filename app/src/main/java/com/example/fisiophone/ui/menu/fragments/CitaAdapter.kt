@@ -65,7 +65,15 @@ class CitaAdapter(
         fun bind(cita: Cita) {
             val context = itemView.context
             tvCitaTime.text = cita.time
-            tvCitaDate.text = cita.date
+            
+            // Formatear la fecha de aaaa-mm-dd a dd-mm-aaaa
+            val dateParts = cita.date.split("-")
+            tvCitaDate.text = if (dateParts.size == 3) {
+                "${dateParts[2]}-${dateParts[1]}-${dateParts[0]}"
+            } else {
+                cita.date
+            }
+            
             tvCitaTreatment.text = cita.tratamiento
             
             // Lógica de estado explícita (ya no es automática por tiempo)

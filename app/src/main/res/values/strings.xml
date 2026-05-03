@@ -193,5 +193,28 @@
     
     <!-- Estados Vacíos -->
     <string name="no_pacientes">No hay pacientes registrados.</string>
-    <string name="no_equipo">No hay profesionales en el equipo.</string>
+    <string name="no_equipo">No hay fisioterapeutas en el equipo.</string>
+    
+    <!-- Citas Fisios-->
+    <string name="titulo_nueva_cita_profesional">Nueva Cita</string>
+    <string name="modificar_cita">Modificar Cita</string>
+    <string name="cita_actualizada_exito">Cita actualizada con éxito</string>
+    <string name="seleccionar_paciente_label">Selecciona Paciente</string>
+    <string name="seleccionar_paciente_hint">Buscar paciente...</string>
+    <string name="seleccionar_fisioterapeuta_label">Selecciona Fisioterapeuta</string>
+    <string name="seleccionar_tratamiento_label">Selecciona Tratamiento</string>
+    <string name="elegir_dia_label">Elige el Día</string>
+    <string name="horas_disponibles_label">Horas Disponibles</string>
+    <string name="btn_actualizar_reserva">Actualizar Reserva</string>
+
+    <!-- Correo de Verificación -->
+    <string name="email_verificacion_enviado">Cuenta creada con éxito. Te hemos enviado un enlace de verificación al correo. Por favor, revísalo y verifica tu cuenta antes de iniciar sesión.</string>
+    <string name="error_email_no_verificado">Debes verificar tu correo electrónico antes de iniciar sesión. Revisa tu bandeja de entrada.</string>
+    <string name="titulo_verificar_cuenta">Verificar Cuenta</string>
+    <string name="mensaje_verificar_cuenta">Tu cuenta aún no está verificada. Para poder acceder necesitas confirmar tu correo electrónico.\n\n¿Quieres que te enviemos un correo de verificación ahora mismo?</string>
+    <string name="enviar_correo">Enviar Correo</string>
+    <string name="olvido_password">He olvidado mi contraseña</string>
+    <string name="mensaje_olvido_password">¿Quieres que enviemos un correo para restablecer tu contraseña a %s?</string>
+    <string name="error_email_olvido">Por favor, introduce tu correo electrónico arriba para poder restablecer la contraseña.</string>
+
 </resources>

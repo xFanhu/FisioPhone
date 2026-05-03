@@ -87,8 +87,13 @@ class NewUserActivity : AppCompatActivity() {
                             db.collection("users").document(userId)
                                 .set(userMap)
                                 .addOnSuccessListener {
+                                    auth.currentUser?.sendEmailVerification()
+                                    auth.signOut() // Desconectar para forzar login tras verificar
+                                    
                                     setLoading(false)
-                                    val intent = Intent(this, MainActivity::class.java)
+                                    Toast.makeText(this, getString(R.string.email_verificacion_enviado), Toast.LENGTH_LONG).show()
+                                    
+                                    val intent = Intent(this, LogInActivity::class.java)
                                     startActivity(intent)
                                     finish()
                                 }
