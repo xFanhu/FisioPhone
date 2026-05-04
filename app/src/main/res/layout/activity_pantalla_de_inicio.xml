@@ -31,7 +31,9 @@
             android:gravity="center"
             android:text="@string/iniciar"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginBottom="3dp"/>
+
 
     </androidx.cardview.widget.CardView>
 
@@ -60,7 +62,8 @@
             android:gravity="center"
             android:text="@string/nuevoUsuario"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginBottom="3dp"/>
 
     </androidx.cardview.widget.CardView>
 

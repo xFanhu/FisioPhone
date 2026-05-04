@@ -21,6 +21,7 @@ import java.util.Locale
 /**
  * ViewModel que gestiona la lógica de disponibilidad y reserva de citas.
  */
+
 class AddCitaViewModel : ViewModel() {
 
     private val db = FirebaseFirestore.getInstance()
