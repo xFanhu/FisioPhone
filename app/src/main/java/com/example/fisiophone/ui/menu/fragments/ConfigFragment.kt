@@ -21,7 +21,7 @@ import androidx.core.os.LocaleListCompat
 
 class ConfigFragment : Fragment() {
 
-    // El binding es nullable porque la vista del fragment puede destruirse antes que el fragment.
+
     private var _binding: FragmentConfigBinding? = null
     private val binding get() = _binding!!
 

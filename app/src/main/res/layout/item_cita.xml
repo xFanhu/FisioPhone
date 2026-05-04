@@ -82,7 +82,7 @@
                 android:background="@drawable/bg_login_input"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="2dp"
-                android:text="Confirmada"
+                tools:text="Confirmada"
                 android:textColor="@color/azul"
                 android:textSize="10sp" />
         </LinearLayout>

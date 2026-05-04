@@ -65,49 +65,49 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lun" />
+                android:text="@string/dia_lun" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipTue"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mar" />
+                android:text="@string/dia_mar" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipWed"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mié" />
+                android:text="@string/dia_mie" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipThu"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jue" />
+                android:text="@string/dia_jue" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipFri"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vie" />
+                android:text="@string/dia_vie" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipSat"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sáb" />
+                android:text="@string/dia_sab" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipSun"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dom" />
+                android:text="@string/dia_dom" />
         </com.google.android.material.chip.ChipGroup>
 
         <TextView
@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
-                    android:text="09:00" />
+                    tools:text="09:00" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <View
@@ -165,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
-                    android:text="21:00" />
+                    tools:text="21:00" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -194,14 +194,14 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="30 min" />
+                android:text="@string/duracion_30_min" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip45min"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="45 min" />
+                android:text="@string/duracion_45_min" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip60min"
@@ -209,7 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="60 min" />
+                android:text="@string/duracion_60_min" />
         </com.google.android.material.chip.ChipGroup>
 
         <Button

@@ -59,6 +59,8 @@
     <string name="hint_nota_clinica">Escribe detalles de la sesión, tratamiento aplicado, etc.</string>
     <string name="error_nota_vacia">La nota no puede estar vacía</string>
     <string name="sesion_finalizada_sin_nota">Sesión finalizada sin nota</string>
+    <string name="cita_confirmada">Confirmada</string>
+    <string name="cambiar_fecha">CAMBIAR</string>
     
     <!-- Historia Clínica -->
     <string name="historia_clinica">Historia Clínica</string>
@@ -89,6 +91,16 @@
     <string name="seleccionar_dias">Por favor, selecciona al menos un día laborable</string>
     <string name="horario_no_configurado">Horario no configurado</string>
     <string name="selecciona_tratamiento_error">Por favor, selecciona al menos un tratamiento</string>
+    <string name="dia_lun">Lun</string>
+    <string name="dia_mar">Mar</string>
+    <string name="dia_mie">Mié</string>
+    <string name="dia_jue">Jue</string>
+    <string name="dia_vie">Vie</string>
+    <string name="dia_sab">Sáb</string>
+    <string name="dia_dom">Dom</string>
+    <string name="duracion_30_min">30 min</string>
+    <string name="duracion_45_min">45 min</string>
+    <string name="duracion_60_min">60 min</string>
 
     <!-- Equipo -->
     <string name="nuestro_equipo">Nuestro Equipo</string>
@@ -136,6 +148,8 @@
     <string name="cambiar">CAMBIAR</string>
     <string name="label_fisioterapeuta">Fisioterapeuta:</string>
     <string name="label_paciente">Paciente:</string>
+    <string name="perfil_especialidades">ESPECIALIDADES</string>
+    <string name="perfil_horario_semanal">HORARIO SEMANAL</string>
 
     <!-- Diálogos -->
     <string name="llamar_paciente_titulo">¿Llamar al paciente?</string>

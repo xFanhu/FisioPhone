@@ -38,7 +38,7 @@
             app:layout_constraintEnd_toStartOf="@id/tvUserRole"
             app:layout_constraintStart_toEndOf="@id/ivUserPhoto"
             app:layout_constraintTop_toTopOf="@id/ivUserPhoto"
-            android:text="Nombre Apellidos" />
+            tools:text="Nombre Apellidos" />
 
         <TextView
             android:id="@+id/tvUserRole"
@@ -54,7 +54,7 @@
             app:layout_constraintBottom_toBottomOf="@id/tvUserName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvUserName"
-            android:text="Paciente" />
+            tools:text="Paciente" />
 
         <TextView
             android:id="@+id/tvUserEmail"
@@ -66,7 +66,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvUserName"
             app:layout_constraintTop_toBottomOf="@id/tvUserName"
-            android:text="email@example.com" />
+            tools:text="email@example.com" />
 
         <TextView
             android:id="@+id/tvUserDni"
@@ -78,7 +78,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvUserName"
             app:layout_constraintTop_toBottomOf="@id/tvUserEmail"
-            android:text="DNI: 12345678A" />
+            tools:text="DNI: 12345678A" />
 
         <TextView
             android:id="@+id/tvUserPhone"
@@ -90,7 +90,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvUserName"
             app:layout_constraintTop_toBottomOf="@id/tvUserDni"
-            android:text="Teléfono: 600123456" />
+            tools:text="Teléfono: 600123456" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnChangeRole"
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Hacer Fisioterapeuta"
+            android:text="@string/hacer_fisioterapeuta"
             app:cornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvUserPhone" />
