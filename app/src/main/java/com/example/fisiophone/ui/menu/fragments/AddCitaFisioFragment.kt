@@ -17,6 +17,9 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.CompositeDateValidator
+import com.example.fisiophone.utils.WorkingDaysValidator
+
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -230,13 +233,19 @@ class AddCitaFisioFragment : Fragment() {
     }
 
     private fun showDatePicker() {
-        val constraintsBuilder = CalendarConstraints.Builder()
-        // En modo edición permitimos fechas pasadas si no las ha modificado? Mejor no, point forward
-        constraintsBuilder.setValidator(DateValidatorPointForward.now())
+        val workDays = viewModel.workDays.value
+        
+        val validators = mutableListOf<CalendarConstraints.DateValidator>()
+        validators.add(DateValidatorPointForward.now()) // No pasado
+        validators.add(WorkingDaysValidator(workDays))  // Solo días laborables
+        
+        val constraints = CalendarConstraints.Builder()
+            .setValidator(CompositeDateValidator.allOf(validators))
+            .build()
 
         val picker = MaterialDatePicker.Builder.datePicker()
             .setTitleText(getString(R.string.seleccionar_fecha))
-            .setCalendarConstraints(constraintsBuilder.build())
+            .setCalendarConstraints(constraints)
             .build()
 
         picker.addOnPositiveButtonClickListener { selection ->

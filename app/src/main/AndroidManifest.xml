@@ -30,19 +30,15 @@
             android:theme="@style/Theme.FisioPhone" />
         <activity
             android:name=".ui.auth.LogInActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.FisioPhone" />
-        <activity
-            android:name=".ui.start.PantallaDeInicio"
             android:exported="true"
-            android:theme="@style/Theme.InicioFisioPhone">
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.FisioPhone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
         <service
             android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"

@@ -17,6 +17,9 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.CompositeDateValidator
+import com.example.fisiophone.utils.WorkingDaysValidator
+
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -231,10 +234,16 @@ class AddCitaFragment : Fragment() {
     }
 
     private fun showDatePicker() {
+        val workDays = viewModel.workDays.value
+        
+        val validators = mutableListOf<CalendarConstraints.DateValidator>()
+        validators.add(DateValidatorPointForward.now()) // No pasado
+        validators.add(WorkingDaysValidator(workDays))  // Solo días laborables
+        
         val constraints = CalendarConstraints.Builder()
-            .setValidator(DateValidatorPointForward.now()) // No permitir fechas pasadas
+            .setValidator(CompositeDateValidator.allOf(validators))
             .build()
-
+            
         val picker = MaterialDatePicker.Builder.datePicker()
             .setTitleText(getString(R.string.seleccionar_fecha))
             .setCalendarConstraints(constraints)

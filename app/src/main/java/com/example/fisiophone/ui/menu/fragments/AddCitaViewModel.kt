@@ -40,6 +40,10 @@ class AddCitaViewModel : ViewModel() {
     private val _bookingResult = MutableSharedFlow<Result<Unit>>()
     val bookingResult: SharedFlow<Result<Unit>> = _bookingResult.asSharedFlow()
 
+    private val _workDays = MutableStateFlow<List<String>>(emptyList())
+    val workDays: StateFlow<List<String>> = _workDays.asStateFlow()
+
+
     // Datos de la reserva actual
     var selectedPhysio: User? = null
         private set
@@ -85,7 +89,22 @@ class AddCitaViewModel : ViewModel() {
     fun selectPhysio(physio: User) {
         selectedPhysio = physio
         resetBookingProgress()
+        fetchPhysioSchedule(physio.id)
     }
+
+    private fun fetchPhysioSchedule(physioId: String) {
+        viewModelScope.launch {
+            try {
+                val doc = db.collection("users").document(physioId).get().await()
+                val schedule = doc.get("schedule") as? Map<*, *>
+                val days = (schedule?.get("workDays") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                _workDays.value = days
+            } catch (e: Exception) {
+                _workDays.value = emptyList()
+            }
+        }
+    }
+
     
     fun selectTreatment(treatment: String) {
         selectedTreatment = treatment
@@ -115,8 +134,21 @@ class AddCitaViewModel : ViewModel() {
     private fun isWorkingDay(date: Date): Boolean {
         val calendar = Calendar.getInstance().apply { time = date }
         val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-        return dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY
+        
+        val dayStr = when (dayOfWeek) {
+            Calendar.MONDAY -> "Mon"
+            Calendar.TUESDAY -> "Tue"
+            Calendar.WEDNESDAY -> "Wed"
+            Calendar.THURSDAY -> "Thu"
+            Calendar.FRIDAY -> "Fri"
+            Calendar.SATURDAY -> "Sat"
+            Calendar.SUNDAY -> "Sun"
+            else -> ""
+        }
+        
+        return _workDays.value.isEmpty() || _workDays.value.contains(dayStr)
     }
+
 
     /**
      * Genera los huecos libres para un día concreto cruzando el horario del fisio

@@ -39,6 +39,10 @@ class AddCitaFisioViewModel : ViewModel() {
     private val _bookingResult = MutableSharedFlow<Result<Unit>>()
     val bookingResult: SharedFlow<Result<Unit>> = _bookingResult.asSharedFlow()
 
+    private val _workDays = MutableStateFlow<List<String>>(emptyList())
+    val workDays: StateFlow<List<String>> = _workDays.asStateFlow()
+
+
     // Current booking data
     var selectedPatient: User? = null
         private set
@@ -113,8 +117,10 @@ class AddCitaFisioViewModel : ViewModel() {
 
                 // If fisio, auto-select themselves
                 if (currentUserRole == "fisioterapeuta") {
-                    selectedPhysio = physiosList.find { it.id == uid }
+                    val physio = physiosList.find { it.id == uid }
+                    if (physio != null) selectPhysio(physio)
                 }
+
 
             } catch (e: Exception) {
                 // Silently handle
@@ -172,7 +178,22 @@ class AddCitaFisioViewModel : ViewModel() {
         selectedDate = null
         selectedTime = null
         _availableSlots.value = null
+        fetchPhysioScheduleDays(physio.id)
     }
+
+    private fun fetchPhysioScheduleDays(physioId: String) {
+        viewModelScope.launch {
+            try {
+                val doc = db.collection("users").document(physioId).get().await()
+                val schedule = doc.get("schedule") as? Map<*, *>
+                val days = (schedule?.get("workDays") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                _workDays.value = days
+            } catch (e: Exception) {
+                _workDays.value = emptyList()
+            }
+        }
+    }
+
 
     fun selectTreatment(treatment: String) {
         selectedTreatment = treatment
@@ -201,8 +222,21 @@ class AddCitaFisioViewModel : ViewModel() {
     private fun isWorkingDay(date: Date): Boolean {
         val calendar = Calendar.getInstance().apply { time = date }
         val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-        return dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY
+        
+        val dayStr = when (dayOfWeek) {
+            Calendar.MONDAY -> "Mon"
+            Calendar.TUESDAY -> "Tue"
+            Calendar.WEDNESDAY -> "Wed"
+            Calendar.THURSDAY -> "Thu"
+            Calendar.FRIDAY -> "Fri"
+            Calendar.SATURDAY -> "Sat"
+            Calendar.SUNDAY -> "Sun"
+            else -> ""
+        }
+        
+        return _workDays.value.isEmpty() || _workDays.value.contains(dayStr)
     }
+
 
     private fun fetchAvailableSlots(date: Date, skipCurrentTimeCheck: Boolean) {
         val physioId = selectedPhysio?.id ?: return

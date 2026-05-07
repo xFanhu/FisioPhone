@@ -229,6 +229,7 @@
     <string name="enviar_correo">Send Email</string>
     <string name="olvido_password">I forgot my password</string>
     <string name="mensaje_olvido_password">Do you want us to send a password reset email to %s?</string>
-    <string name="error_email_olvido">Please enter your email address above to reset your password.</string>
+    <string name="error_email_olvido">Please enter your email above to reset your password.</string>
+    <string name="separador_o">or</string>
 
 </resources>

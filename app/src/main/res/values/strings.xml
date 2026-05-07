@@ -230,5 +230,7 @@
     <string name="olvido_password">He olvidado mi contraseña</string>
     <string name="mensaje_olvido_password">¿Quieres que enviemos un correo para restablecer tu contraseña a %s?</string>
     <string name="error_email_olvido">Por favor, introduce tu correo electrónico arriba para poder restablecer la contraseña.</string>
+    <string name="separador_o">o</string>
+
 
 </resources>

@@ -100,6 +100,21 @@ class LogInActivity : AppCompatActivity() {
                 }
                 .show()
         }
+
+        binding.btnNuevoUsuario.setOnClickListener {
+            val intent = Intent(this, NewUserActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null && currentUser.isEmailVerified) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun setLoading(isLoading: Boolean) {
