@@ -174,7 +174,7 @@ class CitasViewModel : ViewModel() {
     }
 
     /**
-     * Elimina (cancela) una cita.
+     * Elimina una cita.
      */
     fun deleteCita(cita: Cita) {
         viewModelScope.launch {

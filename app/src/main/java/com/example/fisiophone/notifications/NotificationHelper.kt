@@ -31,7 +31,7 @@ object NotificationHelper {
     fun showNotification(context: Context, title: String, message: String, notificationId: Int = System.currentTimeMillis().toInt()) {
         createNotificationChannel(context)
 
-        // Intent to open the app when clicking the notification
+        // Intent para abrir la app cuando das a la notificacion
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }

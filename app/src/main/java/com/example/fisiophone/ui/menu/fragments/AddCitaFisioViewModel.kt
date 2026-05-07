@@ -23,7 +23,7 @@ class AddCitaFisioViewModel : ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
-    // UI States
+
     private val _patients = MutableStateFlow<List<User>>(emptyList())
     val patients: StateFlow<List<User>> = _patients.asStateFlow()
 
@@ -43,7 +43,7 @@ class AddCitaFisioViewModel : ViewModel() {
     val workDays: StateFlow<List<String>> = _workDays.asStateFlow()
 
 
-    // Current booking data
+
     var selectedPatient: User? = null
         private set
     var selectedPhysio: User? = null
@@ -55,13 +55,13 @@ class AddCitaFisioViewModel : ViewModel() {
     var selectedTreatment: String? = null
         private set
 
-    // Edit mode properties
+
     var isEditMode = false
         private set
     var editCitaId: String? = null
         private set
 
-    // Current user role
+
     var currentUserRole: String = "fisioterapeuta"
         private set
 
@@ -73,12 +73,12 @@ class AddCitaFisioViewModel : ViewModel() {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                // Determine current user role
+
                 val uid = auth.currentUser?.uid ?: return@launch
                 val userDoc = db.collection("users").document(uid).get().await()
                 currentUserRole = userDoc.getString("role") ?: "fisioterapeuta"
 
-                // Load Patients
+
                 val patientsResult = db.collection("users")
                     .whereEqualTo("role", "paciente")
                     .get().await()
@@ -96,7 +96,7 @@ class AddCitaFisioViewModel : ViewModel() {
                 }.sortedBy { it.nombre }
                 _patients.value = patientsList
 
-                // Load Physios (only needed if admin, but we load for both just in case)
+
                 val physiosResult = db.collection("users")
                     .whereIn("role", listOf("fisioterapeuta", "administrador"))
                     .get().await()
@@ -115,7 +115,7 @@ class AddCitaFisioViewModel : ViewModel() {
                 }
                 _physios.value = physiosList
 
-                // If fisio, auto-select themselves
+
                 if (currentUserRole == "fisioterapeuta") {
                     val physio = physiosList.find { it.id == uid }
                     if (physio != null) selectPhysio(physio)
@@ -123,7 +123,7 @@ class AddCitaFisioViewModel : ViewModel() {
 
 
             } catch (e: Exception) {
-                // Silently handle
+
             } finally {
                 _isLoading.value = false
             }
@@ -145,7 +145,7 @@ class AddCitaFisioViewModel : ViewModel() {
                     val timeStr = doc.getString("time") ?: ""
                     val treatment = doc.getString("tratamiento") ?: ""
                     
-                    // Await lists if not loaded yet
+
                     while (_patients.value.isEmpty() || _physios.value.isEmpty()) {
                         kotlinx.coroutines.delay(100)
                     }
@@ -264,7 +264,7 @@ class AddCitaFisioViewModel : ViewModel() {
                     .await()
                     
                 val bookedTimes = appointments.mapNotNull {
-                    // Ignore the current booking if editing
+
                     if (isEditMode && it.id == editCitaId) null else it.getString("time")
                 }
                 

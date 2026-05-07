@@ -89,7 +89,7 @@ class UserAdapter(
                 btnChangeRole.setText(R.string.hacer_fisioterapeuta)
             }
 
-            // Ocultar botón si es administrador (no quiero que se degraden a sí mismos accidentalmente)
+            // Ocultar botón si es administrador
             if (!showActions || user.role == "administrador") {
                 btnChangeRole.visibility = View.GONE
             } else {

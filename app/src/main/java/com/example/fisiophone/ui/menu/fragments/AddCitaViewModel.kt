@@ -114,7 +114,7 @@ class AddCitaViewModel : ViewModel() {
     }
 
     fun selectDate(date: Date) {
-        // Validar que el profesional trabaje ese día (ej. L-V)
+        // Validar que el fisio trabaja
         if (!isWorkingDay(date)) {
             viewModelScope.launch {
                 _bookingResult.emit(Result.failure(Exception("NO_WORKING_DAY")))

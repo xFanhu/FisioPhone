@@ -56,7 +56,7 @@ class AddCitaFragment : Fragment() {
         setupListeners()
         observeViewModel()
         
-        // Restaurar estado visual tras cambios de configuración (ej. rotación)
+
         restoreUIState()
     }
 
@@ -102,7 +102,7 @@ class AddCitaFragment : Fragment() {
                         binding.cgTreatments.addView(chip)
                     }
                 } else {
-                    // Fallback por defecto si no tiene especialidades configuradas
+
                     viewModel.selectTreatment(getString(R.string.sesion_fisio_default))
                     binding.tvSelectDateLabel.visibility = View.VISIBLE
                     binding.btnOpenCalendar.visibility = View.VISIBLE
@@ -144,7 +144,7 @@ class AddCitaFragment : Fragment() {
                             binding.cgTimeSlots.visibility = View.VISIBLE
                             binding.tvNoSlotsError.visibility = View.GONE
                             
-                            // Re-seleccionar chip si ya había uno marcado (ej. al rotar)
+                            // Reseleccionar si ya había uno marcado
                             viewModel.selectedTime?.let { selected ->
                                 for (i in 0 until binding.cgTimeSlots.childCount) {
                                     val chip = binding.cgTimeSlots.getChildAt(i) as Chip

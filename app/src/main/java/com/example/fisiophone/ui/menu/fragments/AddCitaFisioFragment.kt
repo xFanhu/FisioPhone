@@ -96,7 +96,7 @@ class AddCitaFisioFragment : Fragment() {
                     binding.tvSelectPhysioLabel.visibility = View.VISIBLE
                     binding.tilPhysioSelector.visibility = View.VISIBLE
                 } else if (viewModel.selectedPhysio != null) {
-                    // For fisios, physio is already auto-selected
+                    // Cuando eres usuario fisio, el fisio se autoselecciona
                     showTreatments(viewModel.selectedPhysio!!.treatments)
                 }
             }
@@ -155,7 +155,7 @@ class AddCitaFisioFragment : Fragment() {
                         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, names)
                         binding.autoCompletePatient.setAdapter(adapter)
                         
-                        // Edit Mode pre-fill
+
                         if (viewModel.isEditMode && viewModel.selectedPatient != null) {
                             binding.autoCompletePatient.setText("${viewModel.selectedPatient!!.nombre} ${viewModel.selectedPatient!!.apellidos}", false)
                         }
@@ -168,7 +168,7 @@ class AddCitaFisioFragment : Fragment() {
                         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, names)
                         binding.autoCompletePhysio.setAdapter(adapter)
 
-                        // Edit Mode pre-fill
+
                         if (viewModel.isEditMode && viewModel.selectedPhysio != null) {
                             binding.autoCompletePhysio.setText("${viewModel.selectedPhysio!!.nombre} ${viewModel.selectedPhysio!!.apellidos}", false)
                             showTreatments(viewModel.selectedPhysio!!.treatments)
@@ -236,7 +236,7 @@ class AddCitaFisioFragment : Fragment() {
         val workDays = viewModel.workDays.value
         
         val validators = mutableListOf<CalendarConstraints.DateValidator>()
-        validators.add(DateValidatorPointForward.now()) // No pasado
+        validators.add(DateValidatorPointForward.now()) // Dias pasados
         validators.add(WorkingDaysValidator(workDays))  // Solo días laborables
         
         val constraints = CalendarConstraints.Builder()

@@ -102,11 +102,11 @@ class CitaAdapter(
             }
 
             ivDeleteCita.setOnClickListener { 
-                // Evitar que el clic se propague a la tarjeta
+
                 onDeleteClick(cita) 
             }
             btnFinishCita.setOnClickListener { 
-                // Evitar que el clic se propague a la tarjeta
+
                 onFinishClick(cita) 
             }
             itemView.setOnClickListener { onItemClick(cita) }
