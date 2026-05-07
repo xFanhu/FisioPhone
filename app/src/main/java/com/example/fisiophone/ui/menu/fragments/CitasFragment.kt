@@ -108,13 +108,19 @@ class CitasFragment : Fragment() {
             .commit()
     }
 
+    private fun updateDashboardVisibility() {
+        val isPatient = viewModel.isPatient.value
+        val citas = viewModel.citas.value
+        binding.cardDashboard.visibility = if (isPatient || citas.isEmpty()) View.GONE else View.VISIBLE
+    }
+
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 
                 launch {
                     viewModel.isPatient.collect { isPatient ->
-                        binding.cardDashboard.visibility = if (isPatient) View.GONE else View.VISIBLE
+                        updateDashboardVisibility()
                         binding.cardDatePicker.visibility = if (isPatient) View.GONE else View.VISIBLE
                         citaAdapter.updateRole(isPatient)
                         
@@ -153,18 +159,17 @@ class CitasFragment : Fragment() {
                 launch {
                     viewModel.citas.collect { citas ->
                         val isPatient = viewModel.isPatient.value
+                        updateDashboardVisibility()
                         
                         if (citas.isEmpty()) {
                             binding.layoutEmptyCitas.visibility = View.VISIBLE
                             citaAdapter.updateList(emptyList())
-                            binding.cardDashboard.visibility = View.GONE
                         } else {
                             binding.layoutEmptyCitas.visibility = View.GONE
                             citaAdapter.updateList(citas)
                             
                             // Actualizar Dashboard si es Fisio
                             if (!isPatient) {
-                                binding.cardDashboard.visibility = View.VISIBLE
                                 val pending = citas.count { it.status == "booked" }
                                 val done = citas.count { it.status == "done" }
                                 binding.tvPendingCount.text = pending.toString()
@@ -191,8 +196,6 @@ class CitasFragment : Fragment() {
                                     binding.dashboardDivider.visibility = View.GONE
                                     binding.layoutNextAppointment.visibility = View.GONE
                                 }
-                            } else {
-                                binding.cardDashboard.visibility = View.GONE
                             }
                         }
                     }
