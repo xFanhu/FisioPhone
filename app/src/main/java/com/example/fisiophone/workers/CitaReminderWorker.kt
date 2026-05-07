@@ -7,7 +7,7 @@ import com.example.fisiophone.data.settings.SettingsManager
 import com.example.fisiophone.notifications.NotificationHelper
 import kotlinx.coroutines.flow.first
 
-class AppointmentReminderWorker(
+class CitaReminderWorker(
     private val context: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {

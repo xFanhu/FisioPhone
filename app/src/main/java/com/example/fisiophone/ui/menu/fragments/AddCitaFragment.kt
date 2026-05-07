@@ -29,7 +29,7 @@ import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import java.util.concurrent.TimeUnit
-import com.example.fisiophone.workers.AppointmentReminderWorker
+import com.example.fisiophone.workers.CitaReminderWorker
 
 /**
  * Fragmento para que los pacientes soliciten una nueva cita.
@@ -222,7 +222,7 @@ class AddCitaFragment : Fragment() {
                     .putString("time", timeStr)
                     .build()
 
-                val workRequest = OneTimeWorkRequestBuilder<AppointmentReminderWorker>()
+                val workRequest = OneTimeWorkRequestBuilder<CitaReminderWorker>()
                     .setInitialDelay(delay, TimeUnit.MILLISECONDS)
                     .setInputData(data)
                     .build()

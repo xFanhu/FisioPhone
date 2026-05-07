@@ -15,6 +15,12 @@ import com.example.fisiophone.data.settings.SettingsManager
 import kotlinx.coroutines.flow.first
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +30,17 @@ class MainActivity : AppCompatActivity() {
     private var userRole: String = "paciente"
     private var appointmentsListener: ListenerRegistration? = null
     private var isInitialLoad = true
+    
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // Permiso concedido, las notificaciones funcionarán
+        } else {
+            // Permiso denegado, podrías mostrar un mensaje al usuario
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +50,27 @@ class MainActivity : AppCompatActivity() {
         setupToolbar()
         setupBottomNavigation()
         fetchUserRole()
+        checkNotificationPermission()
+
         
         // Show Home/Citas by default
         if (savedInstanceState == null) {
             binding.bottomNavigation.selectedItemId = R.id.nav_citas
         }
     }
+
+    private fun checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
+
 
     private fun setupToolbar() {
         binding.topAppBar.setNavigationOnClickListener {
