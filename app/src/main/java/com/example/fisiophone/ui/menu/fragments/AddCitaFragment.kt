@@ -176,10 +176,9 @@ class AddCitaFragment : Fragment() {
                         result.onSuccess {
                             scheduleReminder() // Programar notificación local
                             Toast.makeText(requireContext(), getString(R.string.cita_exito), Toast.LENGTH_LONG).show()
-                            // Volver a la lista de citas
-                            parentFragmentManager.beginTransaction()
-                                .replace(com.example.fisiophone.R.id.fragmentHost, CitasFragment())
-                                .commit()
+                            // Volver a la lista de citas seleccionando el ítem en el BottomNav
+                            val bottomNav = requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
+                            bottomNav.selectedItemId = R.id.nav_citas
                         }.onFailure { e ->
                             when (e.message) {
                                 "NO_WORKING_DAY" -> Toast.makeText(requireContext(), getString(R.string.error_dia_no_laborable), Toast.LENGTH_LONG).show()
