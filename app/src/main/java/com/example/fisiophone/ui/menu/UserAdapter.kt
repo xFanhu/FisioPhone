@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fisiophone.R
+import com.example.fisiophone.databinding.ItemUserBinding
 import com.google.android.material.button.MaterialButton
 
 data class User(
@@ -34,8 +35,10 @@ class UserAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
-        return UserViewHolder(view)
+        val binding = ItemUserBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return UserViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
@@ -45,56 +48,50 @@ class UserAdapter(
 
     override fun getItemCount(): Int = userList.size
 
-    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val tvUserName: TextView = itemView.findViewById(R.id.tvUserName)
-        private val tvUserRole: TextView = itemView.findViewById(R.id.tvUserRole)
-        private val tvUserEmail: TextView = itemView.findViewById(R.id.tvUserEmail)
-        private val tvUserDni: TextView = itemView.findViewById(R.id.tvUserDni)
-        private val tvUserPhone: TextView = itemView.findViewById(R.id.tvUserPhone)
-        private val btnChangeRole: MaterialButton = itemView.findViewById(R.id.btnChangeRole)
-        private val ivUserPhoto: android.widget.ImageView = itemView.findViewById(R.id.ivUserPhoto)
-
+    inner class UserViewHolder(private val binding: ItemUserBinding) : 
+        RecyclerView.ViewHolder(binding.root) {
+        
         fun bind(user: User) {
-            tvUserName.text = "${user.nombre} ${user.apellidos}"
-            tvUserRole.text = user.role.replaceFirstChar { it.uppercase() }
-            tvUserEmail.text = user.email
-            tvUserDni.text = "${itemView.context.getString(R.string.DNI)}: ${user.dni}"
+            binding.tvUserName.text = "${user.nombre} ${user.apellidos}"
+            binding.tvUserRole.text = user.role.replaceFirstChar { it.uppercase() }
+            binding.tvUserEmail.text = user.email
+            binding.tvUserDni.text = "${itemView.context.getString(R.string.DNI)}: ${user.dni}"
             
             if (!user.photoUrl.isNullOrEmpty()) {
-                ivUserPhoto.setPadding(0, 0, 0, 0)
-                ivUserPhoto.imageTintList = null
+                binding.ivUserPhoto.setPadding(0, 0, 0, 0)
+                binding.ivUserPhoto.imageTintList = null
                 com.bumptech.glide.Glide.with(itemView.context)
                     .load(user.photoUrl)
                     .circleCrop()
                     .placeholder(R.drawable.ic_profile)
-                    .into(ivUserPhoto)
+                    .into(binding.ivUserPhoto)
             } else {
-                ivUserPhoto.setPadding(24, 24, 24, 24)
-                ivUserPhoto.setImageResource(R.drawable.ic_profile)
-                ivUserPhoto.imageTintList = android.content.res.ColorStateList.valueOf(
+                binding.ivUserPhoto.setPadding(24, 24, 24, 24)
+                binding.ivUserPhoto.setImageResource(R.drawable.ic_profile)
+                binding.ivUserPhoto.imageTintList = android.content.res.ColorStateList.valueOf(
                     itemView.context.getColor(R.color.azul)
                 )
             }
 
             if (user.telefono.isNotEmpty()) {
-                tvUserPhone.visibility = View.VISIBLE
-                tvUserPhone.text = "${itemView.context.getString(R.string.telefono)}: ${user.telefono}"
+                binding.tvUserPhone.visibility = View.VISIBLE
+                binding.tvUserPhone.text = "${itemView.context.getString(R.string.telefono)}: ${user.telefono}"
             } else {
-                tvUserPhone.visibility = View.GONE
+                binding.tvUserPhone.visibility = View.GONE
             }
 
             if (user.role == "fisioterapeuta") {
-                btnChangeRole.setText(R.string.hacer_paciente)
+                binding.btnChangeRole.setText(R.string.hacer_paciente)
             } else {
-                btnChangeRole.setText(R.string.hacer_fisioterapeuta)
+                binding.btnChangeRole.setText(R.string.hacer_fisioterapeuta)
             }
 
             // Ocultar botón si es administrador
             if (!showActions || user.role == "administrador") {
-                btnChangeRole.visibility = View.GONE
+                binding.btnChangeRole.visibility = View.GONE
             } else {
-                btnChangeRole.visibility = View.VISIBLE
-                btnChangeRole.setOnClickListener {
+                binding.btnChangeRole.visibility = View.VISIBLE
+                binding.btnChangeRole.setOnClickListener {
                     onRoleChangeClick(user)
                 }
             }

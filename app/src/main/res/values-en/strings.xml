@@ -232,4 +232,15 @@
     <string name="error_email_olvido">Please enter your email above to reset your password.</string>
     <string name="separador_o">or</string>
 
+    <string name="editar_anotacion">Edit Note</string>
+    <string name="borrar_anotacion">Delete Note</string>
+    <string name="confirmar_borrado_titulo">Delete note?</string>
+    <string name="confirmar_borrado_mensaje">This action cannot be undone. Are you sure you want to delete this clinical note?</string>
+    <string name="eliminar">Delete</string>
+    <string name="editar">Edit</string>
+    <string name="opciones_anotacion">What would you like to do with this note?</string>
+    <string name="pregunta_editar">Do you want to edit this note?</string>
+    <string name="pregunta_borrar">Do you want to delete this note?</string>
+    <string name="anotacion_eliminada">Note deleted</string>
+    <string name="anotacion_actualizada">Note updated</string>
 </resources>

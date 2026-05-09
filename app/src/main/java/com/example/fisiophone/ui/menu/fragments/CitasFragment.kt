@@ -87,8 +87,7 @@ class CitasFragment : Fragment() {
         binding.btnEmptyAddCita.setOnClickListener {
             if (viewModel.isPatient.value) {
                 (activity as? MainActivity)?.let { mainActivity ->
-                    val bottomNav = mainActivity.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
-                    bottomNav?.selectedItemId = R.id.nav_add
+                    mainActivity.binding.bottomNavigation.selectedItemId = R.id.nav_add
                 }
             } else {
                 openAddCitaFisio()

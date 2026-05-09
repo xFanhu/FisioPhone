@@ -28,6 +28,7 @@ class HistoryFragment : Fragment() {
     private lateinit var adapter: HistoriaAdapter
     private var patientId: String? = null
     private var isOwnProfile: Boolean = false
+    private var userRole: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,13 +48,132 @@ class HistoryFragment : Fragment() {
         setupButtons()
         
         if (patientId != null) {
+            fetchUserRole()
             fetchHistory()
         }
     }
 
+    private fun fetchUserRole() {
+        val currentUid = auth.currentUser?.uid ?: return
+        db.collection("users").document(currentUid).get().addOnSuccessListener { doc ->
+            userRole = doc.getString("role")
+        }
+    }
+
     private fun setupRecyclerView() {
-        adapter = HistoriaAdapter(emptyList())
+        adapter = HistoriaAdapter(emptyList()) { historia ->
+            if (userRole == "administrador") {
+                showAdminOptionsDialog(historia)
+            }
+        }
         binding.rvHistoria.adapter = adapter
+    }
+
+    private fun showAdminOptionsDialog(historia: HistoriaClinica) {
+        val options = arrayOf(getString(R.string.editar), getString(R.string.eliminar))
+        
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.opciones_anotacion)
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> confirmEditHistory(historia)
+                    1 -> confirmDeleteHistory(historia)
+                }
+            }
+            .show()
+    }
+
+    private fun confirmEditHistory(historia: HistoriaClinica) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.editar)
+            .setMessage(R.string.pregunta_editar)
+            .setPositiveButton(R.string.si) { _, _ ->
+                showEditHistoryDialog(historia)
+            }
+            .setNegativeButton(R.string.no, null)
+            .show()
+    }
+
+    private fun confirmDeleteHistory(historia: HistoriaClinica) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.eliminar)
+            .setMessage(R.string.pregunta_borrar)
+            .setPositiveButton(R.string.si) { _, _ ->
+                deleteHistoryNote(historia)
+            }
+            .setNegativeButton(R.string.no, null)
+            .show()
+    }
+
+    private fun deleteHistoryNote(historia: HistoriaClinica) {
+        val targetUid = patientId ?: return
+        db.collection("users").document(targetUid)
+            .collection("historias_clinicas")
+            .document(historia.id)
+            .delete()
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(), R.string.anotacion_eliminada, Toast.LENGTH_SHORT).show()
+                fetchHistory()
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), R.string.error_generico, Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun showEditHistoryDialog(historia: HistoriaClinica) {
+        val context = requireContext()
+        val input = TextInputEditText(context).apply {
+            hint = context.getString(R.string.escribe_detalles)
+            setText(historia.note)
+            setLines(5)
+            maxLines = 10
+            gravity = android.view.Gravity.TOP or android.view.Gravity.START
+        }
+
+        val container = android.widget.FrameLayout(context)
+        val params = android.widget.FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(
+                (24 * resources.displayMetrics.density).toInt(),
+                (16 * resources.displayMetrics.density).toInt(),
+                (24 * resources.displayMetrics.density).toInt(),
+                (16 * resources.displayMetrics.density).toInt()
+            )
+        }
+        input.layoutParams = params
+        container.addView(input)
+
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle(R.string.editar_anotacion)
+            .setView(container)
+            .setPositiveButton(R.string.guardar_cambios) { dialog, _ ->
+                val newText = input.text.toString().trim()
+                if (newText.isNotEmpty()) {
+                    dialog.dismiss()
+                    updateHistoryNote(historia, newText)
+                } else {
+                    Toast.makeText(context, getString(R.string.nota_vacia), Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun updateHistoryNote(historia: HistoriaClinica, newText: String) {
+        val targetUid = patientId ?: return
+        db.collection("users").document(targetUid)
+            .collection("historias_clinicas")
+            .document(historia.id)
+            .update("note", newText)
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(), R.string.anotacion_actualizada, Toast.LENGTH_SHORT).show()
+                fetchHistory()
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), R.string.error_generico, Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun setupButtons() {

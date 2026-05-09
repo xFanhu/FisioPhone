@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fisiophone.R
+import com.example.fisiophone.databinding.ItemHistoriaBinding
 
 data class HistoriaClinica(
     val id: String,
@@ -16,7 +17,8 @@ data class HistoriaClinica(
 )
 
 class HistoriaAdapter(
-    private var historias: List<HistoriaClinica>
+    private var historias: List<HistoriaClinica>,
+    private val onItemClick: (HistoriaClinica) -> Unit
 ) : RecyclerView.Adapter<HistoriaAdapter.HistoriaViewHolder>() {
 
     fun updateList(newList: List<HistoriaClinica>) {
@@ -25,8 +27,10 @@ class HistoriaAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoriaViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_historia, parent, false)
-        return HistoriaViewHolder(view)
+        val binding = ItemHistoriaBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return HistoriaViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: HistoriaViewHolder, position: Int) {
@@ -35,15 +39,17 @@ class HistoriaAdapter(
 
     override fun getItemCount(): Int = historias.size
 
-    inner class HistoriaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val tvPhysioName: TextView = itemView.findViewById(R.id.tvPhysioName)
-        private val tvDate: TextView = itemView.findViewById(R.id.tvDate)
-        private val tvNote: TextView = itemView.findViewById(R.id.tvNote)
+    inner class HistoriaViewHolder(private val binding: ItemHistoriaBinding) : 
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(historia: HistoriaClinica) {
-            tvPhysioName.text = historia.physioName
-            tvDate.text = historia.date
-            tvNote.text = historia.note
+            binding.tvPhysioName.text = historia.physioName
+            binding.tvDate.text = historia.date
+            binding.tvNote.text = historia.note
+            
+            binding.root.setOnClickListener {
+                onItemClick(historia)
+            }
         }
     }
 }

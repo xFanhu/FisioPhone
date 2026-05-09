@@ -233,4 +233,15 @@
     <string name="separador_o">o</string>
 
 
+    <string name="editar_anotacion">Editar Anotación</string>
+    <string name="borrar_anotacion">Borrar Anotación</string>
+    <string name="confirmar_borrado_titulo">¿Borrar anotación?</string>
+    <string name="confirmar_borrado_mensaje">Esta acción no se puede deshacer. ¿Estás seguro de que quieres eliminar esta nota clínica?</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="editar">Editar</string>
+    <string name="opciones_anotacion">¿Qué quieres hacer con esta anotación?</string>
+    <string name="pregunta_editar">¿Quieres editar esta anotación?</string>
+    <string name="pregunta_borrar">¿Quieres borrar esta anotación?</string>
+    <string name="anotacion_eliminada">Anotación eliminada</string>
+    <string name="anotacion_actualizada">Anotación actualizada</string>
 </resources>

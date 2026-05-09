@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fisiophone.R
+import com.example.fisiophone.databinding.ItemTeamMemberBinding
 import com.example.fisiophone.ui.menu.User
 
 class TeamAdapter(
@@ -19,8 +20,10 @@ class TeamAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_team_member, parent, false)
-        return TeamViewHolder(view)
+        val binding = ItemTeamMemberBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return TeamViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
@@ -30,27 +33,25 @@ class TeamAdapter(
 
     override fun getItemCount(): Int = teamList.size
 
-    inner class TeamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val tvTeamMemberName: TextView = itemView.findViewById(R.id.tvTeamMemberName)
-        private val tvTeamMemberEmail: TextView = itemView.findViewById(R.id.tvTeamMemberEmail)
-        private val ivTeamMemberPhoto: android.widget.ImageView = itemView.findViewById(R.id.ivTeamMemberPhoto)
+    inner class TeamViewHolder(private val binding: ItemTeamMemberBinding) : 
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(user: User) {
-            tvTeamMemberName.text = "${user.nombre} ${user.apellidos}"
-            tvTeamMemberEmail.text = user.email
+            binding.tvTeamMemberName.text = "${user.nombre} ${user.apellidos}"
+            binding.tvTeamMemberEmail.text = user.email
             
             if (!user.photoUrl.isNullOrEmpty()) {
-                ivTeamMemberPhoto.setPadding(0, 0, 0, 0)
-                ivTeamMemberPhoto.imageTintList = null
+                binding.ivTeamMemberPhoto.setPadding(0, 0, 0, 0)
+                binding.ivTeamMemberPhoto.imageTintList = null
                 com.bumptech.glide.Glide.with(itemView.context)
                     .load(user.photoUrl)
                     .circleCrop()
                     .placeholder(R.drawable.ic_profile)
-                    .into(ivTeamMemberPhoto)
+                    .into(binding.ivTeamMemberPhoto)
             } else {
-                ivTeamMemberPhoto.setPadding(32, 32, 32, 32)
-                ivTeamMemberPhoto.setImageResource(R.drawable.ic_profile)
-                ivTeamMemberPhoto.imageTintList = android.content.res.ColorStateList.valueOf(
+                binding.ivTeamMemberPhoto.setPadding(32, 32, 32, 32)
+                binding.ivTeamMemberPhoto.setImageResource(R.drawable.ic_profile)
+                binding.ivTeamMemberPhoto.imageTintList = android.content.res.ColorStateList.valueOf(
                     itemView.context.getColor(R.color.azul)
                 )
             }

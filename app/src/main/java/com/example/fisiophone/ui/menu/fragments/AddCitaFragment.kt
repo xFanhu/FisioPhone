@@ -12,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.fisiophone.R
+import com.example.fisiophone.ui.menu.MainActivity
 import com.example.fisiophone.databinding.FragmentAddCitaBinding
 import com.google.android.material.chip.Chip
 import com.google.android.material.datepicker.CalendarConstraints
@@ -177,8 +178,7 @@ class AddCitaFragment : Fragment() {
                             scheduleReminder() // Programar notificación local
                             Toast.makeText(requireContext(), getString(R.string.cita_exito), Toast.LENGTH_LONG).show()
                             // Volver a la lista de citas seleccionando el ítem en el BottomNav
-                            val bottomNav = requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
-                            bottomNav.selectedItemId = R.id.nav_citas
+                            (requireActivity() as? MainActivity)?.binding?.bottomNavigation?.selectedItemId = R.id.nav_citas
                         }.onFailure { e ->
                             when (e.message) {
                                 "NO_WORKING_DAY" -> Toast.makeText(requireContext(), getString(R.string.error_dia_no_laborable), Toast.LENGTH_LONG).show()

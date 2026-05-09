@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp">
+    android:clickable="true"
+    android:focusable="true">
 
     <TextView
         android:id="@+id/tvPatientsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/anton"
         android:text="@string/pacientes"
         android:textColor="@color/card_text"
@@ -21,6 +24,7 @@
         android:id="@+id/cvSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
         android:layout_marginTop="20dp"
         app:cardCornerRadius="28dp"
         app:cardElevation="2dp"

@@ -6,15 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fisiophone.databinding.ActivityManageUsersBinding
 import com.example.fisiophone.R
+import com.example.fisiophone.ui.menu.User
+import com.example.fisiophone.ui.menu.UserAdapter
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ManageUsersActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var searchView: SearchView
-    private lateinit var topAppBar: MaterialToolbar
+    private lateinit var binding: ActivityManageUsersBinding
     private lateinit var userAdapter: UserAdapter
     private val db = FirebaseFirestore.getInstance()
     
@@ -22,21 +23,18 @@ class ManageUsersActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_manage_users)
+        binding = ActivityManageUsersBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        topAppBar = findViewById(R.id.topAppBar)
-        searchView = findViewById(R.id.searchView)
-        recyclerView = findViewById(R.id.recyclerViewUsers)
-
-        topAppBar.setNavigationOnClickListener {
+        binding.topAppBar.setNavigationOnClickListener {
             finish()
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerViewUsers.layoutManager = LinearLayoutManager(this)
         userAdapter = UserAdapter(emptyList(), onRoleChangeClick = { userToChange ->
             changeUserRole(userToChange)
         })
-        recyclerView.adapter = userAdapter
+        binding.recyclerViewUsers.adapter = userAdapter
 
         setupSearchView()
         fetchUsers()
@@ -69,7 +67,7 @@ class ManageUsersActivity : AppCompatActivity() {
     }
 
     private fun setupSearchView() {
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 filterList(query)
                 return true
@@ -109,7 +107,7 @@ class ManageUsersActivity : AppCompatActivity() {
                 val index = allUsers.indexOfFirst { it.id == user.id }
                 if (index != -1) {
                     allUsers[index].role = newRole
-                    filterList(searchView.query.toString())
+                    filterList(binding.searchView.query.toString())
                 }
             }
             .addOnFailureListener {
