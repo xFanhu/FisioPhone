@@ -49,6 +49,7 @@ class CitasFragment : Fragment() {
         
         setupRecyclerView()
         observeViewModel()
+        viewModel.fetchData()
     }
 
     private fun setupRecyclerView() {

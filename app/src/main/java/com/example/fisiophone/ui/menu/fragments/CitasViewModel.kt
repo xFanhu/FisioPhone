@@ -56,7 +56,7 @@ class CitasViewModel : ViewModel() {
     /**
      * Obtiene las citas de Firestore filtrando por rol y fecha si aplica.
      */
-    private fun fetchData() {
+    fun fetchData() {
         val uid = auth.currentUser?.uid ?: return
         
         viewModelScope.launch {

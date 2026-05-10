@@ -153,7 +153,7 @@ class AddCitaFisioViewModel : ViewModel() {
                     selectedPatient = _patients.value.find { it.id == patientId }
                     selectedPhysio = _physios.value.find { it.id == physioId }
                     selectedTreatment = treatment
-                    selectedTime = timeStr
+                    selectedTime = null
 
                     val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                     try {
@@ -197,7 +197,6 @@ class AddCitaFisioViewModel : ViewModel() {
 
     fun selectTreatment(treatment: String) {
         selectedTreatment = treatment
-        selectedDate = null
         selectedTime = null
         _availableSlots.value = null
     }
@@ -238,7 +237,7 @@ class AddCitaFisioViewModel : ViewModel() {
     }
 
 
-    private fun fetchAvailableSlots(date: Date, skipCurrentTimeCheck: Boolean) {
+    fun fetchAvailableSlots(date: Date, skipCurrentTimeCheck: Boolean) {
         val physioId = selectedPhysio?.id ?: return
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val dateStr = sdf.format(date)

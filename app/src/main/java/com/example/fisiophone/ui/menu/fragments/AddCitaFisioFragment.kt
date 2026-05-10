@@ -79,10 +79,14 @@ class AddCitaFisioFragment : Fragment() {
             val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             binding.tvSelectedDateDisplay.text = getString(R.string.dia_seleccionado, sdf.format(viewModel.selectedDate!!))
             binding.tvSelectedDateDisplay.visibility = View.VISIBLE
+            
+            // Aseguramos que los controles de fecha y hora sean visibles en edición
+            binding.tvSelectDateLabel.visibility = View.VISIBLE
+            binding.btnOpenCalendar.visibility = View.VISIBLE
         }
-        if (viewModel.selectedTime != null) {
-            binding.btnConfirmBooking.visibility = View.VISIBLE
-        }
+        
+        // El botón de confirmar solo se ve si hay una hora elegida
+        binding.btnConfirmBooking.visibility = if (viewModel.selectedTime != null) View.VISIBLE else View.GONE
     }
 
     private fun setupListeners() {
@@ -134,6 +138,11 @@ class AddCitaFisioFragment : Fragment() {
                         viewModel.selectTreatment(treatment)
                         binding.tvSelectDateLabel.visibility = View.VISIBLE
                         binding.btnOpenCalendar.visibility = View.VISIBLE
+                        
+                        // Si ya tenemos una fecha (en modo edición), cargamos las horas directamente
+                        viewModel.selectedDate?.let { date ->
+                            viewModel.fetchAvailableSlots(date, skipCurrentTimeCheck = true)
+                        }
                     }
                 }
                 binding.cgTreatments.addView(chip)
@@ -210,6 +219,20 @@ class AddCitaFisioFragment : Fragment() {
                     viewModel.isLoading.collect { isLoading ->
                         binding.pbLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
                         binding.btnConfirmBooking.isEnabled = !isLoading
+                        
+                        // Si termina de cargar y estamos en edición, forzamos la actualización de la UI
+                        if (!isLoading && viewModel.isEditMode) {
+                            restoreUIState()
+                            
+                            // Forzamos el texto en los autocompletables por si ya se habían cargado las listas antes
+                            viewModel.selectedPatient?.let {
+                                binding.autoCompletePatient.setText("${it.nombre} ${it.apellidos}", false)
+                            }
+                            viewModel.selectedPhysio?.let {
+                                binding.autoCompletePhysio.setText("${it.nombre} ${it.apellidos}", false)
+                                showTreatments(it.treatments)
+                            }
+                        }
                     }
                 }
 
