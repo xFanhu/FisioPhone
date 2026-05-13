@@ -25,8 +25,7 @@ class CitaAdapter(
     private var citas: List<Cita>,
     private var isPatient: Boolean,
     private val onItemClick: (Cita) -> Unit = {},
-    private val onDeleteClick: (Cita) -> Unit,
-    private val onFinishClick: (Cita) -> Unit = {} // Nuevo callback
+    private val onDeleteClick: (Cita) -> Unit
 ) : RecyclerView.Adapter<CitaAdapter.CitaViewHolder>() {
 
     fun updateRole(newIsPatient: Boolean) {
@@ -75,17 +74,9 @@ class CitaAdapter(
             if (cita.status == "done") {
                 binding.tvCitaStatus.text = context.getString(R.string.estado_realizada)
                 binding.tvCitaStatus.setTextColor(android.graphics.Color.GRAY)
-                binding.btnFinishCita.visibility = View.GONE
             } else {
                 binding.tvCitaStatus.text = context.getString(R.string.estado_confirmada)
                 binding.tvCitaStatus.setTextColor(context.getColor(R.color.azul))
-                
-                // Mostrar botón "Finalizar" solo si es FISIO y es el momento (hoy o pasado)
-                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
-                val now = sdf.format(java.util.Date())
-                val isTimeToShowFinish = !isPatient && "${cita.date} ${cita.time}" <= now
-                
-                binding.btnFinishCita.visibility = if (isTimeToShowFinish) View.VISIBLE else View.GONE
             }
 
             if (isPatient) {
@@ -98,9 +89,6 @@ class CitaAdapter(
 
             binding.ivDeleteCita.setOnClickListener { 
                 onDeleteClick(cita) 
-            }
-            binding.btnFinishCita.setOnClickListener { 
-                onFinishClick(cita) 
             }
             itemView.setOnClickListener { onItemClick(cita) }
         }

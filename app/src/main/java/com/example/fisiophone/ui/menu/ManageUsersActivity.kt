@@ -99,19 +99,29 @@ class ManageUsersActivity : AppCompatActivity() {
     private fun changeUserRole(user: User) {
         val newRole = if (user.role == "fisioterapeuta") "paciente" else "fisioterapeuta"
         
-        db.collection("users").document(user.id)
-            .update("role", newRole)
-            .addOnSuccessListener {
-                Toast.makeText(this, getString(R.string.rol_actualizado, newRole), Toast.LENGTH_SHORT).show()
-                // Update local list to reflect changes immediately
-                val index = allUsers.indexOfFirst { it.id == user.id }
-                if (index != -1) {
-                    allUsers[index].role = newRole
-                    filterList(binding.searchView.query.toString())
-                }
+        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.confirmar_cambio_rol_titulo))
+            .setMessage(getString(R.string.confirmar_cambio_rol_mensaje, newRole))
+            .setPositiveButton(getString(R.string.si)) { dialog, _ ->
+                dialog.dismiss()
+                db.collection("users").document(user.id)
+                    .update("role", newRole)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, getString(R.string.rol_actualizado, newRole), Toast.LENGTH_SHORT).show()
+                        // Update local list to reflect changes immediately
+                        val index = allUsers.indexOfFirst { it.id == user.id }
+                        if (index != -1) {
+                            allUsers[index].role = newRole
+                            filterList(binding.searchView.query.toString())
+                        }
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, getString(R.string.error_actualizando_rol), Toast.LENGTH_SHORT).show()
+                    }
             }
-            .addOnFailureListener {
-                Toast.makeText(this, getString(R.string.error_actualizando_rol), Toast.LENGTH_SHORT).show()
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                dialog.dismiss()
             }
+            .show()
     }
 }

@@ -32,8 +32,13 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCitasTitle"
+        app:layout_constraintTop_toBottomOf="@id/cardDatePicker"
         app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -165,6 +170,7 @@
                         android:alpha="0.5" />
                 </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -179,7 +185,7 @@
         app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardDashboard"
+        app:layout_constraintTop_toBottomOf="@id/tvCitasTitle"
         app:strokeWidth="0dp">
 
         <LinearLayout
@@ -223,7 +229,7 @@
         android:paddingHorizontal="16dp"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardDatePicker"
+        app:layout_constraintTop_toBottomOf="@id/cardDashboard"
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_cita" />
 
@@ -237,7 +243,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardDatePicker">
+        app:layout_constraintTop_toBottomOf="@id/cardDashboard">
 
         <ImageView
             android:layout_width="120dp"
@@ -303,7 +309,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardDatePicker" />
+        app:layout_constraintTop_toBottomOf="@id/cardDashboard" />
 
     <!-- Fisios/Admins -->
     <com.google.android.material.card.MaterialCardView

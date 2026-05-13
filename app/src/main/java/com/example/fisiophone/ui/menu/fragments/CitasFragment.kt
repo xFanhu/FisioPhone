@@ -65,9 +65,6 @@ class CitasFragment : Fragment() {
             },
             onDeleteClick = { cita ->
                 confirmDeleteCita(cita)
-            },
-            onFinishClick = { cita ->
-                confirmFinishCita(cita)
             }
         )
         binding.rvCitas.adapter = citaAdapter
@@ -91,7 +88,10 @@ class CitasFragment : Fragment() {
                     mainActivity.binding.bottomNavigation.selectedItemId = R.id.nav_add
                 }
             } else {
-                openAddCitaFisio()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentHost, ScheduleFragment())
+                    .addToBackStack(null)
+                    .commit()
             }
         }
         

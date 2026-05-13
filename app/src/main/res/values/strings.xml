@@ -244,4 +244,7 @@
     <string name="pregunta_borrar">¿Quieres borrar esta anotación?</string>
     <string name="anotacion_eliminada">Anotación eliminada</string>
     <string name="anotacion_actualizada">Anotación actualizada</string>
+
+    <string name="confirmar_cambio_rol_titulo">Confirmar cambio de rol</string>
+    <string name="confirmar_cambio_rol_mensaje">Al cambiar el rol del usuario a %s, se podrían borrar o desvincular registros y citas asociadas a su rol anterior. ¿Estás seguro de que deseas continuar?</string>
 </resources>
