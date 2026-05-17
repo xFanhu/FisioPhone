@@ -99,6 +99,7 @@ class NewUserActivity : AppCompatActivity() {
                                 }
                                 .addOnFailureListener { e ->
                                     setLoading(false)
+                                    auth.currentUser?.delete()
                                     Toast.makeText(this, getString(R.string.error_guardando_datos, e.message), Toast.LENGTH_SHORT).show()
                                 }
                         }

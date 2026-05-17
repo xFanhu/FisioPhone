@@ -66,11 +66,25 @@ class ConfigFragment : Fragment() {
             Language(getString(R.string.idioma_en), "en")
         )
         
-        val adapter = android.widget.ArrayAdapter(
+        val adapter = object : android.widget.ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_dropdown_item_1line,
             availableLanguages.map { it.name }
-        )
+        ) {
+            override fun getFilter(): android.widget.Filter {
+                return object : android.widget.Filter() {
+                    override fun performFiltering(constraint: CharSequence?): FilterResults {
+                        val results = FilterResults()
+                        results.values = availableLanguages.map { it.name }
+                        results.count = availableLanguages.size
+                        return results
+                    }
+                    override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                        notifyDataSetChanged()
+                    }
+                }
+            }
+        }
         binding.autoCompleteLanguage.setAdapter(adapter)
     }
 

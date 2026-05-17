@@ -11,12 +11,12 @@
         android:id="@+id/tvCitasTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
         android:fontFamily="@font/anton"
         android:text="@string/mis_citas"
         android:textColor="@color/card_text"
-        android:textSize="28sp"
+        android:textSize="@dimen/text_size_xlarge"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,12 +24,12 @@
         android:id="@+id/cardDashboard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_medium"
         android:visibility="gone"
         app:cardBackgroundColor="@color/azul"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardDatePicker"
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="20dp"
+                android:padding="@dimen/spacing_large"
                 android:weightSum="2">
 
                 <LinearLayout
@@ -60,7 +60,7 @@
                         android:layout_height="wrap_content"
                         tools:text="0"
                         android:textColor="@android:color/white"
-                        android:textSize="24sp"
+                        android:textSize="@dimen/text_size_xxlarge"
                         android:textStyle="bold" />
 
                     <TextView
@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/pendientes"
                         android:textColor="@android:color/white"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/text_size_small"
                         android:alpha="0.8" />
                 </LinearLayout>
 
@@ -92,7 +92,7 @@
                         android:layout_height="wrap_content"
                         tools:text="0"
                         android:textColor="@android:color/white"
-                        android:textSize="24sp"
+                        android:textSize="@dimen/text_size_xxlarge"
                         android:textStyle="bold" />
 
                     <TextView
@@ -101,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/realizadas"
                         android:textColor="@android:color/white"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/text_size_small"
                         android:alpha="0.8" />
                 </LinearLayout>
 
@@ -113,7 +113,7 @@
                 android:layout_height="1dp"
                 android:background="@android:color/white"
                 android:alpha="0.2"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="@dimen/spacing_large"
                 android:visibility="gone" />
 
             <LinearLayout
@@ -121,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp"
+                android:padding="@dimen/spacing_large"
                 android:visibility="gone">
 
                 <TextView
@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/proxima_cita_label"
                     android:textColor="@android:color/white"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/text_size_small"
                     android:textAllCaps="true"
                     android:letterSpacing="0.1"
                     android:alpha="0.7" />
@@ -138,7 +138,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/spacing_small"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -147,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         tools:text="10:00"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/text_size_large"
                         android:textStyle="bold" />
 
                     <TextView
@@ -155,16 +155,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="@dimen/spacing_medium"
                         android:textColor="@android:color/white"
                         tools:text="Nombre Paciente"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_size_medium"
                         android:ellipsize="end"
                         android:maxLines="1" />
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="@dimen/icon_size_small"
+                        android:layout_height="@dimen/icon_size_small"
                         android:src="@drawable/ic_citas"
                         app:tint="@android:color/white"
                         android:alpha="0.5" />
@@ -177,11 +177,11 @@
         android:id="@+id/cardDatePicker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_medium"
         android:visibility="gone"
         app:cardBackgroundColor="@color/card_background"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -193,11 +193,11 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:padding="@dimen/spacing_medium">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
                 android:src="@drawable/ic_calendar"
                 app:tint="@color/azul" />
 
@@ -205,11 +205,11 @@
                 android:id="@+id/tvSelectedDateFilter"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_weight="1"
                 android:text="@string/hoy"
                 android:textColor="@color/card_text"
-                android:textSize="20sp" />
+                android:textSize="@dimen/text_size_xlarge" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -225,8 +225,8 @@
         android:id="@+id/rvCitas"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:paddingHorizontal="16dp"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:paddingHorizontal="@dimen/spacing_medium"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardDashboard"
@@ -246,10 +246,10 @@
         app:layout_constraintTop_toBottomOf="@id/cardDashboard">
 
         <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="@dimen/icon_size_large"
+            android:layout_height="@dimen/icon_size_large"
             android:src="@drawable/ic_emptycitas"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/spacing_medium"
             app:tint="@color/description_gray" />
 
         <TextView
@@ -264,10 +264,10 @@
             android:id="@+id/btnEmptyAddCita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/spacing_large"
             app:cardBackgroundColor="@color/azul"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
             app:strokeWidth="0dp"
             android:clickable="true"
             android:focusable="true"
@@ -278,13 +278,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:paddingVertical="12dp"
-                android:paddingHorizontal="20dp">
+                android:paddingVertical="@dimen/spacing_medium"
+                android:paddingHorizontal="@dimen/spacing_large">
 
                 <ImageView
                     android:id="@+id/ivEmptyAddCita"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="@dimen/icon_size_small"
+                    android:layout_height="@dimen/icon_size_small"
                     android:src="@drawable/ic_add"
                     app:tint="@android:color/white" />
 
@@ -292,7 +292,7 @@
                     android:id="@+id/tvEmptyAddCita"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="@dimen/spacing_medium"
                     android:text="@string/nueva_cita"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
@@ -314,23 +314,23 @@
     <!-- Fisios/Admins -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/fabAddCita"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="@dimen/button_height"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
         android:clickable="true"
         android:focusable="true"
         android:visibility="gone"
         app:cardBackgroundColor="@color/azul"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="@dimen/button_corner_radius"
         app:cardElevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:strokeWidth="0dp">
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
             android:layout_gravity="center"
             android:src="@drawable/ic_add"
             app:tint="@android:color/white" />

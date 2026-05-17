@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="24dp">
+        android:padding="@dimen/spacing_large">
 
         <TextView
             android:id="@+id/tvScheduleTitle"
@@ -20,7 +20,7 @@
             android:fontFamily="@font/anton"
             android:text="@string/configurar_horario"
             android:textColor="@color/card_text"
-            android:textSize="28sp"
+            android:textSize="@dimen/text_size_xlarge"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,10 +28,10 @@
             android:id="@+id/tvTreatmentsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/spacing_large"
             android:text="@string/especialidades"
             android:textColor="@color/card_text"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvScheduleTitle" />
@@ -40,17 +40,17 @@
             android:id="@+id/cgTreatments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_small"
             app:layout_constraintTop_toBottomOf="@id/tvTreatmentsLabel" />
 
         <TextView
             android:id="@+id/tvWorkingDaysLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/spacing_large"
             android:text="@string/dias_laborables"
             android:textColor="@color/card_text"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cgTreatments" />
@@ -59,7 +59,7 @@
             android:id="@+id/cgWorkingDays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_small"
             app:layout_constraintTop_toBottomOf="@id/tvWorkingDaysLabel">
 
             <com.google.android.material.chip.Chip
@@ -116,10 +116,10 @@
             android:id="@+id/tvTimeRangeLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/spacing_large"
             android:text="@string/rango_horario"
             android:textColor="@color/card_text"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cgWorkingDays" />
@@ -128,7 +128,7 @@
             android:id="@+id/llTimeRange"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_small"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/tvTimeRangeLabel">
 
@@ -150,7 +150,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <View
-                android:layout_width="16dp"
+                android:layout_width="@dimen/spacing_medium"
                 android:layout_height="0dp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -175,10 +175,10 @@
             android:id="@+id/tvDurationLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/spacing_large"
             android:text="@string/duracion_sesion"
             android:textColor="@color/card_text"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/llTimeRange" />
@@ -187,7 +187,7 @@
             android:id="@+id/cgDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_small"
             app:layout_constraintTop_toBottomOf="@id/tvDurationLabel"
             app:singleSelection="true">
 
@@ -217,14 +217,14 @@
         <Button
             android:id="@+id/btnSaveSchedule"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="40dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/spacing_xxlarge"
             android:backgroundTint="@color/azul"
             android:text="@string/guardar_horario"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
-            app:cornerRadius="28dp"
+            app:cornerRadius="@dimen/button_corner_radius"
             app:layout_constraintTop_toBottomOf="@id/cgDuration" />
 
         <ProgressBar

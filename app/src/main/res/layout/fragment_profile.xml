@@ -13,8 +13,8 @@
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:paddingHorizontal="24dp"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:paddingHorizontal="@dimen/spacing_large"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -24,20 +24,20 @@
             android:fontFamily="@font/anton"
             android:text="@string/perfil"
             android:textColor="@color/card_text"
-            android:textSize="28sp"
+            android:textSize="@dimen/text_size_xlarge"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardClinicalHistory"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/icon_size_medium"
+            android:layout_height="@dimen/icon_size_medium"
             app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="2dp"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
             app:layout_constraintEnd_toStartOf="@id/btnEditProfile"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/spacing_small"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:clickable="true"
@@ -45,8 +45,8 @@
             android:visibility="gone">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_pacientes"
                 app:tint="@color/azul" />
@@ -54,11 +54,11 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/btnEditProfile"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/icon_size_medium"
+            android:layout_height="@dimen/icon_size_medium"
             app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="2dp"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,8 +67,8 @@
             android:visibility="gone">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_biografia"
                 app:tint="@color/azul" />
@@ -78,7 +78,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/spacing_medium"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,21 +89,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="@dimen/spacing_large">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="4dp"
+                app:cardCornerRadius="@dimen/spacing_large"
+                app:cardElevation="@dimen/card_elevation"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="24dp">
+                    android:padding="@dimen/spacing_large">
 
                     <!-- Custom layout for photo and name -->
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -143,7 +143,7 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="20dp"
+                                android:layout_marginStart="@dimen/spacing_large"
                                 android:orientation="vertical"
                                 app:layout_constraintBottom_toBottomOf="@id/photoPickerCard"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -155,7 +155,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/card_text"
-                                    android:textSize="22sp"
+                                    android:textSize="@dimen/text_size_xlarge"
                                     android:textStyle="bold"
                                     tools:text="Lucía" />
 
@@ -163,9 +163,9 @@
                                     android:id="@+id/tvApellidosValue"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="2dp"
+                                    android:layout_marginTop="@dimen/spacing_micro"
                                     android:textColor="@color/description_gray"
-                                    android:textSize="16sp"
+                                    android:textSize="@dimen/text_size_medium"
                                     tools:text="Fernández López" />
                             </LinearLayout>
 
@@ -174,7 +174,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="24dp"
+                        android:layout_marginVertical="@dimen/spacing_large"
                         android:background="#1A000000" />
 
                     <TextView
@@ -182,7 +182,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/email"
                         android:textColor="@color/description_gray"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/text_size_small"
                         android:textAllCaps="true"
                         android:letterSpacing="0.1" />
 
@@ -190,19 +190,19 @@
                         android:id="@+id/tvEmailValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_small"
                         android:textColor="@color/card_text"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_size_medium"
                         tools:text="lucia.fernandez@email.com" />
 
                     <TextView
                         android:id="@+id/tvDniLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/spacing_large"
                         android:text="@string/DNI"
                         android:textColor="@color/description_gray"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/text_size_small"
                         android:textAllCaps="true"
                         android:letterSpacing="0.1" />
 
@@ -210,19 +210,19 @@
                         android:id="@+id/tvDniValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_small"
                         android:textColor="@color/card_text"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_size_medium"
                         tools:text="12345678X" />
 
                     <TextView
                         android:id="@+id/tvPhoneLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/spacing_large"
                         android:text="@string/telefono"
                         android:textColor="@color/description_gray"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/text_size_small"
                         android:textAllCaps="true"
                         android:letterSpacing="0.1" />
 
@@ -231,7 +231,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="@dimen/spacing_small">
 
                         <TextView
                             android:id="@+id/tvPhoneValue"
@@ -239,13 +239,13 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/card_text"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/text_size_medium"
                             tools:text="600123456" />
 
                         <ImageButton
                             android:id="@+id/btnCall"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="@dimen/icon_size_medium"
+                            android:layout_height="@dimen/icon_size_medium"
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_call"
                             android:visibility="gone"
@@ -258,7 +258,7 @@
                         android:id="@+id/layoutBioLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="@dimen/spacing_large"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:visibility="gone">
@@ -273,10 +273,10 @@
                             android:id="@+id/tvBioLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="@dimen/spacing_small"
                             android:text="@string/biografia"
                             android:textColor="@color/description_gray"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/text_size_small"
                             android:textAllCaps="true"
                             android:letterSpacing="0.1" />
                     </LinearLayout>
@@ -285,9 +285,9 @@
                         android:id="@+id/tvBioValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_small"
                         android:textColor="@color/card_text"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/text_size_medium"
                         android:lineSpacingExtra="4dp"
                         android:visibility="gone"
                         tools:text="Fisioterapeuta con más de 10 años de experiencia en lesiones deportivas..." />
@@ -297,10 +297,10 @@
                         android:id="@+id/tvSpecialtiesTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="@dimen/spacing_large"
                         android:text="@string/perfil_especialidades"
                         android:textColor="@color/description_gray"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/text_size_small"
                         android:textAllCaps="true"
                         android:letterSpacing="0.1"
                         android:visibility="gone" />
@@ -309,7 +309,7 @@
                         android:id="@+id/cgSpecialties"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_small"
                         android:visibility="gone" />
 
                     <!-- HORARIO -->
@@ -317,10 +317,10 @@
                         android:id="@+id/tvScheduleTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="@dimen/spacing_large"
                         android:text="@string/perfil_horario_semanal"
                         android:textColor="@color/description_gray"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/text_size_small"
                         android:textAllCaps="true"
                         android:letterSpacing="0.1"
                         android:visibility="gone" />
@@ -329,9 +329,9 @@
                         android:id="@+id/tvScheduleDays"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_small"
                         android:textColor="@color/card_text"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_size_medium"
                         android:textStyle="bold"
                         android:visibility="gone"
                         tools:text="Lunes, Martes, Miércoles" />
@@ -340,9 +340,9 @@
                         android:id="@+id/tvScheduleHours"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_micro"
                         android:textColor="@color/card_text"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_size_medium"
                         android:visibility="gone"
                         tools:text="09:00 - 14:00" />
 
@@ -354,18 +354,18 @@
                 android:id="@+id/tvSessionsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="@dimen/spacing_xlarge"
                 android:fontFamily="@font/anton"
                 android:text="@string/perfil_resumen_actividad"
                 android:textColor="@color/card_text"
-                android:textSize="22sp" />
+                android:textSize="@dimen/text_size_xlarge" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/spacing_medium"
                 app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="@dimen/card_corner_radius"
                 app:strokeWidth="1dp"
                 app:strokeColor="#1A000000">
 
@@ -373,7 +373,7 @@
                     android:id="@+id/rvSessions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:padding="@dimen/spacing_medium"
                     android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -383,11 +383,11 @@
                 android:id="@+id/tvSessionsEmpty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:gravity="center"
                 android:text="@string/perfil_sesiones_vacias"
                 android:textColor="@color/description_gray"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_size_normal"
                 android:visibility="gone" />
 
         </LinearLayout>

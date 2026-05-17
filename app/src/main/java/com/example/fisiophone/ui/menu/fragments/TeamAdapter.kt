@@ -49,7 +49,8 @@ class TeamAdapter(
                     .placeholder(R.drawable.ic_profile)
                     .into(binding.ivTeamMemberPhoto)
             } else {
-                binding.ivTeamMemberPhoto.setPadding(32, 32, 32, 32)
+                val paddingPx = itemView.context.resources.getDimensionPixelSize(R.dimen.avatar_list_padding)
+                binding.ivTeamMemberPhoto.setPadding(paddingPx, paddingPx, paddingPx, paddingPx)
                 binding.ivTeamMemberPhoto.setImageResource(R.drawable.ic_profile)
                 binding.ivTeamMemberPhoto.imageTintList = android.content.res.ColorStateList.valueOf(
                     itemView.context.getColor(R.color.azul)

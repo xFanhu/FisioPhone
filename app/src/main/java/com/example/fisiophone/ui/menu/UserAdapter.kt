@@ -66,7 +66,8 @@ class UserAdapter(
                     .placeholder(R.drawable.ic_profile)
                     .into(binding.ivUserPhoto)
             } else {
-                binding.ivUserPhoto.setPadding(24, 24, 24, 24)
+                val paddingPx = itemView.context.resources.getDimensionPixelSize(R.dimen.avatar_list_padding)
+                binding.ivUserPhoto.setPadding(paddingPx, paddingPx, paddingPx, paddingPx)
                 binding.ivUserPhoto.setImageResource(R.drawable.ic_profile)
                 binding.ivUserPhoto.imageTintList = android.content.res.ColorStateList.valueOf(
                     itemView.context.getColor(R.color.azul)

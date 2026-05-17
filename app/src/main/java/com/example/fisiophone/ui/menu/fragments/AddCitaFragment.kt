@@ -128,7 +128,25 @@ class AddCitaFragment : Fragment() {
                 launch {
                     viewModel.physios.collect { physios ->
                         val names = physios.map { "${it.nombre} ${it.apellidos}" }
-                        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, names)
+                        val adapter = object : ArrayAdapter<String>(
+                            requireContext(),
+                            android.R.layout.simple_dropdown_item_1line,
+                            names
+                        ) {
+                            override fun getFilter(): android.widget.Filter {
+                                return object : android.widget.Filter() {
+                                    override fun performFiltering(constraint: CharSequence?): FilterResults {
+                                        val results = FilterResults()
+                                        results.values = names
+                                        results.count = names.size
+                                        return results
+                                    }
+                                    override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                                        notifyDataSetChanged()
+                                    }
+                                }
+                            }
+                        }
                         binding.autoCompletePhysio.setAdapter(adapter)
                     }
                 }

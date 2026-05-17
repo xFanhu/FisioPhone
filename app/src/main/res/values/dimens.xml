@@ -1,7 +1,45 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Margins -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="new_user_horizontal_margin">40dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    
+    <!-- Spacing -->
+    <dimen name="spacing_micro">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="spacing_xxlarge">40dp</dimen>
+    <dimen name="spacing_huge">60dp</dimen>
+
+    <!-- Text -->
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_xlarge">20sp</dimen>
+    <dimen name="text_size_xxlarge">24sp</dimen>
+    <dimen name="text_size_huge">32sp</dimen>
+
+    <!-- UI  -->
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="button_corner_radius">28dp</dimen>
+    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    
+    <dimen name="input_field_width">300dp</dimen>
+    <dimen name="button_width">250dp</dimen>
+    <dimen name="logo_size">150dp</dimen>
+    <dimen name="icon_size_small">24dp</dimen>
+    <dimen name="icon_size_medium">48dp</dimen>
+    <dimen name="icon_size_large">80dp</dimen>
+    
+    <!-- Avatar -->
+    <dimen name="avatar_size_small">40dp</dimen>
+    <dimen name="avatar_size_medium">80dp</dimen>
+    <dimen name="avatar_size_large">120dp</dimen>
+    <dimen name="avatar_list_size">56dp</dimen>
+    <dimen name="avatar_list_padding">12dp</dimen>
 </resources>

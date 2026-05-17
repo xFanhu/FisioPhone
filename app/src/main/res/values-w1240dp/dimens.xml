@@ -1,5 +1,45 @@
 <resources>
     <dimen name="activity_horizontal_margin">200dp</dimen>
     <dimen name="new_user_horizontal_margin">280dp</dimen>
+    <dimen name="activity_vertical_margin">200dp</dimen>
     <dimen name="fab_margin">200dp</dimen>
+
+    <!-- Spacing -->
+    <dimen name="spacing_micro">8dp</dimen>
+    <dimen name="spacing_small">16dp</dimen>
+    <dimen name="spacing_medium">32dp</dimen>
+    <dimen name="spacing_large">48dp</dimen>
+    <dimen name="spacing_xlarge">64dp</dimen>
+    <dimen name="spacing_xxlarge">80dp</dimen>
+    <dimen name="spacing_huge">100dp</dimen>
+
+    <!-- Text Sizes -->
+    <dimen name="text_size_micro">14sp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="text_size_normal">18sp</dimen>
+    <dimen name="text_size_medium">22sp</dimen>
+    <dimen name="text_size_large">28sp</dimen>
+    <dimen name="text_size_xlarge">32sp</dimen>
+    <dimen name="text_size_xxlarge">36sp</dimen>
+    <dimen name="text_size_huge">48sp</dimen>
+
+    <!-- UI Elements -->
+    <dimen name="button_height">72dp</dimen>
+    <dimen name="button_corner_radius">36dp</dimen>
+    <dimen name="card_corner_radius">20dp</dimen>
+    <dimen name="card_elevation">12dp</dimen>
+    
+    <dimen name="input_field_width">500dp</dimen>
+    <dimen name="button_width">450dp</dimen>
+    <dimen name="logo_size">250dp</dimen>
+    <dimen name="icon_size_small">40dp</dimen>
+    <dimen name="icon_size_medium">80dp</dimen>
+    <dimen name="icon_size_large">120dp</dimen>
+    
+    <!-- Avatars -->
+    <dimen name="avatar_size_small">72dp</dimen>
+    <dimen name="avatar_size_medium">120dp</dimen>
+    <dimen name="avatar_size_large">200dp</dimen>
+    <dimen name="avatar_list_size">100dp</dimen>
+    <dimen name="avatar_list_padding">16dp</dimen>
 </resources>
