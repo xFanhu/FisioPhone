@@ -68,17 +68,21 @@ class AddCitaViewModel : ViewModel() {
                 val result = db.collection("users")
                     .whereIn("role", listOf("fisioterapeuta", "administrador"))
                     .get().await()
-                val list = result.documents.map { doc ->
-                    User(
-                        id = doc.id,
-                        nombre = doc.getString("nombre") ?: "",
-                        apellidos = doc.getString("apellidos") ?: "",
-                        email = doc.getString("email") ?: "",
-                        dni = doc.getString("dni") ?: "",
-                        telefono = doc.getString("telefono") ?: "",
-                        role = doc.getString("role") ?: "fisioterapeuta",
-                        treatments = ((doc.get("schedule") as? Map<*, *>)?.get("treatments") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
-                    )
+                val list = result.documents.mapNotNull { doc ->
+                    val schedule = doc.get("schedule") as? Map<*, *>
+                    val workDays = (schedule?.get("workDays") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                    if (schedule != null && workDays.isNotEmpty()) {
+                        User(
+                            id = doc.id,
+                            nombre = doc.getString("nombre") ?: "",
+                            apellidos = doc.getString("apellidos") ?: "",
+                            email = doc.getString("email") ?: "",
+                            dni = doc.getString("dni") ?: "",
+                            telefono = doc.getString("telefono") ?: "",
+                            role = doc.getString("role") ?: "fisioterapeuta",
+                            treatments = (schedule["treatments"] as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                        )
+                    } else null
                 }
                 _physios.value = list
             } catch (e: Exception) { /* Error silencioso o logs */ }
