@@ -44,7 +44,7 @@ object NotificationHelper {
         )
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_notificaciones) // Make sure this icon is a valid simple silhouette icon. If not, fallback to app_logo might be needed but Android requires transparent backgrounds for status bar icons.
+            .setSmallIcon(R.drawable.ic_notificaciones)
             .setContentTitle(title)
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_HIGH)

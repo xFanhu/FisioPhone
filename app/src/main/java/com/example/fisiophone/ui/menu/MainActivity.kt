@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         if (isGranted) {
             // Permiso concedido, las notificaciones funcionarán
         } else {
-            // Permiso denegado, podrías mostrar un mensaje al usuario
+            // Permiso denegado
         }
     }
 
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         checkNotificationPermission()
 
         
-        // Show Home/Citas by default
+        // Citas es la fragment por defecto asi que el botón sale marcado
         if (savedInstanceState == null) {
             binding.bottomNavigation.selectedItemId = R.id.nav_citas
         }

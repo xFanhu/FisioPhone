@@ -87,7 +87,7 @@ class NewUserActivity : AppCompatActivity() {
                             db.collection("users").document(userId)
                                 .set(userMap)
                                 .addOnSuccessListener {
-                                    auth.currentUser?.sendEmailVerification()
+                                    auth.currentUser?.sendEmailVerification() // Email de verificación
                                     auth.signOut() // Desconectar para forzar login tras verificar
                                     
                                     setLoading(false)

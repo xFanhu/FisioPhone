@@ -181,7 +181,7 @@ class HistoryFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
 
-        // Si es el propio perfil del paciente, ocultamos el botón
+        // Si es el propio perfil del paciente, el botón no sale
         if (isOwnProfile) {
             binding.fabAddHistory.visibility = View.GONE
         } else {
@@ -201,7 +201,7 @@ class HistoryFragment : Fragment() {
             gravity = android.view.Gravity.TOP or android.view.Gravity.START
         }
         
-        // Wrap with some padding
+
         val container = android.widget.FrameLayout(context)
         val params = android.widget.FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -256,7 +256,7 @@ class HistoryFragment : Fragment() {
                 .add(historiaMap)
                 .addOnSuccessListener {
                     Toast.makeText(requireContext(), getString(R.string.anotacion_guardada), Toast.LENGTH_SHORT).show()
-                    fetchHistory() // Recargar lista
+                    fetchHistory() // Recarga lista
                 }
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), getString(R.string.error_guardar), Toast.LENGTH_SHORT).show()

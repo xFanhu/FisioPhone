@@ -86,14 +86,14 @@ class ScheduleFragment : Fragment() {
                 if (doc.exists()) {
                     val schedule = doc.get("schedule") as? Map<*, *> ?: return@addOnSuccessListener
                     
-                    // Treatments
+                    //Tratamientos
                     val selectedTreatments = (schedule["treatments"] as? List<*>)?.filterIsInstance<String>() ?: emptyList()
                     for (i in 0 until binding.cgTreatments.childCount) {
                         val chip = binding.cgTreatments.getChildAt(i) as com.google.android.material.chip.Chip
                         chip.isChecked = selectedTreatments.contains(chip.tag as String)
                     }
                     
-                    // Days
+                    //Dias
                     val days = (schedule["workDays"] as? List<*>)?.filterIsInstance<String>() ?: emptyList()
                     binding.chipMon.isChecked = days.contains("Mon")
                     binding.chipTue.isChecked = days.contains("Tue")
@@ -103,11 +103,11 @@ class ScheduleFragment : Fragment() {
                     binding.chipSat.isChecked = days.contains("Sat")
                     binding.chipSun.isChecked = days.contains("Sun")
                     
-                    // Hours
+                    //De que hora a que hora
                     binding.etStartTime.setText(schedule["startHour"] as? String ?: "09:00")
                     binding.etEndTime.setText(schedule["endHour"] as? String ?: "21:00")
                     
-                    // Duration
+                    //Duración
                     val duration = (schedule["duration"] as? Number)?.toInt() ?: 60
                     when (duration) {
                         30 -> binding.chip30min.isChecked = true

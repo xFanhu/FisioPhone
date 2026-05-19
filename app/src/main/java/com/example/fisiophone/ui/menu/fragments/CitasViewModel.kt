@@ -16,15 +16,12 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-/**
- * ViewModel que gestiona la lógica de obtención y filtrado de citas.
- */
+
 class CitasViewModel : ViewModel() {
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
-    // Estados reactivos (StateFlow)
     private val _citas = MutableStateFlow<List<Cita>>(emptyList())
     val citas: StateFlow<List<Cita>> = _citas.asStateFlow()
 
@@ -41,7 +38,7 @@ class CitasViewModel : ViewModel() {
     val selectedDate: StateFlow<String?> = _selectedDate.asStateFlow()
 
     init {
-        // Por defecto cargamos el día de hoy
+        // se carga el dia de hoy
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         _selectedDate.value = sdf.format(Date())
         fetchData()
@@ -53,31 +50,29 @@ class CitasViewModel : ViewModel() {
         fetchData()
     }
 
-    /**
-     * Obtiene las citas de Firestore filtrando por rol y fecha si aplica.
-     */
+    //Obtiene las citas filtrando por rol y fecha
     fun fetchData() {
         val uid = auth.currentUser?.uid ?: return
         
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                // 1. Obtener rol del usuario actual
+                // Obtiene rol del usuario actual
                 val userDoc = db.collection("users").document(uid).get().await()
                 val role = userDoc.getString("role")?.lowercase() ?: "paciente"
                 val patientFlag = role == "paciente"
                 _isPatient.value = patientFlag
 
-                // 2. Construir query base
+
                 val field = if (patientFlag) "patientId" else "physioId"
                 var query: com.google.firebase.firestore.Query = db.collection("citas")
                     .whereEqualTo(field, uid)
 
                 if (patientFlag) {
-                    // El paciente solo quiere ver las citas activas (reservadas)
+                    // El paciente solo ve citas pendientes
                     query = query.whereEqualTo("status", "booked")
                 } else {
-                    // El fisio ve las del día (reservadas o ya hechas) si está filtrando por fecha
+                    // El fisio ve las del día (pendientes o realizadas)
                     if (_selectedDate.value != null) {
                         query = query.whereEqualTo("date", _selectedDate.value!!)
                     }
@@ -85,7 +80,7 @@ class CitasViewModel : ViewModel() {
 
                 val result = query.get().await()
 
-                // Mapear documentos a objetos Cita
+
                 val list = result.documents.map { doc ->
                     Cita(
                         id = doc.id,
@@ -100,19 +95,19 @@ class CitasViewModel : ViewModel() {
                     )
                 }
 
-                // 3. Filtrado adicional y ordenación en memoria
+                //ordenación en memoria
                 val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
                 val now = sdf.format(Date())
 
                 val filteredList = if (patientFlag) {
-                    // El PACIENTE solo ve sus citas futuras para no estorbar
+                    //Citas pendientes
                     list.filter { cita -> "${cita.date} ${cita.time}" >= now }
                 } else {
-                    // El FISIO ve todo el planning del día seleccionado
+                    //Ve todas
                     list
                 }
 
-                // Ordenar por fecha y luego por hora
+                //Ordena por fecha y luego por hora
                 val sortedCitas = filteredList.sortedWith(compareBy({ it.date }, { it.time }))
                 _citas.value = sortedCitas
 
@@ -124,16 +119,14 @@ class CitasViewModel : ViewModel() {
         }
     }
 
-    /**
-     * Marca una cita como realizada.
-     */
+    //Marca una cita como realizada.
     fun completeCita(cita: Cita) {
         viewModelScope.launch {
             _isLoading.value = true
             try {
                 db.collection("citas").document(cita.id).update("status", "done").await()
                 _messages.emit(Result.success("COMPLETED|${cita.id}")) // Enviamos ID para saber cuál se ha completado
-                fetchData() // Recargar lista
+                fetchData() // Recarga lista
             } catch (e: Exception) {
                 _messages.emit(Result.failure(e))
                 _isLoading.value = false
@@ -141,9 +134,7 @@ class CitasViewModel : ViewModel() {
         }
     }
 
-    /**
-     * Guarda una anotación en la historia clínica del paciente.
-     */
+    //Guarda una anotación en la historia clínica del paciente.
     fun saveClinicalNote(cita: Cita, note: String) {
         viewModelScope.launch {
             _isLoading.value = true
@@ -173,16 +164,14 @@ class CitasViewModel : ViewModel() {
         }
     }
 
-    /**
-     * Elimina una cita.
-     */
+    //Elimina una cita.
     fun deleteCita(cita: Cita) {
         viewModelScope.launch {
             _isLoading.value = true
             try {
                 db.collection("citas").document(cita.id).delete().await()
                 _messages.emit(Result.success("DELETED"))
-                fetchData() // Recargar para actualizar lista
+                fetchData() // Recarga lista
             } catch (e: Exception) {
                 _messages.emit(Result.failure(e))
                 _isLoading.value = false

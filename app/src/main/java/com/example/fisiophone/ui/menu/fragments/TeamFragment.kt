@@ -16,10 +16,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-/**
- * Fragmento que muestra el equipo de fisioterapeutas.
- * Permite a los administradores gestionar usuarios.
- */
 class TeamFragment : Fragment() {
 
     private var _binding: com.example.fisiophone.databinding.FragmentTeamBinding? = null
@@ -52,7 +48,7 @@ class TeamFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.rvTeamMembers.layoutManager = LinearLayoutManager(requireContext())
         teamAdapter = TeamAdapter(emptyList()) { user ->
-            // Al pulsar sobre un fisio, abrimos su perfil público
+            // Al pulsar sobre un fisio, abrimos su perfil(sin telefono y dni)
             val profileFragment = ProfileFragment.newInstance(
                 ProfileFragment.UserRole.fromValue(user.role),
                 user.id
@@ -66,16 +62,14 @@ class TeamFragment : Fragment() {
     }
 
     private fun setupFab() {
-        // Solo administradores pueden ver y pulsar este botón
+        // Botón de manageuser (solo admins)
         binding.fabAddPhysio.setOnClickListener {
             val intent = Intent(requireContext(), ManageUsersActivity::class.java)
             startActivity(intent)
         }
     }
 
-    /**
-     * Verifica el rol del usuario actual para mostrar u ocultar opciones de gestión.
-     */
+    //Botón de manageusers visibilidad (solo admins)
     private fun checkUserRole() {
         val currentUser = auth.currentUser ?: return
         db.collection("users").document(currentUser.uid).get()
@@ -89,9 +83,7 @@ class TeamFragment : Fragment() {
             }
     }
 
-    /**
-     * Obtiene todos los usuarios con rol 'fisioterapeuta' de Firestore.
-     */
+    //Obtiene todos los usuarios con rol 'fisioterapeuta' de Firestore.
     private fun fetchTeamMembers() {
         db.collection("users")
             .whereIn("role", listOf("fisioterapeuta", "administrador"))
@@ -112,11 +104,10 @@ class TeamFragment : Fragment() {
                     )
                     teamList.add(user)
                 }
-                // Ordenar alfabéticamente por nombre y apellidos
+                // Ordena alfabéticamente por nombre y apellidos
                 teamList.sortWith(compareBy({ it.nombre }, { it.apellidos }))
                 teamAdapter.updateList(teamList)
-                
-                // Mostrar mensaje si no hay equipo registrado
+
                 binding.tvEmptyTeam.visibility = if (teamList.isEmpty()) View.VISIBLE else View.GONE
             }
             .addOnFailureListener {

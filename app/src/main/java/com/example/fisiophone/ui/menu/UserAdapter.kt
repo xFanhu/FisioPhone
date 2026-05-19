@@ -87,7 +87,7 @@ class UserAdapter(
                 binding.btnChangeRole.setText(R.string.hacer_fisioterapeuta)
             }
 
-            // Ocultar botón si es administrador
+            // Oculta botón si es administrador o en PatientsFragment
             if (!showActions || user.role == "administrador") {
                 binding.btnChangeRole.visibility = View.GONE
             } else {

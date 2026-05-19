@@ -24,10 +24,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-/**
- * Fragmento encargado de mostrar la lista de citas del usuario.
- * Filtra por rol (paciente/fisio) y por fecha si es fisio.
- */
 class CitasFragment : Fragment() {
 
     private var _binding: FragmentCitasBinding? = null
@@ -69,7 +65,7 @@ class CitasFragment : Fragment() {
         )
         binding.rvCitas.adapter = citaAdapter
 
-        // Selector de fecha (solo visible para fisioterapeutas)
+        // Selector de fecha (solo fisios9
         binding.cardDatePicker.setOnClickListener {
             val picker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText(getString(R.string.seleccionar_fecha))
@@ -168,14 +164,14 @@ class CitasFragment : Fragment() {
                             binding.layoutEmptyCitas.visibility = View.GONE
                             citaAdapter.updateList(citas)
                             
-                            // Actualizar Dashboard si es Fisio
+                            // Actualiza Dashboard si es Fisio
                             if (!isPatient) {
                                 val pending = citas.count { it.status == "booked" }
                                 val done = citas.count { it.status == "done" }
                                 binding.tvPendingCount.text = pending.toString()
                                 binding.tvCompletedCount.text = done.toString()
 
-                                // Calcular próxima cita hoy
+                                // Calcula próxima cita hoy
                                 val todayStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
                                 if (viewModel.selectedDate.value == todayStr) {
                                     val nowTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
@@ -239,7 +235,7 @@ class CitasFragment : Fragment() {
         options.add(getString(R.string.ver_perfil_paciente))
         options.add(getString(R.string.modificar_cita))
         
-        // Solo permitir marcar como realizada si no lo está ya
+        // Solo permite marcar como realizada si no lo está ya
         if (cita.status != "done") {
             options.add(getString(R.string.marcar_como_realizada))
         }

@@ -80,7 +80,7 @@ class AddCitaFisioFragment : Fragment() {
             binding.tvSelectedDateDisplay.text = getString(R.string.dia_seleccionado, sdf.format(viewModel.selectedDate!!))
             binding.tvSelectedDateDisplay.visibility = View.VISIBLE
             
-            // Aseguramos que los controles de fecha y hora sean visibles en edición
+
             binding.tvSelectDateLabel.visibility = View.VISIBLE
             binding.btnOpenCalendar.visibility = View.VISIBLE
         }
@@ -95,7 +95,8 @@ class AddCitaFisioFragment : Fragment() {
             if (position in patients.indices) {
                 viewModel.selectPatient(patients[position])
                 resetStepsAfterPatient()
-                
+
+                    // El admin puede elegir fisio
                 if (viewModel.currentUserRole == "administrador") {
                     binding.tvSelectPhysioLabel.visibility = View.VISIBLE
                     binding.tilPhysioSelector.visibility = View.VISIBLE
@@ -256,11 +257,11 @@ class AddCitaFisioFragment : Fragment() {
                         binding.pbLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
                         binding.btnConfirmBooking.isEnabled = !isLoading
                         
-                        // Si termina de cargar y estamos en edición, forzamos la actualización de la UI
+
                         if (!isLoading && viewModel.isEditMode) {
                             restoreUIState()
                             
-                            // Forzamos el texto en los autocompletables por si ya se habían cargado las listas antes
+
                             viewModel.selectedPatient?.let {
                                 binding.autoCompletePatient.setText("${it.nombre} ${it.apellidos}", false)
                             }

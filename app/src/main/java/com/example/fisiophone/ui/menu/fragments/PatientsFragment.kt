@@ -19,7 +19,7 @@ class PatientsFragment : Fragment() {
     
     private val db = FirebaseFirestore.getInstance()
     private var allPatients = mutableListOf<User>()
-    private lateinit var adapter: UserAdapter
+    private lateinit var adapter: UserAdapter //Usamos el mismo adapter que en manageuser por reciclar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +44,7 @@ class PatientsFragment : Fragment() {
                 user.id
             )
             parentFragmentManager.beginTransaction()
-                .replace(com.example.fisiophone.R.id.fragmentHost, profileFragment)
+                .replace(com.example.fisiophone.R.id.fragmentHost, profileFragment) //navegamos al perfil del paciente
                 .addToBackStack(ProfileFragment.TAG)
                 .commit()
         })
@@ -52,6 +52,7 @@ class PatientsFragment : Fragment() {
         binding.rvPatients.adapter = adapter
     }
 
+    //buscador de pacientes
     private fun setupSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -66,6 +67,7 @@ class PatientsFragment : Fragment() {
         })
     }
 
+    //Carga la lista de pacientes por rol
     private fun fetchPatients() {
         binding.pbLoading.visibility = View.VISIBLE
         db.collection("users")

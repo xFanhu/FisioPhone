@@ -18,16 +18,14 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-/**
- * ViewModel que gestiona la lógica de disponibilidad y reserva de citas.
- */
+
 
 class AddCitaViewModel : ViewModel() {
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
-    // Estados de UI
+
     private val _physios = MutableStateFlow<List<User>>(emptyList())
     val physios: StateFlow<List<User>> = _physios.asStateFlow()
 
@@ -58,9 +56,7 @@ class AddCitaViewModel : ViewModel() {
         fetchPhysios()
     }
 
-    /**
-     * Obtiene la lista de profesionales disponibles.
-     */
+    //Obtiene la lista de profesionales disponibles.
     private fun fetchPhysios() {
         viewModelScope.launch {
             _isLoading.value = true
@@ -85,7 +81,7 @@ class AddCitaViewModel : ViewModel() {
                     } else null
                 }
                 _physios.value = list
-            } catch (e: Exception) { /* Error silencioso o logs */ }
+            } catch (e: Exception) {  }
             finally { _isLoading.value = false }
         }
     }
@@ -118,7 +114,7 @@ class AddCitaViewModel : ViewModel() {
     }
 
     fun selectDate(date: Date) {
-        // Validar que el fisio trabaja
+        // Valida que el fisio trabaja
         if (!isWorkingDay(date)) {
             viewModelScope.launch {
                 _bookingResult.emit(Result.failure(Exception("NO_WORKING_DAY")))
@@ -166,7 +162,7 @@ class AddCitaViewModel : ViewModel() {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                // 1. Obtener horario del fisioterapeuta
+                // Obtiene horario del fisio
                 val doc = db.collection("users").document(physioId).get().await()
                 val schedule = doc.get("schedule") as? Map<*, *>
                 if (schedule == null) {
@@ -178,7 +174,7 @@ class AddCitaViewModel : ViewModel() {
                 val endStr = schedule["endHour"] as? String ?: "21:00"
                 val duration = (schedule["duration"] as? Number)?.toInt() ?: 60
                 
-                // 2. Consultar citas ya existentes para ese día
+                // Coinsulta citas ya existentes para ese día
                 val appointments = db.collection("citas")
                     .whereEqualTo("physioId", physioId)
                     .whereEqualTo("date", dateStr)
@@ -187,7 +183,7 @@ class AddCitaViewModel : ViewModel() {
                     
                 val bookedTimes = appointments.mapNotNull { it.getString("time") }
                 
-                // 3. Generar la lista de horas disponibles (filtrando las pasadas si es hoy)
+                // Genera lista de horas disponibles
                 val isToday = dateStr == sdf.format(Date())
                 val slots = generateSlots(startStr, endStr, duration, bookedTimes, isToday)
                 _availableSlots.value = slots
@@ -213,7 +209,7 @@ class AddCitaViewModel : ViewModel() {
         var current = startMins
         while (current + duration <= endMins) {
             val timeStr = minsToTime(current)
-            // Solo añadimos si no está reservada y (si es hoy) no ha pasado ya la hora
+
             if (!booked.contains(timeStr) && current > nowMins) {
                 slots.add(timeStr)
             }
@@ -231,9 +227,7 @@ class AddCitaViewModel : ViewModel() {
         return String.format("%02d:%02d", mins / 60, mins % 60)
     }
 
-    /**
-     * Guarda la nueva cita en Firestore.
-     */
+    //Guarda la nueva cita en Firestore.
     fun confirmBooking() {
         val patientId = auth.currentUser?.uid ?: return
         val physio = selectedPhysio ?: return
@@ -245,7 +239,7 @@ class AddCitaViewModel : ViewModel() {
             try {
                 val dateStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date)
                 
-                // Obtener nombre del paciente para que el fisio lo vea en su lista
+                // Obtiene nombre del paciente para que el fisio lo vea en su lista
                 val patientDoc = db.collection("users").document(patientId).get().await()
                 val patientName = if (patientDoc.exists()) {
                     "${patientDoc.getString("nombre")} ${patientDoc.getString("apellidos")}"

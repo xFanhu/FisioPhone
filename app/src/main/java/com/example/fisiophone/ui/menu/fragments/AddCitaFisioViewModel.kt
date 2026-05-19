@@ -158,7 +158,7 @@ class AddCitaFisioViewModel : ViewModel() {
                     val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                     try {
                         selectedDate = sdf.parse(dateStr)
-                        selectedDate?.let { fetchAvailableSlots(it, skipCurrentTimeCheck = true) } // In edit mode, we might keep the same time even if "passed" visually if it's today
+                        selectedDate?.let { fetchAvailableSlots(it, skipCurrentTimeCheck = true) }
                     } catch (e: Exception) {}
                 }
             } catch (e: Exception) {

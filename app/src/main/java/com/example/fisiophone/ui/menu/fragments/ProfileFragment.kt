@@ -7,20 +7,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.example.fisiophone.R
 import com.example.fisiophone.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-/**
- * Fragmento que muestra el perfil de un usuario (propio o ajeno).
- * Adapta su contenido según el rol (Paciente o Fisio) y la privacidad.
- */
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
@@ -44,7 +37,7 @@ class ProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Recuperar foto tras rotación
+
         selectedPhotoUri = savedInstanceState?.getString(KEY_SELECTED_PHOTO_URI)?.let(Uri::parse)
     }
 
@@ -89,10 +82,8 @@ class ProfileFragment : Fragment() {
         binding.rvSessions.adapter = sessionAdapter
     }
 
-    /**
-     * Obtiene los datos del usuario de Firestore.
-     * Si es el propio perfil, no se pasa ID por argumentos.
-     */
+    // Obtiene los datos del usuario de Firestore. Si es el propio perfil coge lo del elvis, no se pasa ID por argumnts.
+
     @Suppress("UNCHECKED_CAST")
     private fun fetchUserData() {
         val targetUid = arguments?.getString(ARG_USER_ID) ?: FirebaseAuth.getInstance().currentUser?.uid
@@ -129,9 +120,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    /**
-     * Si el perfil es un PACIENTE, cargamos su historial de citas realizadas.
-     */
+    //Si el perfil es paciente, carga su historial de citas realizadas.
     private fun fetchUserSessions(uid: String, profile: UserProfile) {
         FirebaseFirestore.getInstance().collection("citas")
             .whereEqualTo("patientId", uid)
@@ -161,36 +150,33 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    /**
-     * Vincula los datos del perfil a la UI aplicando reglas de privacidad.
-     */
+    //Pone los datos del perfil aplicando privacidad, para que el paciente no vea datos personales de fisios.
+
     private fun bindProfile(profile: UserProfile) {
         val isOwnProfile = arguments?.getString(ARG_USER_ID) == null
         val isPatient = profile.role == UserRole.PATIENT
         val isPhysio = profile.role == UserRole.PHYSIOTHERAPIST || profile.role == UserRole.ADMIN
-        
-        // Visibilidad de botones de acción superior
-        // El botón de editar solo aparece si es MI perfil Y soy FISIOTERAPEUTA (para la bio)
+
+        // El botón de editar solo aparece si es mi perfil yy soy fisio (para la bio)
         binding.btnEditProfile.visibility = if (isOwnProfile && isPhysio) View.VISIBLE else View.GONE
-        // El historial clínico se ve siempre que el perfil que estamos mirando sea de un PACIENTE
+        // El historial clínico se ve siempre que el perfil que estamos mirando sea de un paciente
         binding.cardClinicalHistory.visibility = if (isPatient) View.VISIBLE else View.GONE
         
         // PRIVACIDAD: Los pacientes NO ven DNI ni teléfono de los fisios.
-        // Los fisios y admins SÍ ven todo de los pacientes.
         val showSensitiveData = isOwnProfile || isPatient
 
         binding.tvNameValue.text = profile.name
         binding.tvApellidosValue.text = profile.surnames
         binding.tvEmailValue.text = profile.email
 
-        // Manejo de visibilidad de DNI
+        //Visibilidad de DNI
         binding.tvDniLabel.visibility = if (showSensitiveData) View.VISIBLE else View.GONE
         binding.tvDniValue.visibility = if (showSensitiveData) View.VISIBLE else View.GONE
         if (showSensitiveData) {
             binding.tvDniValue.text = profile.dni
         }
 
-        // Manejo de visibilidad de Teléfono
+        //Visibilidad de Teléfono
         if (profile.phone.isNotEmpty() && showSensitiveData) {
             binding.tvPhoneLabel.visibility = View.VISIBLE
             binding.tvPhoneValue.visibility = View.VISIBLE
@@ -200,7 +186,7 @@ class ProfileFragment : Fragment() {
             binding.tvPhoneValue.visibility = View.GONE
         }
         
-        // Biografía (solo para fisios)
+        // Biografía (solo fisios9
         if (isPhysio) {
             binding.layoutBioLabel.visibility = View.VISIBLE
             binding.tvBioValue.visibility = View.VISIBLE
@@ -216,7 +202,7 @@ class ProfileFragment : Fragment() {
             binding.tvBioValue.visibility = View.GONE
         }
 
-        // Lista de sesiones pasadas (solo para pacientes)
+        // Lista sesiones realizads (solo pacientes)
         binding.tvSessionsTitle.visibility = if (isPatient) View.VISIBLE else View.GONE
         binding.tvSessionsEmpty.visibility = if (isPatient && profile.sessions.isEmpty()) View.VISIBLE else View.GONE
         
@@ -227,7 +213,7 @@ class ProfileFragment : Fragment() {
             renderSessions(profile.sessions)
         }
         
-        // Bloque de información para Fisioterapeutas (Especialidades y Horario)
+        //Especialidades y Horario (solo fisos)
         if (isPhysio) {
             binding.tvSpecialtiesTitle.visibility = View.VISIBLE
             binding.cgSpecialties.visibility = View.VISIBLE
@@ -280,7 +266,7 @@ class ProfileFragment : Fragment() {
         
         binding.photoPickerCard.isEnabled = isOwnProfile
         
-        // Acción de llamada (solo si es el perfil de un paciente visto por un fisio)
+        // Boton llamada
         binding.btnCall.visibility = if (!isOwnProfile && profile.phone.isNotEmpty() && showSensitiveData) View.VISIBLE else View.GONE
         binding.btnCall.setOnClickListener {
             com.google.android.material.dialog.MaterialAlertDialogBuilder(requireActivity())
@@ -343,7 +329,7 @@ class ProfileFragment : Fragment() {
         FirebaseFirestore.getInstance().collection("users").document(uid)
             .update("bio", bio)
             .addOnSuccessListener {
-                fetchUserData() // Recargar para mostrar cambios
+                fetchUserData() // Recarga para mostrar cambios
                 android.widget.Toast.makeText(requireContext(), R.string.horario_guardado, android.widget.Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
@@ -353,8 +339,7 @@ class ProfileFragment : Fragment() {
 
     private fun renderPhoto(photoUrl: String? = null) {
         val isOwnProfile = arguments?.getString(ARG_USER_ID) == null
-        
-        // Prioridad: 1. Foto recién elegida localmente, 2. Foto de URL remota, 3. Placeholder
+
         when {
             selectedPhotoUri != null -> {
                 binding.ivProfilePhoto.setImageURI(selectedPhotoUri)
@@ -393,7 +378,6 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    // Modelos de datos locales del fragmento
     data class UserProfile(
         val role: UserRole,
         val name: String,

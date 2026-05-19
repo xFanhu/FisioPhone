@@ -66,6 +66,7 @@ class ManageUsersActivity : AppCompatActivity() {
             }
     }
 
+    //Buscador
     private fun setupSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -108,7 +109,7 @@ class ManageUsersActivity : AppCompatActivity() {
                     .update("role", newRole)
                     .addOnSuccessListener {
                         Toast.makeText(this, getString(R.string.rol_actualizado, newRole), Toast.LENGTH_SHORT).show()
-                        // Update local list to reflect changes immediately
+
                         val index = allUsers.indexOfFirst { it.id == user.id }
                         if (index != -1) {
                             allUsers[index].role = newRole

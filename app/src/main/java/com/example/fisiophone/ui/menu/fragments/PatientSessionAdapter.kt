@@ -20,7 +20,7 @@ class PatientSessionAdapter(
     override fun onBindViewHolder(holder: SessionViewHolder, position: Int) {
         val session = sessions[position]
         
-        // Formatear la fecha de aaaa-mm-dd a dd-mm-aaaa
+        // Pone la fecha bien
         val dateParts = session.date.split("-")
         val formattedDate = if (dateParts.size == 3) {
             "${dateParts[2]}-${dateParts[1]}-${dateParts[0]}"

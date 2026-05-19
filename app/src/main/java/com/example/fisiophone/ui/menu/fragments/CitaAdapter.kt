@@ -60,7 +60,7 @@ class CitaAdapter(
             val context = itemView.context
             binding.tvCitaTime.text = cita.time
             
-            // Formatear la fecha de aaaa-mm-dd a dd-mm-aaaa
+            // Pone la fecha bien escrita
             val dateParts = cita.date.split("-")
             binding.tvCitaDate.text = if (dateParts.size == 3) {
                 "${dateParts[2]}-${dateParts[1]}-${dateParts[0]}"
@@ -69,8 +69,7 @@ class CitaAdapter(
             }
             
             binding.tvCitaTreatment.text = cita.tratamiento
-            
-            // Lógica de estado explícita (ya no es automática por tiempo)
+
             if (cita.status == "done") {
                 binding.tvCitaStatus.text = context.getString(R.string.estado_realizada)
                 binding.tvCitaStatus.setTextColor(android.graphics.Color.GRAY)

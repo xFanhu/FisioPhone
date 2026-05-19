@@ -32,10 +32,7 @@ import androidx.work.WorkManager
 import java.util.concurrent.TimeUnit
 import com.example.fisiophone.workers.CitaReminderWorker
 
-/**
- * Fragmento para que los pacientes soliciten una nueva cita.
- * Guía al usuario por 4 pasos: Profesional -> Tratamiento -> Fecha -> Hora.
- */
+
 class AddCitaFragment : Fragment() {
 
     private var _binding: FragmentAddCitaBinding? = null
@@ -124,7 +121,7 @@ class AddCitaFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 
-                // Cargar lista de profesionales
+                // Carga lista de fisios
                 launch {
                     viewModel.physios.collect { physios ->
                         val names = physios.map { "${it.nombre} ${it.apellidos}" }
@@ -151,7 +148,7 @@ class AddCitaFragment : Fragment() {
                     }
                 }
                 
-                // Mostrar huecos horarios disponibles
+                // Muestra huecos horarios disponibles
                 launch {
                     viewModel.availableSlots.collect { slots ->
                         if (slots == null) return@collect
@@ -163,7 +160,7 @@ class AddCitaFragment : Fragment() {
                             binding.cgTimeSlots.visibility = View.VISIBLE
                             binding.tvNoSlotsError.visibility = View.GONE
                             
-                            // Reseleccionar si ya había uno marcado
+                            // Reselecciona si ya había uno marcado
                             viewModel.selectedTime?.let { selected ->
                                 for (i in 0 until binding.cgTimeSlots.childCount) {
                                     val chip = binding.cgTimeSlots.getChildAt(i) as Chip
@@ -193,9 +190,9 @@ class AddCitaFragment : Fragment() {
                 launch {
                     viewModel.bookingResult.collect { result ->
                         result.onSuccess {
-                            scheduleReminder() // Programar notificación local
+                            scheduleReminder() // Programa notificación local
                             Toast.makeText(requireContext(), getString(R.string.cita_exito), Toast.LENGTH_LONG).show()
-                            // Volver a la lista de citas seleccionando el ítem en el BottomNav
+                            // Vuelve a la fragment de citas y autoselecciona el ítem en el BottomNav
                             (requireActivity() as? MainActivity)?.binding?.bottomNavigation?.selectedItemId = R.id.nav_citas
                         }.onFailure { e ->
                             when (e.message) {
@@ -210,9 +207,7 @@ class AddCitaFragment : Fragment() {
         }
     }
 
-    /**
-     * Programa una notificación local para recordar la cita (24h antes).
-     */
+
     private fun scheduleReminder() {
         val date = viewModel.selectedDate ?: return
         val timeStr = viewModel.selectedTime ?: return
@@ -247,7 +242,7 @@ class AddCitaFragment : Fragment() {
 
                 WorkManager.getInstance(requireContext().applicationContext).enqueue(workRequest)
             }
-        } catch (e: Exception) { /* Silencioso */ }
+        } catch (e: Exception) {  }
     }
 
     private fun showDatePicker() {
